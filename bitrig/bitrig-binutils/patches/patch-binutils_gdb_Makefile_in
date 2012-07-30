@@ -1,6 +1,6 @@
 $OpenBSD$
---- binutils/gdb/Makefile.in.orig	Wed Feb 29 23:05:15 2012
-+++ binutils/gdb/Makefile.in	Tue Mar 13 13:59:40 2012
+--- binutils/gdb/Makefile.in.orig	Wed Feb 29 22:05:15 2012
++++ binutils/gdb/Makefile.in	Mon Jul 30 15:55:32 2012
 @@ -103,7 +103,7 @@ MAKEHTMLFLAGS = -glossary -menu -split_chapter
  # Set this up with gcc if you have gnu ld and the loader will print out
  # line numbers for undefined references.
@@ -21,3 +21,17 @@ $OpenBSD$
  
  # Where is the BFD library?  Typically in ../bfd.
  BFD_DIR = ../bfd
+@@ -122,11 +122,11 @@ BFD_SRC = $(srcdir)/$(BFD_DIR)
+ BFD_CFLAGS = -I$(BFD_DIR) -I$(BFD_SRC)
+ 
+ # Where is the READLINE library?  Typically in ../readline.
+-#READLINE_DIR = ../readline
++READLINE_DIR = ../../libreadline
+ #READLINE = $(READLINE_DIR)/libreadline.a
+ #READLINE_SRC = $(srcdir)/$(READLINE_DIR)
+ #READLINE_CFLAGS = -I$(READLINE_SRC)/..
+-READLINE = -lreadline
++READLINE = -L../../libreadline -lreadline
+ 
+ WARN_CFLAGS = @WARN_CFLAGS@
+ WERROR_CFLAGS = @WERROR_CFLAGS@
