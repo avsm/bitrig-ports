@@ -1,0 +1,8 @@
+$OpenBSD$
+--- libiberty/shlib_version.orig	Mon Jul 30 15:43:58 2012
++++ libiberty/shlib_version	Mon Jul 30 15:44:05 2012
+@@ -1,2 +1,2 @@
+-major=10
+-minor=1
++major=11
++minor=0

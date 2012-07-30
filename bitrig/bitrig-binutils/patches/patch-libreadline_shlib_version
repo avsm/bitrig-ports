@@ -1,0 +1,7 @@
+$OpenBSD$
+--- libreadline/shlib_version.orig	Mon Jul 30 15:43:43 2012
++++ libreadline/shlib_version	Mon Jul 30 15:43:48 2012
+@@ -1,2 +1,2 @@
+-major=3
++major=4
+ minor=0
