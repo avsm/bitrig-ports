@@ -77,7 +77,7 @@ REGRESS_DEPENDS += 	${BUILD_PKGPATH},-gcclibs>=4.6,<4.7
 .endif
 
 CONFIGURE_STYLE =		gnu
-MODGNU_CONFIG_GUESS_DIRS =	${WRKSRC} ${WRKSRC}/gcc
+MODGNU_CONFIG_GUESS_DIRS =	${WRKSRC} ${WRKSRC}/gcc ${WRKSRC}/libjava/classpath
 
 EXTRA_ENV += am_cv_func_iconv=no JAR=no
 EXTRA_ENV += ac_cv_prog_CONFIGURED_M4=/usr/bin/m4
