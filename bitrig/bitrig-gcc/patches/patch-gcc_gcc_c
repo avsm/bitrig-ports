@@ -1,0 +1,12 @@
+$OpenBSD$
+--- gcc/gcc.c.orig	Sat Oct 20 15:04:27 2012
++++ gcc/gcc.c	Sat Oct 20 15:04:30 2012
+@@ -609,7 +609,7 @@ proper position among the other output files.  */
+ 
+ #ifndef LINK_PIE_SPEC
+ #ifdef HAVE_LD_PIE
+-#define LINK_PIE_SPEC "%{pie:-pie} "
++#define LINK_PIE_SPEC "%{pie:-pie} %{p|pg|nopie:-nopie} "
+ #else
+ #define LINK_PIE_SPEC "%{pie:} "
+ #endif
