@@ -1,0 +1,12 @@
+$OpenBSD$
+--- gcc/defaults.h.orig	Sat Oct 20 21:23:13 2012
++++ gcc/defaults.h	Sat Oct 20 21:23:15 2012
+@@ -1339,4 +1339,8 @@ see the files COPYING3 and COPYING.RUNTIME respectivel
+ 
+ #endif /* GCC_INSN_FLAGS_H  */
+ 
++#ifndef PIE_DEFAULT
++#define PIE_DEFAULT 0
++#endif
++
+ #endif  /* ! GCC_DEFAULTS_H */

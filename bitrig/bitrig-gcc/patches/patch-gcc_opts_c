@@ -1,0 +1,12 @@
+$OpenBSD$
+--- gcc/opts.c.orig	Sat Oct 20 21:27:51 2012
++++ gcc/opts.c	Sat Oct 20 21:36:39 2012
+@@ -691,6 +691,8 @@ finish_options (struct gcc_options *opts, struct gcc_o
+ 
+   if (!opts->x_flag_opts_finished)
+     {
++      if (opts->x_flag_pic || profile_flag)
++	opts->x_flag_pie = 0;
+       if (opts->x_flag_pie)
+ 	opts->x_flag_pic = opts->x_flag_pie;
+       if (opts->x_flag_pic && !opts->x_flag_pie)

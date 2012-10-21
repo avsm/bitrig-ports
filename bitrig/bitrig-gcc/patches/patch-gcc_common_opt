@@ -1,6 +1,15 @@
 $OpenBSD: patch-gcc_common_opt,v 1.1 2012/02/16 21:30:15 pascal Exp $
---- gcc/common.opt.orig	Mon Apr 11 17:26:47 2011
-+++ gcc/common.opt	Sat Feb 11 08:40:59 2012
+--- gcc/common.opt.orig	Mon Apr 11 11:26:47 2011
++++ gcc/common.opt	Sat Oct 20 21:22:19 2012
+@@ -1489,7 +1489,7 @@ Common Report Var(flag_pic,2)
+ Generate position-independent code if possible (large mode)
+ 
+ fPIE
+-Common Report Var(flag_pie,2)
++Common Report Var(flag_pie,2) Init(PIE_DEFAULT)
+ Generate position-independent code for executables if possible (large mode)
+ 
+ fpic
 @@ -1779,7 +1779,7 @@ Common RejectNegative Joined Var(common_deferred_optio
  -fstack-limit-symbol=<name>	Trap if the stack goes past symbol <name>
  
