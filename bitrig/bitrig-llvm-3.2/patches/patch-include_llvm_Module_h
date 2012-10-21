@@ -1,0 +1,20 @@
+$OpenBSD$
+--- include/llvm/Module.h.orig	Sat Oct 20 22:48:26 2012
++++ include/llvm/Module.h	Sat Oct 20 22:36:52 2012
+@@ -373,6 +373,16 @@ class Module { (public)
+   ///      the existing global.
+   Constant *getOrInsertGlobal(StringRef Name, Type *Ty);
+ 
++  /// getOrInsertLinkerPrivate - Look up the specified linker private in the
++  /// module symbol table.
++  ///   1. If it does not exist, add a declaration of the linker private variable
++  ///      and return it.
++  ///   2. Else, the variable exists but has the wrong type: return the function
++  ///      with a constantexpr cast to the right type.
++  ///   3. Finally, if the existing global is the correct declaration, return
++  ///      the existing linker private variable.
++  Constant *getOrInsertLinkerPrivate(StringRef Name, Type *Ty);
++
+ /// @}
+ /// @name Global Alias Accessors
+ /// @{
