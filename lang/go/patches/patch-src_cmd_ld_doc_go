@@ -1,0 +1,12 @@
+$OpenBSD$
+--- src/cmd/ld/doc.go.orig	Tue Oct 23 12:02:35 2012
++++ src/cmd/ld/doc.go	Tue Oct 23 12:02:07 2012
+@@ -37,7 +37,7 @@ Options new in this version:
+ 		Write FreeBSD ELF binaries (default when $GOOS is freebsd)
+ 	-Hnetbsd     (only in 6l/8l)
+ 		Write NetBSD ELF binaries (default when $GOOS is netbsd)
+-	-Hopenbsd    (only in 6l/8l)
++	-Hopenbsd
+ 		Write OpenBSD ELF binaries (default when $GOOS is openbsd)
+ 	-Hwindows    (only in 6l/8l)
+ 		Write Windows PE32+ Console binaries (default when $GOOS is windows)

@@ -1,0 +1,13 @@
+$OpenBSD$
+--- src/cmd/dist/unix.c.orig	Mon Oct 22 15:13:56 2012
++++ src/cmd/dist/unix.c	Mon Oct 22 15:14:22 2012
+@@ -673,7 +673,8 @@ main(int argc, char **argv)
+ 			gohostarch = "amd64";
+ 		else if(hassuffix(u.machine, "86"))
+ 			gohostarch = "386";
+-		else if(contains(u.machine, "arm"))
++		else if(contains(u.machine, "arm") || contains(u.machine, "panda"))
++
+ 			gohostarch = "arm";
+ 		else
+ 			fatal("unknown architecture: %s", u.machine);

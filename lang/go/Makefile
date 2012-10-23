@@ -1,6 +1,6 @@
 # $OpenBSD: Makefile,v 1.7 2012/10/01 06:20:09 jsing Exp $
 
-ONLY_FOR_ARCHS =	amd64 i386
+ONLY_FOR_ARCHS =	amd64 i386 arm
 
 COMMENT =		Go programming language
 
@@ -44,17 +44,28 @@ GOARCH =		amd64
 EXEPREFIX =		6
 PKG_ARGS +=		-Damd64=1
 PKG_ARGS +=		-Di386=0
+PKG_ARGS +=		-Darm=0
 .elif ${MACHINE_ARCH} == "i386"
 GOARCH =		386
 EXEPREFIX =		8
 PKG_ARGS +=		-Damd64=0
 PKG_ARGS +=		-Di386=1
+PKG_ARGS +=		-Darm=0
+.elif ${MACHINE_ARCH} == "arm"
+GOARCH =		arm
+EXEPREFIX =		5
+PKG_ARGS +=		-Damd64=0
+PKG_ARGS +=		-Di386=0
+PKG_ARGS +=		-Darm=1
 .else
-PKG_ARGS += 		-Damd64=0 -Di386=0
+PKG_ARGS += 		-Damd64=0 -Di386=0 -Darm=0
 .endif
 
 GOCFG =			/${GOOS}_${GOARCH}
 GOEXE =			${GOCFG}/${EXEPREFIX}
+
+pre-configure:
+	@cp -r ${FILESDIR}/. ${WRKSRC}/
 
 do-configure:
 .	if ${GOARCH} == "unknown"

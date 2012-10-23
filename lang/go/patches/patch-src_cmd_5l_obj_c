@@ -1,0 +1,27 @@
+$OpenBSD$
+--- src/cmd/5l/obj.c.orig	Tue Oct 23 22:09:48 2012
++++ src/cmd/5l/obj.c	Tue Oct 23 22:09:57 2012
+@@ -48,6 +48,7 @@ Header headers[] = {
+    "risc", Hrisc,
+    "plan9", Hplan9x32,
+    "netbsd", Hnetbsd,
++   "openbsd", Hopenbsd,
+    "ixp1200", Hixp1200,
+    "ipaq", Hipaq,
+    "linux", Hlinux,
+@@ -58,6 +59,7 @@ Header headers[] = {
+  *	-Hrisc -T0x10005000 -R4		is aif for risc os
+  *	-Hplan9 -T4128 -R4096		is plan9 format
+  *	-Hnetbsd -T0xF0000020 -R4	is NetBSD format
++ *	-Hopenbsd -Tx -Rx		is OpenBSD elf-exec
+  *	-Hixp1200			is IXP1200 (raw)
+  *	-Hipaq -T0xC0008010 -R1024	is ipaq
+  *	-Hlinux -Tx -Rx			is linux elf
+@@ -212,6 +214,7 @@ main(int argc, char *argv[])
+ 			INITRND = 1024;
+ 		break;
+ 	case Hlinux:	/* arm elf */
++	case Hopenbsd:	/* arm elf */
+ 		debug['d'] = 1;	// no dynamic linking
+ 		elfinit();
+ 		HEADR = ELFRESERVE;

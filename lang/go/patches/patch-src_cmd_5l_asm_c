@@ -1,0 +1,106 @@
+$OpenBSD$
+--- src/cmd/5l/asm.c.orig	Tue Oct 23 10:45:48 2012
++++ src/cmd/5l/asm.c	Tue Oct 23 11:54:47 2012
+@@ -37,6 +37,7 @@
+ static Prog *PP;
+ 
+ char linuxdynld[] = "/lib/ld-linux.so.2";
++char openbsddynld[] = "/usr/libexec/ld.so";
+ 
+ int32
+ entryvalue(void)
+@@ -74,6 +75,7 @@ enum {
+ 	ElfStrRelPlt,
+ 	ElfStrPlt,
+ 	ElfStrNoteNetbsdIdent,
++	ElfStrNoteOpenbsdIdent,
+ 	ElfStrNoPtrData,
+ 	ElfStrNoPtrBss,
+ 	NElfStr
+@@ -156,6 +158,7 @@ doelf(void)
+ {
+ 	Sym *s, *shstrtab, *dynstr;
+ 
++	Bprint(&bso, "headtype %d\n", HEADTYPE);
+ 	if(!iself)
+ 		return;
+ 
+@@ -172,6 +175,8 @@ doelf(void)
+ 	elfstr[ElfStrNoPtrBss] = addstring(shstrtab, ".noptrbss");
+ 	if(HEADTYPE == Hnetbsd)
+ 		elfstr[ElfStrNoteNetbsdIdent] = addstring(shstrtab, ".note.netbsd.ident");
++	if(HEADTYPE == Hopenbsd)
++		elfstr[ElfStrNoteOpenbsdIdent] = addstring(shstrtab, ".note.openbsd.ident");
+ 	addstring(shstrtab, ".rodata");
+ 	addstring(shstrtab, ".gosymtab");
+ 	addstring(shstrtab, ".gopclntab");
+@@ -339,7 +344,7 @@ asmb(void)
+ 			if(elfverneed)
+ 				elftextsh += 2;
+ 		}
+-		if(HEADTYPE == Hnetbsd)
++		if(HEADTYPE == Hnetbsd || HEADTYPE == Hopenbsd)
+ 			elftextsh += 1;
+ 	}
+ 
+@@ -366,6 +371,7 @@ asmb(void)
+ 			symo = HEADR+segtext.len+segdata.filelen;
+ 			break;
+ 		case Hnetbsd:
++		case Hopenbsd:
+ 			symo = rnd(segdata.filelen, 4096);
+ 			break;
+ 		ElfSym:
+@@ -456,6 +462,7 @@ asmb(void)
+ 		lputl(0xe3300000);		/* nop */
+ 		break;
+ 	case Hlinux:
++	case Hopenbsd:
+ 		/* elf arm */
+ 		eh = getElfEhdr();
+ 		fo = HEADR;
+@@ -492,7 +499,14 @@ asmb(void)
+ 			sh->flags = SHF_ALLOC;
+ 			sh->addralign = 1;
+ 			if(interpreter == nil)
+-				interpreter = linuxdynld;
++				switch(HEADTYPE) {
++				case Hlinux:
++					interpreter = linuxdynld;
++					break;
++				case Hopenbsd:
++					interpreter = openbsddynld;
++					break;
++				}
+ 			resoff -= elfinterp(sh, startva, resoff, interpreter);
+ 
+ 			ph = newElfPhdr();
+@@ -514,6 +528,19 @@ asmb(void)
+ 			phsh(ph, sh);
+ 		}
+ 
++		if(HEADTYPE == Hopenbsd) {
++			sh = newElfShdr(elfstr[ElfStrNoteOpenbsdIdent]);
++			sh->type = SHT_NOTE;
++			sh->flags = SHF_ALLOC;
++			sh->addralign = 4;
++			resoff -= elfopenbsdsig(sh, startva, resoff);
++
++			ph = newElfPhdr();
++			ph->type = PT_NOTE;
++			ph->flags = PF_R;
++			phsh(ph, sh);
++		}
++
+ 		elfphload(&segtext);
+ 		elfphload(&segdata);
+ 
+@@ -654,6 +681,8 @@ asmb(void)
+ 		a += elfwriteinterp(elfstr[ElfStrInterp]);
+ 		if(HEADTYPE == Hnetbsd)
+ 			a += elfwritenetbsdsig(elfstr[ElfStrNoteNetbsdIdent]);
++		if(HEADTYPE == Hopenbsd)
++			a += elfwriteopenbsdsig(elfstr[ElfStrNoteOpenbsdIdent]);
+ 		if(a > ELFRESERVE)	
+ 			diag("ELFRESERVE too small: %d > %d", a, ELFRESERVE);
+ 		break;

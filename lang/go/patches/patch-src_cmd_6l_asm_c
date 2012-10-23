@@ -1,6 +1,6 @@
 $OpenBSD: patch-src_cmd_6l_asm_c,v 1.1 2012/09/19 21:10:38 sthen Exp $
---- src/cmd/6l/asm.c.orig	Thu Jun 14 04:23:38 2012
-+++ src/cmd/6l/asm.c	Mon Sep 17 11:38:32 2012
+--- src/cmd/6l/asm.c.orig	Sun Sep 23 15:43:12 2012
++++ src/cmd/6l/asm.c	Tue Oct 23 22:12:17 2012
 @@ -95,6 +95,7 @@ enum {
  	ElfStrGnuVersion,
  	ElfStrGnuVersionR,
