@@ -17,6 +17,15 @@ $OpenBSD$
   *	-Hixp1200			is IXP1200 (raw)
   *	-Hipaq -T0xC0008010 -R1024	is ipaq
   *	-Hlinux -Tx -Rx			is linux elf
+@@ -152,7 +154,7 @@ main(int argc, char *argv[])
+ 	libinit();
+ 
+ 	if(HEADTYPE == -1)
+-		HEADTYPE = Hlinux;
++		HEADTYPE = Hopenbsd;
+ 	switch(HEADTYPE) {
+ 	default:
+ 		diag("unknown -H option");
 @@ -212,6 +214,7 @@ main(int argc, char *argv[])
  			INITRND = 1024;
  		break;
