@@ -85,44 +85,47 @@ TEXT runtime·raisesigpipe(SB),7,$12
 	RET
 
 TEXT runtime·mmap(SB),7,$36
-	ADD	$0, SP, R10
+
+	MOVW	R2, -4(SP)		// - are these scratch or callee preserve ?
+	MOVW	R3, -8(SP)		// - are these scratch or callee preserve ?
+	ADD	$0, SP, R3
+	MOVW	(SP), R2		// stash the value from the stack
+	MOVW	R2, -12(SP)		// stash the value from the stack
+	MOVW	8(FP), R2		 // arg3 - prot
+	MOVW	R2, 0(R3)
+	MOVW	12(FP), R2		 // arg4 - flags
+	MOVW	R2, 4(R3)
+	MOVW	16(FP), R2		 // arg5 - fd
+	MOVW	R2, 8(R3)
+	MOVW	20(FP), R2	 	 // arg6 - pad
+	MOVW	R2, 12(R3)
+	MOVW	24(FP), R2		 // arg7 - offset
+	MOVW	R2, 16(R3)
+	MOVW	28(FP), R2		 // top 64 bits of file offset
+	MOVW	$0, R2
+	MOVW	R2, 20(R3)
+
 	MOVW	0(FP), R2		 // arg1 - addr
 	MOVW	4(FP), R3		 // arg2 - len
-	MOVW	8(FP), R4		 // arg3 - prot
-
-	MOVW	12(FP), R5		 // arg4 - flags
-	MOVW	16(FP), R6		 // arg5 - fd
-	MOVW	20(FP), R7	 	 // arg6 - pad
-	MOVW	24(FP), R8		 // arg7 - offset
-	MOVW	28(FP), R9		 // top 64 bits of file offset
-
-//	MOVM	[R4-R9], (R10)
-	MOVW	(SP), R1		// stash the value from the stack
-	MOVW	R4, 0(R10)
-	MOVW	R5, 4(R10)
-	MOVW	R6, 8(R10)
-	MOVW	R7, 12(R10)
-	MOVW	R7, 16(R10)
-	MOVW	$0, R9
-	MOVW	R9, 20(R10)
-	MOVW	R1, R9			// stash the value from the stack
 
 	MOVW	$0, R1
 	MOVW	$SYS_mmap, R0
 	MOVW	$SYS__syscall, R12
 	SWI	$SYS__syscall
 
-	MOVW	R9, (SP)		// restore the value from the stack
+	MOVW	-12(SP), R2		// stash the value from the stack
+	MOVW	R2, (SP)		// restore the value from the stack
+
+	MOVW	-4(SP), R2		// - are these scratch or callee preserve ?
+	MOVW	-8(SP), R3		// - are these scratch or callee preserve ?
 
 	BCC	mmap_good
-	MOVW	$-1, R0
-//	MOVW	0xf1, R12
-//	MOVW	R12, (R12)		// crash
+	// the go code expects -ERRNO
+	MOVW	$0, R1
+	SUB	R1, R0, R0
 	RET
 mmap_good:
-	MOVW	$0, R0
-//	MOVW	0xf2, R12
-//	MOVW	R12, (R12)		// crash
+	// mmapped address is in R0
 	RET
 
 TEXT runtime·munmap(SB),7,$-4
