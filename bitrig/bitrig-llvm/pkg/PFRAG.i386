@@ -1,2 +1,14 @@
 @comment $OpenBSD$
+${CLANG_INCLUDE_PATH}/sanitizer/
+${CLANG_INCLUDE_PATH}/sanitizer/asan_interface.h
+${CLANG_INCLUDE_PATH}/sanitizer/common_interface_defs.h
+${CLANG_INCLUDE_PATH}/sanitizer/linux_syscall_hooks.h
+${CLANG_INCLUDE_PATH}/sanitizer/msan_interface.h
+lib/libLLVMX86AsmParser.a
+lib/libLLVMX86AsmPrinter.a
+lib/libLLVMX86CodeGen.a
+lib/libLLVMX86Desc.a
+lib/libLLVMX86Disassembler.a
+lib/libLLVMX86Info.a
+lib/libLLVMX86Utils.a
 lib/clang/${LLVM_V}/lib/bitrig/libclang_rt.x86.a

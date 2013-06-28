@@ -1,0 +1,14 @@
+$OpenBSD$
+--- lib/Support/Unix/Memory.inc.orig	Mon Jan  7 12:59:48 2013
++++ lib/Support/Unix/Memory.inc	Wed Jan  9 15:07:09 2013
+@@ -32,6 +32,10 @@
+ #  endif
+ #endif
+ 
++#if defined(__arm__) && defined(__GNUC__)
++extern "C" void __clear_cache(char *, char *);
++#endif
++
+ extern "C" void sys_icache_invalidate(const void *Addr, size_t len);
+ 
+ namespace {

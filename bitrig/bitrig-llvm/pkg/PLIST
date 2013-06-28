@@ -1077,11 +1077,6 @@ ${CLANG_INCLUDE_PATH}/popcntintrin.h
 ${CLANG_INCLUDE_PATH}/prfchwintrin.h
 ${CLANG_INCLUDE_PATH}/rdseedintrin.h
 ${CLANG_INCLUDE_PATH}/rtmintrin.h
-${CLANG_INCLUDE_PATH}/sanitizer/
-${CLANG_INCLUDE_PATH}/sanitizer/asan_interface.h
-${CLANG_INCLUDE_PATH}/sanitizer/common_interface_defs.h
-${CLANG_INCLUDE_PATH}/sanitizer/linux_syscall_hooks.h
-${CLANG_INCLUDE_PATH}/sanitizer/msan_interface.h
 ${CLANG_INCLUDE_PATH}/smmintrin.h
 ${CLANG_INCLUDE_PATH}/stdalign.h
 ${CLANG_INCLUDE_PATH}/stdarg.h
@@ -1136,13 +1131,6 @@ lib/libLLVMTableGen.a
 lib/libLLVMTarget.a
 lib/libLLVMTransformUtils.a
 lib/libLLVMVectorize.a
-lib/libLLVMX86AsmParser.a
-lib/libLLVMX86AsmPrinter.a
-lib/libLLVMX86CodeGen.a
-lib/libLLVMX86Desc.a
-lib/libLLVMX86Disassembler.a
-lib/libLLVMX86Info.a
-lib/libLLVMX86Utils.a
 lib/libLLVMipa.a
 lib/libLLVMipo.a
 lib/libLTO.a
