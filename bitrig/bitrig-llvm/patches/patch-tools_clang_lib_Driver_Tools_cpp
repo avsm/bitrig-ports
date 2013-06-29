@@ -1,0 +1,11 @@
+$OpenBSD$
+--- tools/clang/lib/Driver/Tools.cpp.orig	Sat Jun 29 00:07:12 2013
++++ tools/clang/lib/Driver/Tools.cpp	Sat Jun 29 00:07:28 2013
+@@ -660,6 +660,7 @@ static StringRef getARMFloatABI(const Driver &D,
+     }
+ 
+     case llvm::Triple::FreeBSD:
++    case llvm::Triple::Bitrig:
+       // FreeBSD defaults to soft float
+       FloatABI = "soft";
+       break;
