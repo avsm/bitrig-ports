@@ -5,7 +5,7 @@ $OpenBSD$
  #  endif
  #endif
  
-+#if defined(__arm__) && defined(__GNUC__)
++#if defined(__arm__) && defined(__GNUC__) && !defined(__clang__)
 +extern "C" void __clear_cache(char *, char *);
 +#endif
 +
