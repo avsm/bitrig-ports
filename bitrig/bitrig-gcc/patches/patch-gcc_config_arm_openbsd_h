@@ -45,12 +45,12 @@ $OpenBSD$
 +/* strongarm family default cpu.  */
 +#define SUBTARGET_CPU_DEFAULT TARGET_CPU_strongarm
 +
-+/* Default is to use APCS-32 mode.  */
++/* Default is to use AAPCS-32 mode.  */
 +
-+/* Default it to use ATPCS with soft-VFP.  */
++/* Default it to use AAPCS with soft-VFP.  */
 +#undef TARGET_DEFAULT
 +#define TARGET_DEFAULT			\
-+  (MASK_APCS_FRAME			\
++  (MASK_AAPCS_FRAME			\
 +   | TARGET_ENDIAN_DEFAULT)
 +
 +
@@ -89,7 +89,7 @@ $OpenBSD$
 +   FIXME: -mhard-float currently implies FPA.  */
 +#undef SUBTARGET_ASM_FLOAT_SPEC
 +#define SUBTARGET_ASM_FLOAT_SPEC	\
-+  "%{mhard-float:-mfpu=fpa} \
++  "%{mhard-float:-mfpu=vfp3} \
 +   %{msoft-float:-mfpu=softvfp} \
 +   %{!mhard-float: \
 +     %{!msoft-float:-mfpu=softvfp}}"

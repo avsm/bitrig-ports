@@ -1,6 +1,6 @@
 # $OpenBSD: Makefile,v 1.18 2012/03/07 20:39:37 kurt Exp $
 
-ONLY_FOR_ARCHS = amd64 i386 powerpc sparc sparc64
+ONLY_FOR_ARCHS = amd64 arm i386 powerpc sparc sparc64
 BROKEN-sparc64 = gengtype looping infinitely
 
 V = 4.6.2
@@ -15,6 +15,8 @@ PKGNAME-gcclibs= bitrig-gcclibs-${FULL_PKGVERSION}
 
 REVISION-main = 16
 REVISION-gcclibs=16
+
+CC=cc
 
 SHARED_LIBS =	stdc++		${LIBSTDC_VERSION} \
 		ssp		1.0 \
