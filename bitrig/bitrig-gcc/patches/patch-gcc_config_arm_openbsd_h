@@ -1,7 +1,7 @@
 $OpenBSD$
 --- gcc/config/arm/openbsd.h.orig	Mon Jul 15 11:18:36 2013
-+++ gcc/config/arm/openbsd.h	Mon Jul 15 14:46:42 2013
-@@ -0,0 +1,233 @@
++++ gcc/config/arm/openbsd.h	Mon Jul 15 11:18:36 2013
+@@ -0,0 +1,236 @@
 +/* Definitions of target machine for GNU compiler, OpenBSD/arm ELF version.
 +   Copyright (C) 2002 Free Software Foundation, Inc.
 +   Contributed by Wasabi Systems, Inc.
@@ -34,6 +34,9 @@ $OpenBSD$
 +/* Unsigned chars produces much better code than signed.  */
 +#define DEFAULT_SIGNED_CHAR  0
 +
++/* OpenBSD only supports 32 bit for now, fix runtime test in libgcc */
++#undef TRAMPOLINE_SIZE
++#define TRAMPOLINE_SIZE  (16)
 +
 +/* This defaults us to little-endian.  */
 +#ifndef TARGET_ENDIAN_DEFAULT
