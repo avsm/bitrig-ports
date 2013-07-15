@@ -1,7 +1,7 @@
 $OpenBSD$
 --- gcc/config/arm/openbsd.h.orig	Mon Jul 15 11:18:36 2013
-+++ gcc/config/arm/openbsd.h	Mon Jul 15 12:26:27 2013
-@@ -0,0 +1,232 @@
++++ gcc/config/arm/openbsd.h	Mon Jul 15 14:46:42 2013
+@@ -0,0 +1,233 @@
 +/* Definitions of target machine for GNU compiler, OpenBSD/arm ELF version.
 +   Copyright (C) 2002 Free Software Foundation, Inc.
 +   Contributed by Wasabi Systems, Inc.
@@ -46,11 +46,12 @@ $OpenBSD$
 +#define SUBTARGET_CPU_DEFAULT TARGET_CPU_strongarm
 +
 +/* Default is to use AAPCS-32 mode.  */
++#undef  ARM_DEFAULT_ABI
++#define ARM_DEFAULT_ABI ARM_ABI_AAPCS_LINUX
 +
 +/* Default it to use AAPCS with soft-VFP.  */
 +#undef TARGET_DEFAULT
 +#define TARGET_DEFAULT (TARGET_ENDIAN_DEFAULT)
-+
 +
 +#define TARGET_OS_CPP_BUILTINS()	\
 +  do					\
