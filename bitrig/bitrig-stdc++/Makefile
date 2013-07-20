@@ -121,10 +121,9 @@ PKG_ARGS += -DI386=1
 PKG_ARGS += -DI386=0
 .endif
 
-RUN_DEPENDS =
-WANTLIB =		c m gmp mpc mpfr z
+WANTLIB =		c m z
 
-LIB_DEPENDS +=		devel/gmp>=4.2 \
+BUILD_DEPENDS +=	devel/gmp>=4.2 \
 			devel/mpfr \
 			devel/libmpc
 
