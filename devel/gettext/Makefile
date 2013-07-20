@@ -3,7 +3,7 @@
 COMMENT=	GNU gettext
 
 DISTNAME=	gettext-0.18.2
-REVISION=	4
+REVISION=	3
 SHARED_LIBS +=  intl                 6.0      # .9.2
 SHARED_LIBS +=  asprintf             1.0      # .0.0
 SHARED_LIBS +=  gettextlib           3.1      # .0.0
@@ -24,8 +24,6 @@ PERMIT_PACKAGE_CDROM=	Yes
 
 MODULES=	converters/libiconv
 WANTLIB=	c expat m ncurses stdc++
-BUILD_DEPENDS=	bitrig/bitrig-stdc++
-RUN_DEPENDS=	${BUILD_DEPENDS}
 
 CONFIGURE_STYLE=gnu
 CONFIGURE_ARGS=	${CONFIGURE_SHARED} \
