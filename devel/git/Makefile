@@ -28,10 +28,15 @@ MODULES =		devel/gettext x11/tk
 
 BUILD_DEPENDS =		devel/p5-Error
 
-# -svn should be made a flavoe so that syscomp won't need ruby 1.8
-# ruby 1.8 is gcc only code
-#MULTI_PACKAGES =	-main -svn -x11
 MULTI_PACKAGES =	-main -x11
+
+# svn is a flavor so that syscomp won't need ruby 1.8
+# ruby 1.8 is gcc only code
+FLAVORS=	svn
+FLAVOR?=
+.if ${FLAVOR:Msvn}
+MULTI_PACKAGES +=	-svn
+.endif
 
 WANTLIB-main =		c expat crypto curl pthread ssl z ${MODGETTEXT_WANTLIB}
 RUN_DEPENDS-main =	net/rsync \
