@@ -10,7 +10,8 @@ MASTER_SITES=	${MASTER_SITE_GNU:=make/}
 
 HOMEPAGE=	http://www.gnu.org/software/make/
 
-MODULES=	devel/gettext
+# should become a flavor if so desired
+#MODULES=	devel/gettext
 
 # GPLv3+
 PERMIT_PACKAGE_CDROM=	Yes
