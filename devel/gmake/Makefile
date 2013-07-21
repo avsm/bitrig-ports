@@ -10,8 +10,11 @@ MASTER_SITES=	${MASTER_SITE_GNU:=make/}
 
 HOMEPAGE=	http://www.gnu.org/software/make/
 
-# should become a flavor if so desired
-#MODULES=	devel/gettext
+# gettext is a flavor due to circular dependencies in syscomp
+FLAVORS=	gettext
+.if ${FLAVOR:Mgettext}
+MODULES=	devel/gettext
+.endif
 
 # GPLv3+
 PERMIT_PACKAGE_CDROM=	Yes
