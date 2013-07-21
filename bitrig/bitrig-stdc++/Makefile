@@ -39,8 +39,6 @@ SUBST_VARS+=CONFIG V
 
 USE_LIBTOOL =	gnu
 
-BUILD_DEPENDS +=	devel/bison
-
 TEST_DEPENDS = 	devel/dejagnu \
 		devel/autogen
 
