@@ -11,6 +11,7 @@ MASTER_SITES=	${MASTER_SITE_GNU:=make/}
 HOMEPAGE=	http://www.gnu.org/software/make/
 
 # gettext is a flavor due to circular dependencies in syscomp
+FLAVOR?=
 FLAVORS=	gettext
 .if ${FLAVOR:Mgettext}
 MODULES=	devel/gettext
