@@ -1,7 +1,7 @@
 $OpenBSD$
 --- gcc/config/arm/openbsd.h.orig	Mon Jul 15 11:18:36 2013
 +++ gcc/config/arm/openbsd.h	Mon Jul 15 11:18:36 2013
-@@ -0,0 +1,236 @@
+@@ -0,0 +1,239 @@
 +/* Definitions of target machine for GNU compiler, OpenBSD/arm ELF version.
 +   Copyright (C) 2002 Free Software Foundation, Inc.
 +   Contributed by Wasabi Systems, Inc.
@@ -30,6 +30,9 @@ $OpenBSD$
 +/* This is used in ASM_FILE_START.  */
 +#undef ARM_OS_NAME
 +#define ARM_OS_NAME "OpenBSD"
++
++/* ??? */
++#undef DTOR_LIST_BEGIN
 +
 +/* Unsigned chars produces much better code than signed.  */
 +#define DEFAULT_SIGNED_CHAR  0
@@ -153,8 +156,8 @@ $OpenBSD$
 +#undef TYPE_OPERAND_FMT
 +#define TYPE_OPERAND_FMT "%%%s"
 +
-+#undef FPUTYPE_DEFAULT
-+#define FPUTYPE_DEFAULT "vfp"
++//#undef FPUTYPE_DEFAULT
++//#define FPUTYPE_DEFAULT "vfp"
 +
 +/* VERY BIG NOTE: Change of structure alignment for OpenBSD|NetBSD/arm.
 +   There are consequences you should be aware of...

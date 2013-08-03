@@ -31,7 +31,7 @@ $OpenBSD: patch-gcc_config_gcc,v 1.2 2012/03/07 20:39:37 kurt Exp $
  	;;
 +arm*-*-bitrig*)
 +	tm_file="dbxelf.h elfos.h arm/elf.h arm/aout.h arm/arm.h openbsd.h openbsd-libpthread.h arm/openbsd.h"
-+	tmake_file="${tmake_file} arm/t-arm arm/t-strongarm-elf"
++	tmake_file="${tmake_file} arm/t-arm arm/t-openbsd"
 +	;;
  arm*-*-freebsd*)
  	tm_file="dbxelf.h elfos.h ${fbsd_tm_file} arm/elf.h arm/aout.h arm/freebsd.h arm/arm.h"
