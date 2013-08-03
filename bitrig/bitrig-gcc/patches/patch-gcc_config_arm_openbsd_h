@@ -156,8 +156,8 @@ $OpenBSD$
 +#undef TYPE_OPERAND_FMT
 +#define TYPE_OPERAND_FMT "%%%s"
 +
-+//#undef FPUTYPE_DEFAULT
-+//#define FPUTYPE_DEFAULT "vfp"
++#undef FPUTYPE_DEFAULT
++#define FPUTYPE_DEFAULT "vfp"
 +
 +/* VERY BIG NOTE: Change of structure alignment for OpenBSD|NetBSD/arm.
 +   There are consequences you should be aware of...
