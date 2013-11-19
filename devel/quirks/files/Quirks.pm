@@ -363,6 +363,8 @@ my $obsolete_reason = {
 	'varconf' => 0,
 	'radiusd-cistron' => 2,
 	'radiusd-lucent' => 2,
+# bitrig 0.1
+	'py3-distribute' => 3,
 };
 
 # ->is_base_system($handle, $state):
