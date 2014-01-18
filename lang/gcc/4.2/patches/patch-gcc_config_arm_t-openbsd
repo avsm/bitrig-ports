@@ -1,0 +1,4 @@
+--- gcc/config/arm/t-openbsd.orig	Sat Jan 25 11:35:47 2014
++++ gcc/config/arm/t-openbsd	Sat Jan 25 11:36:01 2014
+@@ -0,0 +1 @@
++LIB2FUNCS_EXTRA = $(srcdir)/config/floatunsidf.c $(srcdir)/config/floatunsisf.c

@@ -1,5 +1,5 @@
 --- gcc/config.gcc.orig	Thu Mar 13 20:11:43 2008
-+++ gcc/config.gcc	Sun Feb  3 21:37:45 2013
++++ gcc/config.gcc	Sat Jan 25 11:33:13 2014
 @@ -543,7 +543,7 @@ case ${target} in
        ;;
    esac
@@ -40,9 +40,9 @@
  	tm_file="dbxelf.h elfos.h ${fbsd_tm_file} arm/elf.h arm/aout.h arm/freebsd.h arm/arm.h"
  	tmake_file="${tmake_file} arm/t-arm arm/t-strongarm-elf"
  	;;
-+arm-*-openbsd*)
++arm-*-openbsd*|arm-*-bitrig*)
 +	tm_file="dbxelf.h elfos.h arm/elf.h arm/aout.h arm/arm.h openbsd.h openbsd-libpthread.h arm/openbsd.h"
-+	tmake_file="${tmake_file} arm/t-arm"
++	tmake_file="${tmake_file} arm/t-arm arm/t-openbsd"
 +	;;
  arm*-*-netbsdelf*)
  	tm_file="dbxelf.h elfos.h netbsd.h netbsd-elf.h arm/elf.h arm/aout.h arm/arm.h arm/netbsd-elf.h"
