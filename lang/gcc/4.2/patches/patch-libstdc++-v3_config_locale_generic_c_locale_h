@@ -1,0 +1,14 @@
+--- libstdc++-v3/config/locale/generic/c_locale.h.orig	Thu Dec  7 10:33:51 2006
++++ libstdc++-v3/config/locale/generic/c_locale.h	Fri Jan 24 23:41:58 2014
+@@ -68,8 +68,9 @@ _GLIBCXX_BEGIN_NAMESPACE(std)
+     char* __sav = NULL;
+     if (std::strcmp(__old, "C"))
+       {
+-	__sav = new char[std::strlen(__old) + 1];
+-	std::strcpy(__sav, __old);
++        size_t __sz = std::strlen(__old) + 1;
++	__sav = new char[__sz];
++	std::memcpy(__sav, __old, __sz);
+ 	std::setlocale(LC_NUMERIC, "C");
+       }
+ 

@@ -1,0 +1,11 @@
+--- libstdc++-v3/docs/html/ext/sgiexts.html.orig	Tue Nov 18 21:56:12 2003
++++ libstdc++-v3/docs/html/ext/sgiexts.html	Fri Jan 24 23:41:58 2014
+@@ -34,7 +34,7 @@ libstdc++-v3</a></h1>
+    for a description).  Not every chapter may have extensions, and the
+    extensions may come and go.  Also, this page is incomplete because the
+    author is pressed for time.  Check back often; the latest change was on
+-   $Date: 2003/04/16 17:02:47 $ (UTC).
++   $Date: 2009/10/15 17:11:32 $ (UTC).
+ </p>
+ 
+ <p>Descriptions range from the scanty to the verbose.  You should also check

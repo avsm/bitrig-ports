@@ -1,7 +1,33 @@
 $OpenBSD: patch-gcc_config_openbsd_h,v 1.5 2012/10/07 20:09:44 landry Exp $
---- gcc/config/openbsd.h.orig	Sat Sep  1 17:28:30 2007
-+++ gcc/config/openbsd.h	Sat Oct  6 12:37:31 2012
-@@ -72,6 +72,37 @@ along with GCC; see the file COPYING3.  If not see
+--- gcc/config/openbsd.h.orig	Fri Jan 24 23:47:31 2014
++++ gcc/config/openbsd.h	Fri Jan 24 23:53:01 2014
+@@ -53,14 +53,25 @@ along with GCC; see the file COPYING3.  If not see
+ 
+ /* The compiler is configured with ONLY the gcc/g++ standard headers.  */
+ #undef INCLUDE_DEFAULTS
++#ifdef CROSS_COMPILE
+ #define INCLUDE_DEFAULTS			\
+   {						\
+     { GPLUSPLUS_INCLUDE_DIR, "G++", 1, 1 },	\
+     { GPLUSPLUS_TOOL_INCLUDE_DIR, "G++", 1, 1 }, \
+     { GPLUSPLUS_BACKWARD_INCLUDE_DIR, "G++", 1, 1 }, \
++    { GPLUSPLUS_INCLUDE_DIR "/..", STANDARD_INCLUDE_COMPONENT, 0, 0 }, \
++    { 0, 0, 0, 0 }				\
++  }
++#else
++#define INCLUDE_DEFAULTS			\
++  {						\
++    { GPLUSPLUS_INCLUDE_DIR, "G++", 1, 1 },	\
++    { GPLUSPLUS_TOOL_INCLUDE_DIR, "G++", 1, 1 }, \
++    { GPLUSPLUS_BACKWARD_INCLUDE_DIR, "G++", 1, 1 }, \
+     { STANDARD_INCLUDE_DIR, STANDARD_INCLUDE_COMPONENT, 0, 0 }, \
+     { 0, 0, 0, 0 }				\
+   }
++#endif
+ 
+ /* Under OpenBSD, the normal location of the various *crt*.o files is the
+    /usr/lib directory.  */
+@@ -72,6 +83,37 @@ along with GCC; see the file COPYING3.  If not see
  
  /* Controlling the compilation driver.  */
  /* TARGET_OS_CPP_BUILTINS() common to all OpenBSD targets.  */
@@ -39,7 +65,7 @@ $OpenBSD: patch-gcc_config_openbsd_h,v 1.5 2012/10/07 20:09:44 landry Exp $
  #define OPENBSD_OS_CPP_BUILTINS()		\
    do						\
      {						\
-@@ -90,21 +121,14 @@ along with GCC; see the file COPYING3.  If not see
+@@ -90,21 +132,14 @@ along with GCC; see the file COPYING3.  If not see
     This two-stage defines makes it easy to pick that for targets that
     have subspecs.  */
  #ifdef CPP_CPU_SPEC
@@ -65,7 +91,7 @@ $OpenBSD: patch-gcc_config_openbsd_h,v 1.5 2012/10/07 20:09:44 landry Exp $
  #ifndef OBSD_HAS_CORRECT_SPECS
  
  #ifndef OBSD_NO_DYNAMIC_LIBRARIES
-@@ -139,6 +163,10 @@ along with GCC; see the file COPYING3.  If not see
+@@ -139,6 +174,10 @@ along with GCC; see the file COPYING3.  If not see
    "%{g:%{!nostdlib:-L/usr/lib/debug}} %{!shared:%{!nostdlib:%{!r*:%{!e*:-e start}}}} %{shared:-Bshareable -x} -dc -dp %{R*} %{static:-Bstatic} %{assert*}"
  #endif
  
@@ -76,7 +102,7 @@ $OpenBSD: patch-gcc_config_openbsd_h,v 1.5 2012/10/07 20:09:44 landry Exp $
  #undef LIB_SPEC
  #define LIB_SPEC OBSD_LIB_SPEC
  #endif
-@@ -281,16 +309,15 @@ do {									 \
+@@ -281,16 +320,15 @@ do {									 \
  /* Storage layout.  */
  
  
@@ -96,12 +122,12 @@ $OpenBSD: patch-gcc_config_openbsd_h,v 1.5 2012/10/07 20:09:44 landry Exp $
  /* Stack is explicitly denied execution rights on OpenBSD platforms.  */
  #define ENABLE_EXECUTE_STACK						\
  extern void __enable_execute_stack (void *);				\
-@@ -305,6 +332,16 @@ __enable_execute_stack (void *addr)					\
+@@ -305,6 +343,16 @@ __enable_execute_stack (void *addr)					\
    if (mprotect (page, end - page, PROT_READ | PROT_WRITE | PROT_EXEC) < 0) \
      perror ("mprotect of trampoline code");				\
  }
 +
-+/*
++/*.
 + * Disable the use of unsafe builtin functions, (strcat, strcpy, stpcpy),
 + * making them easier to spot in the object files.
 + */

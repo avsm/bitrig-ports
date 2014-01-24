@@ -1,7 +1,14 @@
 $OpenBSD: patch-gcc_gcc_c,v 1.7 2012/09/01 00:00:32 pascal Exp $
---- gcc/gcc.c.orig	Wed Aug 29 20:08:40 2012
-+++ gcc/gcc.c	Wed Aug 29 20:51:54 2012
-@@ -683,7 +683,7 @@ proper position among the other output files.  */
+--- gcc/gcc.c.orig	Sat Sep  1 17:28:30 2007
++++ gcc/gcc.c	Fri Jan 24 23:41:58 2014
+@@ -677,13 +677,13 @@ proper position among the other output files.  */
+ #ifdef TARGET_LIBC_PROVIDES_SSP
+ #define LINK_SSP_SPEC "%{fstack-protector:}"
+ #else
+-#define LINK_SSP_SPEC "%{fstack-protector|fstack-protector-all:-lssp_nonshared -lssp}"
++#define LINK_SSP_SPEC "%{fstack-protector|fstack-protector-strong|fstack-protector-all:-lssp_nonshared -lssp}"
+ #endif
+ #endif
  
  #ifndef LINK_PIE_SPEC
  #ifdef HAVE_LD_PIE

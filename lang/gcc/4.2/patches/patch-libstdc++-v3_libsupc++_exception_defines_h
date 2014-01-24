@@ -1,0 +1,11 @@
+--- libstdc++-v3/libsupc++/exception_defines.h.orig	Fri Dec  1 13:56:23 2006
++++ libstdc++-v3/libsupc++/exception_defines.h	Fri Jan 24 23:42:03 2014
+@@ -42,7 +42,7 @@
+ // Iff -fno-exceptions, transform error handling code to work without it.
+ # define try      if (true)
+ # define catch(X) if (false)
+-# define __throw_exception_again
++# define __throw_exception_again ((void)0)
+ #else
+ // Else proceed normally.
+ # define __throw_exception_again throw

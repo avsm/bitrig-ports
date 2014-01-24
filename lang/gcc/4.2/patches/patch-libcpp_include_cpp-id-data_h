@@ -1,0 +1,11 @@
+--- libcpp/include/cpp-id-data.h.orig	Wed Jun 29 04:34:39 2005
++++ libcpp/include/cpp-id-data.h	Fri Jan 24 23:41:58 2014
+@@ -18,7 +18,7 @@ Foundation, 51 Franklin Street, Fifth Floor, Boston, M
+ 
+ #include "cpplib.h"
+ 
+-#if !defined (HAVE_UCHAR) && !defined (IN_GCC)
++#if !defined (HAVE_UCHAR)
+ typedef unsigned char uchar;
+ #endif
+ 

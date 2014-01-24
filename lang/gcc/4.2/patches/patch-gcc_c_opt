@@ -1,0 +1,24 @@
+--- gcc/c.opt.orig	Sat Sep  1 17:28:30 2007
++++ gcc/c.opt	Fri Jan 24 23:41:51 2014
+@@ -402,6 +406,10 @@ Wtraditional
+ C ObjC Var(warn_traditional)
+ Warn about features not present in traditional C
+ 
++Wtrampolines
++Common Var(warn_trampolines)
++Warn when trampolines are emitted
++
+ Wtrigraphs
+ C ObjC C++ ObjC++
+ Warn if trigraphs are encountered that might affect the meaning of the program
+@@ -702,6 +710,10 @@ C++ ObjC++
+ fthreadsafe-statics
+ C++ ObjC++
+ -fno-threadsafe-statics	Do not generate thread-safe code for initializing local statics
++
++ftrampolines
++Common Var(flag_trampolines)
++Allows trampolines
+ 
+ funsigned-bitfields
+ C ObjC C++ ObjC++
