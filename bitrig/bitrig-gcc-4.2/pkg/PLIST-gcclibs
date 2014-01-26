@@ -1,0 +1,2 @@
+lib/libgcc.a
+@lib lib/libestdc++.so.${LIBestdc++_VERSION}

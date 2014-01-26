@@ -1,0 +1,8 @@
+bin/c++
+bin/cc
+bin/g++
+bin/gcc
+include/c++/
+include/c++/stdc++
+include/g++
+%%arm%%
