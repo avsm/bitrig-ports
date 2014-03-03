@@ -940,6 +940,7 @@ libexec/gcc/${CONFIG}/${V}/
 @bin libexec/gcc/${CONFIG}/${V}/cc1plus
 @bin libexec/gcc/${CONFIG}/${V}/collect2
 @bin libexec/gcc/${CONFIG}/${V}/f951
+@bin libexec/gcc/${CONFIG}/${V}/go1
 libexec/gcc/${CONFIG}/${V}/install-tools/
 libexec/gcc/${CONFIG}/${V}/install-tools/fixinc.sh
 @bin libexec/gcc/${CONFIG}/${V}/install-tools/fixincl
