@@ -25,7 +25,7 @@ PKGNAME-java =  gcj-${FULL_PKGVERSION}
 PKGNAME-objc =  gobjc-${FULL_PKGVERSION}
 PKGNAME-ada =   gnat-${FULL_PKGVERSION}
 # needs [gs]etcontext
-#PKGNAME-go =	gccgo-${FULL_PKGVERSION}
+PKGNAME-go =	gccgo-${FULL_PKGVERSION}
 PKGSPEC-main = gcc->=4.8,<4.9
 
 REVISION-main	= 2
@@ -114,9 +114,9 @@ CC = ${WRKDIR}/bin/egcc
 CXX = ${WRKDIR}/bin/eg++
 TEST_DEPENDS += ${BUILD_PKGPATH},-ada
 .endif
-#.if ${BUILD_PACKAGES:M-go}
-#LANGS := ${LANGS},go
-#.endif
+.if ${BUILD_PACKAGES:M-go}
+LANGS := ${LANGS},go
+.endif
 
 CONFIGURE_STYLE =		gnu
 MODGNU_CONFIG_GUESS_DIRS =	${WRKSRC} ${WRKSRC}/gcc
@@ -197,14 +197,14 @@ PKG_ARGS += -DSPARC=0
 	${MACHINE_ARCH} == "amd64" || ${MACHINE_ARCH} == "i386" || \
 	${MACHINE_ARCH} == "powerpc" || ${MACHINE_ARCH} == "sh" || \
 	${MACHINE_ARCH} == "sparc" || ${MACHINE_ARCH} == "sparc64"
-PKG_ARGS += -DITM=1
+PKG_ARGS += -DITM=0
 .else
 PKG_ARGS += -DITM=0
 .endif
 
 .if ${MACHINE_ARCH} == "amd64" || ${MACHINE_ARCH} == "arm" || \
 	${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "powerpc"
-PKG_ARGS += -DATOMIC=1
+PKG_ARGS += -DATOMIC=0
 .else
 PKG_ARGS += -DATOMIC=0
 .endif
