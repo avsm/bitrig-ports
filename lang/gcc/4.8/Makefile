@@ -197,14 +197,14 @@ PKG_ARGS += -DSPARC=0
 	${MACHINE_ARCH} == "amd64" || ${MACHINE_ARCH} == "i386" || \
 	${MACHINE_ARCH} == "powerpc" || ${MACHINE_ARCH} == "sh" || \
 	${MACHINE_ARCH} == "sparc" || ${MACHINE_ARCH} == "sparc64"
-PKG_ARGS += -DITM=0
+PKG_ARGS += -DITM=1
 .else
 PKG_ARGS += -DITM=0
 .endif
 
 .if ${MACHINE_ARCH} == "amd64" || ${MACHINE_ARCH} == "arm" || \
 	${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "powerpc"
-PKG_ARGS += -DATOMIC=0
+PKG_ARGS += -DATOMIC=1
 .else
 PKG_ARGS += -DATOMIC=0
 .endif
