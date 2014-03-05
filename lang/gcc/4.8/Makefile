@@ -57,7 +57,7 @@ FLAVOR ?=
 ONLY_FOR_ARCHS-ada = amd64 i386 sparc64
 ONLY_FOR_ARCHS-java = amd64 i386 powerpc sparc64
 
-MULTI_PACKAGES = -main -f95 -objc -c++ -estdc -java -ada -go
+MULTI_PACKAGES = -main -f95 -objc -c++ -estdc -java -ada
 
 MAINTAINER =	Pascal Stumpf <Pascal.Stumpf@cubes.de>
 
