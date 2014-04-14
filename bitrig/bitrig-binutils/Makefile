@@ -3,6 +3,7 @@ DPB_PROPERTIES= 	parallel
 
 COMMENT =		Bitrig binutils
 
+REVISION =		0
 DISTNAME =		bitrig-binutils-0.9.2
 EXTRACT_SUFX =		.tgz
 CATEGORIES =		bitrig devel
