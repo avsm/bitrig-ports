@@ -1,0 +1,8 @@
+To initialize OPAM, run "opam init" and follow the prompts.
+
+Ensure that you unset MANPATH after running `opam config env`, since
+overriding it replaces the entire system path on OpenBSD.
+
+Some OCaml packages such as Core require more memory to build
+than the default ulimit allows, so increase this via `ulimit -d`
+if you run into problems.
