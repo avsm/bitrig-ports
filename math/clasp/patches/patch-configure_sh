@@ -1,0 +1,9 @@
+$OpenBSD$
+--- configure.sh.orig	Wed Apr 16 17:17:27 2014
++++ configure.sh	Wed Apr 16 17:17:34 2014
+@@ -1,4 +1,4 @@
+-#!/bin/bash
++#!/usr/bin/env bash
+ 
+ # OPTIONS
+ static=0
