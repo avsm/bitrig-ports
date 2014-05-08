@@ -1,0 +1,22 @@
+$OpenBSD$
+--- src/client/opamState.ml.orig	Wed Jan 29 14:46:46 2014
++++ src/client/opamState.ml	Thu May  8 10:53:13 2014
+@@ -1458,9 +1458,6 @@ let env_updates ~opamswitch t =
+   let toplevel_dir =
+     "OCAML_TOPLEVEL_PATH", "=",
+     OpamFilename.Dir.to_string (OpamPath.Switch.toplevel t.root t.switch) in
+-  let man_path =
+-    "MANPATH", "=:",
+-    OpamFilename.Dir.to_string (OpamPath.Switch.man_dir t.root t.switch) in
+   let comp_env = OpamFile.Comp.env comp in
+   let switch =
+     if not opamswitch then []
+@@ -1474,7 +1471,7 @@ let env_updates ~opamswitch t =
+     else
+       [] in
+ 
+-  new_path :: man_path :: toplevel_dir :: new_perl5lib :: (switch @ root @ comp_env)
++  new_path :: toplevel_dir :: new_perl5lib :: (switch @ root @ comp_env)
+ 
+ (* This function is used by 'opam config env' and 'opam switch' to
+    display the environment variables. We have to make sure that
