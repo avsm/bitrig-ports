@@ -1,22 +1,23 @@
-# $OpenBSD: Makefile,v 1.153 2014/03/24 21:34:21 landry Exp $
+# $OpenBSD: Makefile,v 1.156 2014/05/03 07:28:30 landry Exp $
 
 COMMENT-main =		Mozilla application suite
 COMMENT-lightning =	Mozilla Seamonkey calendar extension
 
-MOZILLA_VERSION =	2.25
+MOZILLA_VERSION =	2.26
 MOZILLA_BRANCH =	release
 MOZILLA_PROJECT =	seamonkey
 MOZILLA_CODENAME =	suite
 
 MULTI_PACKAGES =	-main -lightning
 PKGNAME-main =		${PKGNAME}
-PKGNAME-lightning =	lightning-seamonkey-3.0beta1
+REVISION =		0
+PKGNAME-lightning =	lightning-seamonkey-3.1
 EPOCH-lightning =	0
 
 HOMEPAGE =	http://www.seamonkey-project.org/
 #MASTER_SITES=	ftp://ftp.mozilla.org/pub/mozilla.org/${MOZILLA_PROJECT}/nightly/${MOZILLA_VERSION}-candidates/build1/source/
 
-SO_VERSION =	36.0
+SO_VERSION =	37.0
 # NOTE: Must bump minor version if any shlib's are removed from the
 # components dir to avoid pkg_add -r issues.
 
@@ -36,6 +37,11 @@ MODGCC4_ARCHS =		powerpc sparc64 alpha i386
 MODGCC4_LANGS =		c c++
 MODCLANG_ARCHS =	amd64
 MODCLANG_LANGS =	c c++
+
+# fix for 982693, apply only on clang archs
+.if ${MACHINE_ARCH:Mamd64}
+MAKE_ENV += VPXHACK="-fno-integrated-as"
+.endif
 
 NO_TEST=	Yes
 
@@ -59,6 +65,10 @@ CONFIGURE_ARGS +=	--disable-debug-symbols
 # relies on pulseaudio for sound and broken at runtime
 CONFIGURE_ARGS +=	--disable-webrtc
 
+CONFIGURE_ARGS +=	--enable-gstreamer
+BUILD_DEPENDS +=	multimedia/gstreamer-0.10/plugins-base
+RUN_DEPENDS +=	multimedia/gstreamer-0.10/plugins-good
+
 ALL_TARGET =	default
 
 MOZILLA_AUTOCONF_DIRS =		ldap/sdks/c-sdk mozilla mozilla/js/src
@@ -76,8 +86,8 @@ post-install:
 	${UNZIP} -oq ${WRKBUILD}/mozilla/dist/xpi-stage/${xpi}*.xpi -d ${EXTDIR}/${guid}
 .endfor
 	# install prefs
-	${INSTALL_DATA} ${FILESDIR}/all-openbsd.js \
-		${PREFIX}/lib/${MOZILLA_PROJECT}-${MOZILLA_VER}/defaults/pref/
+	${SUBST_CMD} -o ${SHAREOWN} -g ${SHAREGRP} -c ${FILESDIR}/all-openbsd.js \
+		${PREFIX}/lib/${MOZILLA_PROJECT}-${MOZILLA_VER}/defaults/pref/all-openbsd.js
 	# install desktop file
 	${INSTALL_DATA_DIR} ${PREFIX}/share/applications/ ; \
 	${SUBST_CMD} -o ${SHAREOWN} -g ${SHAREGRP} -c ${FILESDIR}/${MOZILLA_PROJECT}.desktop \

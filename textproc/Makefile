@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.407 2014/04/03 07:05:26 bentley Exp $
+# $OpenBSD: Makefile,v 1.413 2014/05/28 22:17:46 jeremy Exp $
 
      SUBDIR =
      SUBDIR += TclXML
@@ -32,8 +32,6 @@
      SUBDIR += docx2txt
      SUBDIR += ebook-tools
      SUBDIR += enchant
-     SUBDIR += erl-edown
-     SUBDIR += erl-neotoma
      SUBDIR += eruby
      SUBDIR += exempi
      SUBDIR += fcbanner
@@ -42,6 +40,7 @@
      SUBDIR += glimpse
      SUBDIR += gnuvd
      SUBDIR += gonzui
+     SUBDIR += grepcidr
      SUBDIR += groff
      SUBDIR += gsed
      SUBDIR += gtk-doc
@@ -73,6 +72,7 @@
      SUBDIR += hyperestraier
      SUBDIR += icu4c
      SUBDIR += idiff
+     SUBDIR += igor
      SUBDIR += iksemel
      SUBDIR += info2html
      SUBDIR += intltool
@@ -309,6 +309,7 @@
      SUBDIR += py-jaxml
      SUBDIR += py-lxml
      SUBDIR += py-nltk
+     SUBDIR += py-numpydoc
      SUBDIR += py-pdf
      SUBDIR += py-polib
      SUBDIR += py-prettytable
@@ -317,6 +318,7 @@
      SUBDIR += py-rdflib,python3
      SUBDIR += py-rtf
      SUBDIR += py-sphinx
+     SUBDIR += py-unidecode
      SUBDIR += py-vatnumber
      SUBDIR += py-vobject
      SUBDIR += py-xml
@@ -334,6 +336,10 @@
      SUBDIR += ruby-classifier
      SUBDIR += ruby-fastercsv,ruby18
      SUBDIR += ruby-fastri,ruby18
+     SUBDIR += ruby-fast_xs,ruby18
+     SUBDIR += ruby-fast_xs,ruby19
+     SUBDIR += ruby-fast_xs,ruby20
+     SUBDIR += ruby-fast_xs,ruby21
      SUBDIR += ruby-fast-stemmer,ruby18
      SUBDIR += ruby-fast-stemmer,ruby19
      SUBDIR += ruby-fast-stemmer,ruby20

@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.28 2014/01/07 22:45:05 jeremy Exp $
+# $OpenBSD: Makefile,v 1.30 2014/05/18 15:49:46 jeremy Exp $
 
 SHARED_ONLY=	Yes
 
@@ -10,7 +10,7 @@ BROKEN-powerpc = no atomics for this arch
 
 COMMENT =	Ruby virtual machine and core library
 
-V=		2.2.3
+V=		2.2.6
 EXTRACT_SUFX=	.tar.bz2
 DISTNAME =	rubinius-${V}
 
@@ -25,12 +25,13 @@ MAINTAINER =	Jeremy Evans <jeremy@openbsd.org>
 # BSD
 PERMIT_PACKAGE_CDROM =	Yes
 
-WANTLIB += c crypto m ncurses ncursesw pthread readline ssl stdc++
-WANTLIB += termcap util yaml z
+WANTLIB += c crypto execinfo m ncurses ncursesw pthread readline ssl stdc++
+WANTLIB += termcap util z
+
+LIB_DEPENDS = devel/libexecinfo
 
 BUILD_DEPENDS =	devel/bison \
 		devel/libffi \
-		devel/llvm \
 		devel/ruby-bundler,ruby20
 
 MODULES =	lang/ruby
@@ -40,6 +41,7 @@ USE_GMAKE =	Yes
 
 MAKE_ENV +=	LDFLAGS="-L${LOCALBASE}/lib" \
 		CPPFLAGS="-DOPENSSL_NO_STATIC_ENGINE -I${LOCALBASE}/include" \
+		CXXFLAGS="-DOPENSSL_NO_STATIC_ENGINE -I${LOCALBASE}/include" \
 		CC="${CC}" \
 		make=gmake \
 		GEM_HOME=${GEM_HOME} \
@@ -47,27 +49,44 @@ MAKE_ENV +=	LDFLAGS="-L${LOCALBASE}/lib" \
 
 RBX_ARCH =	${MACHINE_ARCH}-openbsd
 GEM_HOME =	${WRKSRC}/vendor/build-gems
-FILEUTILS_DIR =	staging/runtime/gems/rubysl-fileutils-*/lib/rubysl/fileutils
+GEM_EXTENSIONS_DIR = lib/rubinius/gems/extensions/${RBX_ARCH:S/i386/x86/}/2.1
 
-SUBST_VARS=	RBX_ARCH
+SUBST_VARS=	RBX_ARCH GEM_EXTENSIONS_DIR
 
 # Used when this rubinius version supports ports LLVM
 #LLVM_OPTION =	--llvm-config=${LOCALBASE}/bin/llvm-config
+#BUILD_DEPENDS += devel/llvm
 # Otherwise
 LLVM_OPTION =	--disable-llvm
 
+OPENSSL_GEM_FILE = vendor/cache/rubysl-openssl-2.1.0.gem
+LIBC = $$(${RUBY} -e 'puts `ldd /usr/bin/at`[/\/usr\/lib\/libc\.so\.[0-9]+/]')
+
 do-configure:
+	# Patch openssl library
+	cd ${WRKSRC} && tar xf ${OPENSSL_GEM_FILE} && \
+		mkdir data && \
+		cd data && \
+		tar ztf ../data.tar.gz > file_list && \
+		tar zxf ../data.tar.gz && \
+		rm -f ../data.tar.gz && \
+		patch --posix ext/rubysl/openssl/ossl_rand.c \
+			${PATCHDIR}/openssl_rand.diff && \
+		tar zcf ../data.tar.gz -I file_list  && \
+		cd .. && \
+		rm -f ${OPENSSL_GEM_FILE} && \
+		tar cf ${OPENSSL_GEM_FILE} metadata.gz data.tar.gz && \
+		rm -rf data metadata.gz data.tar.gz checksums.yaml.gz
 	mkdir -p ${GEM_HOME}
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} bundle20 install \
 		--local --path ${GEM_HOME}
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${RUBY} configure \
 		--prefix=${PREFIX}/lib/rubinius --rake=${RAKE} \
-		--gem=gem20 --make=gmake ${LLVM_OPTION}
+		--gem=gem20 --make=gmake ${LLVM_OPTION} \
+		--libc=${LIBC} --with-execinfo
 
 do-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} HOME=${WRKSRC} ${RAKE} build
-	patch --posix ${WRKSRC}/${FILEUTILS_DIR}/fileutils.rb \
-		${PATCHDIR}/fileutils.diff
 
 do-install:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} HOME=${WRKSRC} \

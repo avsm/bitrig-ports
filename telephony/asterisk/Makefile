@@ -1,11 +1,10 @@
-# $OpenBSD: Makefile,v 1.194 2014/03/23 22:05:10 sthen Exp $
+# $OpenBSD: Makefile,v 1.199 2014/05/31 00:35:31 sthen Exp $
 
 SHARED_ONLY=		Yes
 
 COMMENT-main=		open source multi-protocol PBX and telephony toolkit
 
-VER=			11.8.1
-REVISION-snmp=		0
+VER=			11.10.0
 DISTNAME=		asterisk-${VER:S/beta/-beta/:S/rc/-rc/}
 PKGNAME-main=		asterisk-${VER}
 
@@ -124,11 +123,11 @@ FLAVORS=		imap
 ## flavours:
 
 .if ${FLAVOR:Mimap}
-CONFIGURE_ARGS+=	--with-imap=yes
+CONFIGURE_ARGS+=	--with-imap=system
 MAKE_FLAGS+=		MENUSELECT_OPTS_app_voicemail=IMAP_STORAGE
 CPPFLAGS+=		-I${LOCALBASE}/include/c-client
 LIB_DEPENDS-main+=	mail/alpine,-c-client
-WANTLIB-main+=		c-client gssapi krb5
+WANTLIB-main+=		c-client
 .else
 CONFIGURE_ARGS+=	--with-imap=no
 .endif
@@ -138,9 +137,9 @@ CONFIGURE_ARGS+=	--with-imap=no
 
 # calendar
 COMMENT-calendar=	calendar support for Asterisk
-WANTLIB-calendar=	${MODGETTEXT_WANTLIB} asn1 crypto expat gssapi \
-			ical iksemel krb5 m neon proxy ssl xml2 z wind \
-			com_err heimbase roken
+WANTLIB-calendar=	${MODGETTEXT_WANTLIB} crypto expat ical iksemel
+WANTLIB-calendar+=	m neon proxy ssl xml2 z
+
 LIB_DEPENDS-calendar=	net/neon \
 			textproc/libical \
 			${MODGETTEXT_LIB_DEPENDS}

@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.265 2014/03/18 09:15:00 benoit Exp $
+# $OpenBSD: Makefile,v 1.268 2014/05/30 09:22:21 sthen Exp $
 
      SUBDIR =
      SUBDIR += apache-couchdb
@@ -8,10 +8,6 @@
      SUBDIR += dbh
      SUBDIR += dbic++
      SUBDIR += directoryassistant
-     SUBDIR += erl-Emysql
-     SUBDIR += erl-couchbeam
-     SUBDIR += erl-epgsql
-     SUBDIR += erl-sqerl
      SUBDIR += evolution-data-server
      SUBDIR += freetds
      SUBDIR += gdbm
@@ -176,6 +172,7 @@
      SUBDIR += py-odbc
      SUBDIR += py-pgsql
      SUBDIR += py-psycopg2
+     SUBDIR += py-psycopg2,python3
      SUBDIR += py-puppetdb
      SUBDIR += py-pygresql
      SUBDIR += py-redis
@@ -203,7 +200,6 @@
      SUBDIR += ruby-data_objects,ruby19
      SUBDIR += ruby-data_objects,ruby20
      SUBDIR += ruby-data_objects,rbx
-     SUBDIR += ruby-datamapper
      SUBDIR += ruby-do_mysql,ruby18
      SUBDIR += ruby-do_mysql,ruby19
      SUBDIR += ruby-do_mysql,ruby20

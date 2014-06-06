@@ -1,16 +1,16 @@
-$OpenBSD: patch-third_party_libjpeg_turbo_libjpeg_gyp,v 1.2 2014/01/18 11:42:04 robert Exp $
---- third_party/libjpeg_turbo/libjpeg.gyp.orig.port	Mon Jan 13 22:01:15 2014
-+++ third_party/libjpeg_turbo/libjpeg.gyp	Thu Jan 16 12:26:42 2014
-@@ -232,7 +232,7 @@
+$OpenBSD: patch-third_party_libjpeg_turbo_libjpeg_gyp,v 1.4 2014/05/24 15:27:34 robert Exp $
+--- third_party/libjpeg_turbo/libjpeg.gyp.orig.port	Thu May 22 21:57:20 2014
++++ third_party/libjpeg_turbo/libjpeg.gyp	Thu May 22 21:58:09 2014
+@@ -245,7 +245,7 @@
              ],
            },
          }],
--        [ 'OS=="linux" or (OS=="android" and target_arch!="arm")', {
+-        [ 'OS=="linux" or OS=="freebsd" or (OS=="android" and target_arch!="arm")', {
 +        [ 'OS=="linux" or os_bsd==1 or (OS=="android" and target_arch!="arm")', {
            'conditions': [
              [ 'use_system_yasm==0', {
                'dependencies': [
-@@ -262,6 +262,9 @@
+@@ -275,6 +275,9 @@
                    '-Ilinux/'
                  ],
                }],

@@ -1,10 +1,11 @@
-# $OpenBSD: Makefile,v 1.5 2013/12/11 10:45:49 dcoppa Exp $
+# $OpenBSD: Makefile,v 1.7 2014/05/13 10:19:01 dcoppa Exp $
 
 SHARED_ONLY =	Yes
 
 COMMENT =	NAT Port Mapping Protocol client library
 
-DISTNAME =	libnatpmp-20131126
+DISTNAME =	libnatpmp-20140401
+REVISION =	0
 
 SHARED_LIBS =	natpmp 0.0
 
@@ -17,7 +18,8 @@ MAKE_FLAGS =	CC="${CC}"
 MAKE_ENV =	SHAREDLIB=libnatpmp.so.${LIBnatpmp_VERSION} \
 		SONAME=libnatpmp.so.${LIBnatpmp_VERSION}
 
-FAKE_FLAGS =	INSTALL_DATA="${INSTALL_DATA}" \
+FAKE_FLAGS =	INSTALL="${INSTALL_DATA_DIR}" \
+		INSTALL_DATA="${INSTALL_DATA}" \
 		INSTALL_PROGRAM="${INSTALL_PROGRAM}" \
 		INSTALLPREFIX=${WRKINST}${PREFIX}
 

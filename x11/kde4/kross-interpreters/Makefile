@@ -1,10 +1,11 @@
-# $OpenBSD: Makefile,v 1.5 2013/12/25 13:40:30 zhuk Exp $
+# $OpenBSD: Makefile,v 1.7 2014/05/07 15:42:16 kurt Exp $
 
 COMMENT-main =	KDE bindings for running interpreters
 COMMENT-java =	KDE Java bindings
 DISTNAME =	kross-interpreters-${MODKDE4_VERSION}
 PKGNAME-main =	${PKGNAME}
 PKGNAME-java =	${PKGNAME:C/interpreters/java/}
+REVISION-java =	0
 
 MULTI_PACKAGES =	-main -java
 
@@ -21,7 +22,6 @@ WANTLIB-main =  ${WANTLIB} ${MODPY_WANTLIB} ${MODRUBY_WANTLIB}
 WANTLIB-main += lib/qt4/QtGui
 WANTLIB-main += ${KDE4LIB}/kpty
 
-MODULES =		lang/python
 MODKDE4_USE =		libs
 
 # Unported

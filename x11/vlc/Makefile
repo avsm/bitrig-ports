@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.178 2014/04/12 20:41:26 brad Exp $
+# $OpenBSD: Makefile,v 1.180 2014/05/14 08:59:52 sthen Exp $
 
 SHARED_ONLY=	Yes
 
@@ -9,13 +9,14 @@ V=		2.0.10
 DISTNAME=	vlc-${V}
 PKGNAME-main=	${DISTNAME}
 PKGNAME-jack=	vlc-jack-${V}
-REVISION-main=	0
+REVISION-main=	1
+REVISION-jack=	0
 CATEGORIES=	x11
 MASTER_SITES=	http://download.videolan.org/pub/videolan/vlc/${V}/
 EXTRACT_SUFX=	.tar.xz
 
 SHARED_LIBS=	vlc	2.0 \
-		vlccore	2.0
+		vlccore	2.1
 
 HOMEPAGE=	http://www.videolan.org/vlc/
 
@@ -84,6 +85,7 @@ LIB_DEPENDS-jack= ${MODGETTEXT_LIB_DEPENDS} \
 BUILD_DEPENDS=	net/livemedia>=20120204p0 \
 		${MODGNU_AUTOCONF_DEPENDS} \
 		${MODGNU_AUTOMAKE_DEPENDS} \
+		devel/bison \
 		devel/libtool
 RUN_DEPENDS-main= devel/desktop-file-utils \
 		x11/gtk+2,-guic

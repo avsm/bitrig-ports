@@ -1,15 +1,22 @@
-$OpenBSD: patch-tools_clang_lib_Driver_ToolChains_h,v 1.5 2013/06/21 22:09:12 brad Exp $
---- tools/clang/lib/Driver/ToolChains.h.orig	Mon Apr 29 21:21:43 2013
-+++ tools/clang/lib/Driver/ToolChains.h	Tue Jun  4 23:59:36 2013
-@@ -427,6 +427,11 @@ class LLVM_LIBRARY_VISIBILITY OpenBSD : public Generic
+$OpenBSD: patch-tools_clang_lib_Driver_ToolChains_h,v 1.8 2014/05/22 13:30:23 brad Exp $
+
+r209432
+Use stack protector strong by default on OpenBSD
+
+--- tools/clang/lib/Driver/ToolChains.h.orig	Sun Mar  2 22:03:41 2014
++++ tools/clang/lib/Driver/ToolChains.h	Fri Apr 18 17:14:52 2014
+@@ -538,7 +538,13 @@ class LLVM_LIBRARY_VISIBILITY OpenBSD : public Generic
+   virtual bool isPIEDefault() const { return true; }
  
-   virtual bool IsMathErrnoDefault() const { return false; }
-   virtual bool IsObjCNonFragileABIDefault() const { return true; }
-+  virtual bool isPIEDefault() const { return true; }
-+
-+  virtual unsigned GetDefaultStackProtectorLevel(bool KernelOrKext) const {
-+    return 1;
+   virtual unsigned GetDefaultStackProtectorLevel(bool KernelOrKext) const {
+-    return 1;
++    return 2;
 +  }
++
++  virtual bool IsIntegratedAssemblerDefault() const {
++    if (getTriple().getArch() == llvm::Triple::ppc)
++      return true;
++    return Generic_ELF::IsIntegratedAssemblerDefault();
+   }
  
  protected:
-   virtual Tool *buildAssembler() const;

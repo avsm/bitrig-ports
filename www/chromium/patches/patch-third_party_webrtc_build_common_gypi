@@ -1,7 +1,7 @@
-$OpenBSD: patch-third_party_webrtc_build_common_gypi,v 1.10 2014/03/11 14:52:01 robert Exp $
---- third_party/webrtc/build/common.gypi.orig.port	Thu Feb 20 21:29:46 2014
-+++ third_party/webrtc/build/common.gypi	Fri Feb 21 19:39:55 2014
-@@ -264,7 +264,7 @@
+$OpenBSD: patch-third_party_webrtc_build_common_gypi,v 1.12 2014/05/24 15:27:34 robert Exp $
+--- third_party/webrtc/build/common.gypi.orig.port	Wed May 14 21:24:41 2014
++++ third_party/webrtc/build/common.gypi	Thu May 22 21:42:27 2014
+@@ -282,7 +282,7 @@
            'WEBRTC_IOS',
          ],
        }],

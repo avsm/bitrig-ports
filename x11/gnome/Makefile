@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.231 2014/04/07 12:40:14 jasper Exp $
+# $OpenBSD: Makefile,v 1.234 2014/04/19 18:06:17 ajacoutot Exp $
 
      SUBDIR =
      SUBDIR += alacarte
@@ -23,7 +23,6 @@
      SUBDIR += dictionary
      SUBDIR += doc-utils
      SUBDIR += documents
-     SUBDIR += ekiga
      SUBDIR += empathy
      SUBDIR += eog
      SUBDIR += eog-plugins
@@ -31,7 +30,6 @@
      SUBDIR += font-viewer
      SUBDIR += gcr
      SUBDIR += gdl
-     SUBDIR += gdlmm
      SUBDIR += gdm
      SUBDIR += gedit
      SUBDIR += gedit-code-assistance
@@ -75,7 +73,6 @@
      SUBDIR += mutter
      SUBDIR += nautilus
      SUBDIR += nautilus-sendto
-     SUBDIR += nemiver
      SUBDIR += online-accounts
      SUBDIR += online-miners
      SUBDIR += orca

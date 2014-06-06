@@ -1,12 +1,13 @@
-# $OpenBSD: Makefile,v 1.22 2013/12/22 08:02:48 landry Exp $
+# $OpenBSD: Makefile,v 1.25 2014/05/07 15:42:16 kurt Exp $
 
 COMMENT=		OpenStreetMap map editor
 
-SVN_REV=		6502
+SVN_REV=		6950
 DISTNAME=		josm-snapshot-${SVN_REV}
 EXTRACT_SUFX =		.jar
 EXTRACT_CASES+=		*.jar) unzip -qa ${FULLDISTDIR}/$$archive -d ${WRKDIST};;
 PKGNAME=		josm-${SVN_REV}
+REVISION=		0
 
 PKG_ARCH=		*
 
@@ -34,7 +35,7 @@ INSTALL_DIR =		josm
 do-install:
 	${INSTALL_DATA_DIR} ${PREFIX}/share/${INSTALL_DIR}
 	${INSTALL_DATA} $(DISTDIR)/${DISTNAME}${EXTRACT_SUFX} ${PREFIX}/share/${INSTALL_DIR}/josm-latest.jar
-	@${SUBST_CMD} -c files/josm.sh $(PREFIX)/bin/josm
+	@${SUBST_CMD} -c ${FILESDIR}/josm.sh $(PREFIX)/bin/josm
 	chown ${BINOWN}:${BINGRP} $(PREFIX)/bin/josm
 	chmod +x $(PREFIX)/bin/josm
 	${INSTALL_MAN} $(FILESDIR)/josm.1 ${PREFIX}/man/man1/josm.1

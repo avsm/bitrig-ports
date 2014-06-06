@@ -1,16 +1,17 @@
-# $OpenBSD: Makefile.inc,v 1.2 2014/04/08 12:22:48 sthen Exp $
+# $OpenBSD: Makefile.inc,v 1.9 2014/05/15 21:24:33 sthen Exp $
 
-MULTI_PACKAGES=	-main -ntlm
+MULTI_PACKAGES=	-main
+# -ntlm may come back with samba 4
 
 COMMENT-main=	WWW and FTP proxy cache and accelerator
 COMMENT-ldap=	LDAP authentication/ACL support for Squid
-COMMENT-ntlm=	NTLM authentication/ACL support for Squid
+#COMMENT-ntlm=	NTLM authentication/ACL support for Squid
 
 DISTNAME?=	squid-$V
 EXTRACT_SUFX?=	.tar.xz
 PKGNAME-main=	squid-$V
 PKGNAME-ldap=	squid-ldap-$V
-PKGNAME-ntlm=	squid-ntlm-$V
+#PKGNAME-ntlm=	squid-ntlm-$V
 CATEGORIES=	www
 
 # bzr repository at https://code.launchpad.net/squid
@@ -23,28 +24,21 @@ HOMEPAGE=	http://www.squid-cache.org/
 # GPLv2+
 PERMIT_PACKAGE_CDROM=	Yes
 
-WANTLIB += c m pthread stdc++
+WANTLIB += c m nettle pthread stdc++
 
-WANTLIB-main +=	${WANTLIB} asn1 com_err crypto db execinfo gssapi
-WANTLIB-main +=	heimbase krb5 roken ssl wind
+WANTLIB-main +=	${WANTLIB} crypto db ssl
 
 LIB_DEPENDS-main += ${LIB_DEPENDS} \
 		databases/db/v4 \
-		devel/libexecinfo
+		security/libnettle
 
 SYSCONFDIR=	${BASESYSCONFDIR}/squid
 LOCALSTATEDIR=	${BASELOCALSTATEDIR}/squid
-SUBST_VARS=	LOCALSTATEDIR
 
 PSEUDO_FLAVORS=	no_ldap
 FLAVOR?=
 
 SEPARATE_BUILD=	Yes
-AUTOCONF_VERSION?= 2.68
-AUTOMAKE_VERSION?= 1.11
-BUILD_DEPENDS=	${MODGNU_AUTOCONF_DEPENDS} \
-		${MODGNU_AUTOMAKE_DEPENDS} \
-		devel/libtool
 CONFIGURE_STYLE?= gnu
 MODGNU_CONFIG_GUESS_DIRS= ${WRKSRC}/cfgaux
 
@@ -54,7 +48,7 @@ USE_GROFF=	Yes
 # optimizer is disabled, see e.g.
 # http://www.squid-cache.org/mail-archive/squid-users/201208/0060.html
 MODULES+=	gcc4
-MODGCC4_ARCHS=	powerpc
+MODGCC4_ARCHS?=	powerpc
 MODGCC4_LANGS=	c c++
 
 CONFIGURE_ARGS+= ${CONFIGURE_SHARED} \
@@ -73,13 +67,17 @@ CONFIGURE_ARGS+= ${CONFIGURE_SHARED} \
 		--enable-removal-policies="lru heap" \
 		--enable-ssl \
 		--with-openssl \
-		--enable-stacktraces \
-		--enable-storeio="aufs ufs diskd rock" \
+		--enable-storeio="aufs ufs diskd" \
 		--with-default-user="_squid" \
 		--with-filedescriptors=8192 \
+		--with-krb5-config=no \
 		--with-pidfile="/var/run/squid.pid" \
 		--with-pthreads \
 		--with-swapdir="${LOCALSTATEDIR}/cache"
+
+# "rock" not in --enable-storeio list due to an error at startup:
+# FATAL: Rock cache_dir at /var/squid/rock/rock failed to open db file: (40) Message too long"
+
 # PF transparent support requires access to /dev/pf to retrieve the original
 # source address; ipfw-transparent (which requires divert-to) uses an
 # unprivileged getsockname() call instead.
@@ -89,9 +87,10 @@ CONFIGURE_ARGS+= --disable-pf-transparent \
 # kerberos_ldap_group fails
 CONFIGURE_ARGS+= --enable-external-acl-helpers="${EXTERNAL_ACL}"
 
-CONFIGURE_ENV+=	CPPFLAGS="`krb5-config --cflags` -I${LOCALBASE}/include" \
+CONFIGURE_ENV+=	CPPFLAGS="-I${LOCALBASE}/include" \
 		LDFLAGS="-L${LOCALBASE}/lib" \
-		ac_cv_header_et_com_err_h=false
+		ac_cv_header_et_com_err_h=false \
+		ac_cv_header_execinfo_h=false
 E=		${TRUEPREFIX}/share/examples/squid
 FAKE_FLAGS=	sysconfdir=$E \
 		DEFAULT_CONFIG_FILE=$E/squid.conf \
@@ -103,16 +102,12 @@ MULTI_PACKAGES+= -ldap
 EXTERNAL_ACL+=	LDAP_group eDirectory_userip
 RUN_DEPENDS-ldap= ${BASE_PKGPATH}
 LIB_DEPENDS-ldap += ${LIB_DEPENDS} databases/openldap
-WANTLIB-ldap +=	${WANTLIB} asn1 com_err crypto gssapi krb5
-WANTLIB-ldap +=	lber-2.4 ldap-2.4 sasl2 ssl wind
-WANTLIB-ldap +=	com_err heimbase roken
+WANTLIB-ldap +=	${WANTLIB} crypto lber-2.4 ldap-2.4 sasl2 ssl
 .endif
 
-RUN_DEPENDS-ntlm= net/samba,ads ${BASE_PKGPATH}
-WANTLIB-ntlm +=	${WANTLIB}
-
-post-patch:
-	cd ${WRKSRC}; AUTOCONF_VERSION=${AUTOCONF_VERSION} AUTOMAKE_VERSION=${AUTOMAKE_VERSION} LOCALBASE=${LOCALBASE} ./bootstrap.sh
+#RUN_DEPENDS-ntlm= net/samba,ads ${BASE_PKGPATH}
+#LIB_DEPENDS-ntlm += security/libnettle
+#WANTLIB-ntlm +=	${WANTLIB}
 
 pre-build:
 	@cd ${WRKSRC}; \

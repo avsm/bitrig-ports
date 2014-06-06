@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.335 2014/03/30 19:28:02 sthen Exp $
+# $OpenBSD: Makefile,v 1.343 2014/06/03 14:28:10 sthen Exp $
 
      SUBDIR =
      SUBDIR += ADMfzap
@@ -44,7 +44,6 @@
      SUBDIR += easy-rsa
      SUBDIR += encfs
      SUBDIR += erl-bcrypt
-     SUBDIR += erl-oauth
      SUBDIR += fcrackzip
      SUBDIR += fragroute
      SUBDIR += fragrouter
@@ -78,6 +77,7 @@
      SUBDIR += its4
      SUBDIR += jailkit
      SUBDIR += john
+     SUBDIR += john-jumbo
      SUBDIR += kc
      SUBDIR += kedpm
      SUBDIR += keepassx
@@ -134,7 +134,6 @@
      SUBDIR += p0f
      SUBDIR += p11-kit
      SUBDIR += p5-Authen-Htpasswd
-     SUBDIR += p5-Authen-Krb5-Simple
      SUBDIR += p5-Authen-NTLM
      SUBDIR += p5-Authen-Radius
      SUBDIR += p5-Authen-SASL
@@ -181,7 +180,6 @@
      SUBDIR += p5-Digest-SHA1
      SUBDIR += p5-Digest-Skein
      SUBDIR += p5-GPG
-     SUBDIR += p5-GSSAPI
      SUBDIR += p5-GnuPG
      SUBDIR += p5-GnuPG-Interface
      SUBDIR += p5-IO-Socket-SSL
@@ -208,6 +206,7 @@
      SUBDIR += pgpdump
      SUBDIR += pidgin-otr
      SUBDIR += pinentry
+     SUBDIR += polarssl
      SUBDIR += portscanner
      SUBDIR += portsentry
      SUBDIR += ppgen
@@ -227,8 +226,9 @@
      SUBDIR += py-keyczar
      SUBDIR += py-openssl
      SUBDIR += py-paramiko
+     SUBDIR += py-passlib
+     SUBDIR += py-passlib,python3
      SUBDIR += py-pefile
-     SUBDIR += py-pykpass
      SUBDIR += py-sslwrapper
      SUBDIR += qca
      SUBDIR += qca2
@@ -239,6 +239,7 @@
      SUBDIR += radiusniff
      SUBDIR += rarcrack
      SUBDIR += rdp
+     SUBDIR += reop
      SUBDIR += ruby-akami,ruby19
      SUBDIR += ruby-akami,ruby20
      SUBDIR += ruby-akami,ruby21

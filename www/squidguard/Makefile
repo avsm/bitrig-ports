@@ -1,9 +1,9 @@
-# $OpenBSD: Makefile,v 1.22 2014/01/24 22:50:37 sthen Exp $
+# $OpenBSD: Makefile,v 1.25 2014/05/15 17:27:39 sthen Exp $
 
 COMMENT =		filter, redirector and access controller for Squid
 
 DISTNAME =		squidGuard-1.4
-REVISION =		10
+REVISION =		12
 CATEGORIES =		www
 
 HOMEPAGE =		http://www.squidguard.org/
@@ -18,7 +18,7 @@ MASTER_SITES =		http://www.squidguard.org/Downloads/
 
 LOCALSTATEDIR=		${BASELOCALSTATEDIR}/db/squidGuard
 CONFIG_DIR =		${SYSCONFDIR}/squidguard
-SUBST_VARS =		LOCALSTATEDIR CONFIG_DIR
+SUBST_VARS =		CONFIG_DIR
 
 LIB_DEPENDS =		databases/db/v4
 RUN_DEPENDS =		www/squid/stable

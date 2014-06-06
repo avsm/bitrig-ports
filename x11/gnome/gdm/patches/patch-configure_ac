@@ -1,9 +1,9 @@
-$OpenBSD: patch-configure_ac,v 1.4 2014/03/27 19:19:17 ajacoutot Exp $
+$OpenBSD: patch-configure_ac,v 1.6 2014/05/16 16:48:58 ajacoutot Exp $
 
 https://bugzilla.gnome.org/show_bug.cgi?id=722482
 
---- configure.ac.orig	Tue Mar 25 14:58:43 2014
-+++ configure.ac	Thu Mar 27 18:24:18 2014
+--- configure.ac.orig	Fri May 16 16:52:58 2014
++++ configure.ac	Fri May 16 18:26:57 2014
 @@ -616,14 +616,8 @@ dnl --------------------------------------------------
  dnl - Check for utmp stuff
  dnl ---------------------------------------------------------------------------

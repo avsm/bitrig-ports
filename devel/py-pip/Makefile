@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.12 2013/05/30 13:09:21 ajacoutot Exp $
+# $OpenBSD: Makefile,v 1.14 2014/06/03 11:34:24 rpointel Exp $
 
 COMMENT =		Python easy_install replacement
 
@@ -6,9 +6,7 @@ MODPY_EGG_VERSION =	1.1
 DISTNAME =		pip-${MODPY_EGG_VERSION}
 PKGNAME =		py-${DISTNAME}
 CATEGORIES =		devel
-REVISION =		1
-
-MAINTAINER =		Wen Heping <wenheping@gmail.com>
+REVISION =		3
 
 HOMEPAGE =		http://www.pip-installer.org/
 

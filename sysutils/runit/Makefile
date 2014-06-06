@@ -1,12 +1,14 @@
-# $OpenBSD: Makefile,v 1.13 2014/01/01 20:46:28 naddy Exp $
+# $OpenBSD: Makefile,v 1.15 2014/05/31 10:49:02 jca Exp $
 
 COMMENT=		daemontools alike replacement for init
 
 DISTNAME=		runit-1.7.2
-REVISION=		0
+REVISION=		1
 CATEGORIES=		sysutils
 
 HOMEPAGE=		http://www.smarden.org/runit/
+
+MAINTAINER=		Jeremie Courreges-Anglas <jca@wxcvbn.org>
 
 PERMIT_PACKAGE_CDROM=	Yes
 WANTLIB=		c 
@@ -26,8 +28,8 @@ DOCS1=			benefits.html chpst.8.html dependencies.html faq.html \
 DOCS2=			CHANGES README COPYING THANKS
 EXAMPLES=		etc/2 etc/openbsd/1 etc/openbsd/3 etc/openbsd/ctrlaltdel
 
-pre-build:
-	echo "${CC} ${CFLAGS} ${COPTS}" > ${WRKSRC}/conf-cc
+do-configure:
+	echo "${CC} ${CFLAGS}" > ${WRKSRC}/conf-cc
 	echo "${CC} ${LDFLAGS}" > ${WRKSRC}/conf-ld
 
 do-build:

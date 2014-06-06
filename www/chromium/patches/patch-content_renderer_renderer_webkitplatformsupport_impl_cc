@@ -1,16 +1,16 @@
-$OpenBSD: patch-content_renderer_renderer_webkitplatformsupport_impl_cc,v 1.4 2014/03/11 14:52:01 robert Exp $
---- content/renderer/renderer_webkitplatformsupport_impl.cc.orig.port	Fri Feb 21 23:33:08 2014
-+++ content/renderer/renderer_webkitplatformsupport_impl.cc	Fri Feb 21 23:34:05 2014
-@@ -87,7 +87,7 @@
- #include "third_party/WebKit/public/platform/mac/WebSandboxSupport.h"
- #endif
+$OpenBSD: patch-content_renderer_renderer_webkitplatformsupport_impl_cc,v 1.6 2014/05/24 15:27:34 robert Exp $
+--- content/renderer/renderer_webkitplatformsupport_impl.cc.orig.port	Wed May 14 21:22:05 2014
++++ content/renderer/renderer_webkitplatformsupport_impl.cc	Thu May 22 21:42:27 2014
+@@ -90,7 +90,7 @@
  
--#if defined(OS_POSIX) && !defined(OS_MACOSX) && !defined(OS_ANDROID)
-+#if defined(OS_POSIX) && !defined(OS_MACOSX) && !defined(OS_ANDROID) && !defined(OS_BSD)
+ #if defined(OS_POSIX)
+ #include "base/file_descriptor_posix.h"
+-#if !defined(OS_MACOSX) && !defined(OS_ANDROID)
++#if !defined(OS_MACOSX) && !defined(OS_ANDROID) && !defined(OS_BSD)
  #include <map>
  #include <string>
  
-@@ -164,7 +164,7 @@ class RendererWebKitPlatformSupportImpl::FileUtilities
+@@ -178,7 +178,7 @@ class RendererWebKitPlatformSupportImpl::FileUtilities
    scoped_refptr<ThreadSafeSender> thread_safe_sender_;
  };
  
@@ -19,7 +19,7 @@ $OpenBSD: patch-content_renderer_renderer_webkitplatformsupport_impl_cc,v 1.4 20
  // WebKit doesn't use WebSandboxSupport on android so we don't need to
  // implement anything here.
  class RendererWebKitPlatformSupportImpl::SandboxSupport {
-@@ -256,7 +256,7 @@ RendererWebKitPlatformSupportImpl::fileUtilities() {
+@@ -271,7 +271,7 @@ RendererWebKitPlatformSupportImpl::fileUtilities() {
  }
  
  blink::WebSandboxSupport* RendererWebKitPlatformSupportImpl::sandboxSupport() {
@@ -28,7 +28,7 @@ $OpenBSD: patch-content_renderer_renderer_webkitplatformsupport_impl_cc,v 1.4 20
    // WebKit doesn't use WebSandboxSupport on android.
    return NULL;
  #else
-@@ -541,7 +541,7 @@ bool RendererWebKitPlatformSupportImpl::SandboxSupport
+@@ -588,7 +588,7 @@ bool RendererWebKitPlatformSupportImpl::SandboxSupport
    return FontLoader::CGFontRefFromBuffer(font_data, font_data_size, out);
  }
  

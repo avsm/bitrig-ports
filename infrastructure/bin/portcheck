@@ -1,6 +1,6 @@
 #!/bin/ksh
 #
-# $OpenBSD: portcheck,v 1.71 2014/02/09 19:26:25 zhuk Exp $
+# $OpenBSD: portcheck,v 1.82 2014/05/19 00:57:54 zhuk Exp $
 # Copyright (c) 2013 Vadim Zhukov
 # 
 # Permission to use, copy, modify, and distribute this software for any
@@ -511,10 +511,13 @@ check_port_dir() {
 	local dist_subdir distfiles flavor flavors master_sites
 	local multi_packages pkgpath_this pseudo_flavor pseudo_flavors
 	local shared_libs subst_cmd
+	local perm_pkg_cdrom perm_pkg_ftp perm_dist_ftp
 	local show_items="DIST_SUBDIR DISTFILES FLAVOR FLAVORS FULLPKGNAME"
 	local show_items="$show_items MASTER_SITES MULTI_PACKAGES PKGPATH"
 	local show_items="$show_items PSEUDO_FLAVOR PSEUDO_FLAVORS"
 	local show_items="$show_items SHARED_LIBS SUBST_CMD"
+	local show_items="$show_items PERMIT_PACKAGE_CDROM PERMIT_PACKAGE_FTP"
+	local show_items="$show_items PERMIT_DISTFILES_FTP"
 	local read_ok=false
 
 	local read_failed=false
@@ -531,6 +534,9 @@ check_port_dir() {
 	read -pr pseudo_flavors &&
 	read -pr shared_libs &&
 	read -pr subst_cmd &&
+	read -pr perm_pkg_cdrom &&
+	read -pr perm_pkg_ftp &&
+	read -pr perm_dist_ftp &&
 	read_ok=true
 	if $read_ok; then
 		exec 3<&p
@@ -559,6 +565,8 @@ check_port_dir() {
 
 	check_distfiles "$dir" "$dist_subdir" $distfiles
 	check_master_sites "$dir" $master_sites
+	check_permit_dist "$dir" "$perm_pkg_cdrom" "$perm_pkg_ftp" \
+	    "$perm_dist_ftp"
 	$pkg_exists && check_pkg_dir "$dir"/pkg "$subst_cmd"
 	$existing_port || check_shlibs_versions "$dir" $shared_libs
 
@@ -653,7 +661,7 @@ sub_checks() {
 	local dir=$1; shift
 	local subpkg=$1; shift
 	local fullpkgname=$1; shift
-	local flavor pkg_arch
+	local flavor
 	for flavor in "$@"; do
 		# avoid extra noise
 		[[ ${flavor#no_} != ${flavor} &&
@@ -665,24 +673,48 @@ sub_checks() {
 			portref=$(portref "$dir" "$subpkg" "$flavor" "$*")
 			export SUBPACKAGE="$subpkg" FLAVOR="$flavor"
 
-			make "${make_args[@]}" show="MODULES PKG_ARCH$subpkg WANTLIB$subpkg" | {
-				local modules wantlib
+			local wantlib_var=WANTLIB${subpkg%-}
+			local vars="COMMENT$subpkg MODULES"
+			vars="$vars PKG_ARCH$subpkg $wantlib_var"
+			vars="$vars PERMIT_PACKAGE_CDROM${subpkg%-}"
+			vars="$vars PERMIT_PACKAGE_FTP${subpkg%-}"
+			make "${make_args[@]}" show="$vars" | {
+				local comment modules pkg_arch wantlib
+				local perm_pkg_cdrom perm_pkg_ftp
+				read -r comment
 				read -r modules
 				read -r pkg_arch
 				read -r wantlib
-				if [[ $pkg_arch = "*" && -n $wantlib ]]; then
-					err "${portref}non-empty WANTLIB$subpkg for" \
+				read -r perm_pkg_cdrom
+				read -r perm_pkg_ftp
+
+				if [[ $comment == @(a|an|the)" "* ]]; then
+					err "${portref}no leading articles in" \
+					    "COMMENT${subpkg%-}, please"
+				fi
+
+				if [[ $pkg_arch == "*" && -n $wantlib ]]; then
+					err "${portref}non-empty $wantlib_var for" \
 					    "arch-independent package"
 				fi
-				check_wantlib "$portref" "$modules" $wantlib
-			} || error=true
 
-			if $plist_checks; then
-				(make "${make_args[@]}" print-plist-with-depends ||
-				    true) </dev/null |&
-				check_plist "$portref" "$fullpkgname" "$flavor"
-				wait
-			fi
+				check_wantlib "$portref" "$modules" $wantlib ||
+				    error=true
+				check_permit_subpkg "$portref" "$subpkg" \
+				    "$perm_pkg_cdrom" "$perm_pkg_ftp" ||
+				    error=true
+
+				if $plist_checks; then
+					(make "${make_args[@]}" \
+					    print-plist-with-depends || true) \
+					    </dev/null |&
+					check_plist "$portref" "$fullpkgname" \
+					    "$flavor" "${subpkg%-}" "$modules"
+					wait
+				fi
+
+				! $error
+			} || error=true
 
 			! $error
 		) || error=true
@@ -710,17 +742,26 @@ sub_checks() {
 #     misc/shared-mime-info dependency and @exec/@unexec-delete with
 #     %D/bin/update-mime-database %D/share/mime
 #
+#   * If package adds a GLib schema, it should have @exec/@unexec-delete
+#     with %D/bin/glib-compile-schemas %D/share/glib-2.0/schemas >/dev/null
+#     and "devel/dconf" in MODULES (or at least RDEP on devel/dconf).
+#
 #   * If package installs .mo files under ${PREFIX}/share/locale/, then
 #     run-time dependency on devel/gettext should exists.
 #
 #   * Each .py should have corresponding .pyc files, to avoid
 #     generation of the latter at run-time.
+#
+#   * Manual (man and info) pages should go under ${PREFIX}/{man,info},
+#     not under ${PREFIx}/share/{man,info}.
 check_plist() {
 	$debugging && echo "CALLED: check_plist($*)" >&2
 
 	local portref=$1; shift
 	local fullpkgname=$1; shift
 	local flavor_list=$1; shift
+	local subpkg=$1; shift
+	local modules_list=$1; shift
 
 	local flavor is_static=false
 	for flavor in $flavor_list; do
@@ -742,6 +783,17 @@ check_plist() {
 	local mimepkg_exec_cnt=0
 	local mimepkg_unexec_cnt=0
 
+	local dconf_module
+	if [[ $modules_list == ?(* )devel/dconf?( *) ]]; then
+		dconf_module=true
+	else
+		dconf_module=false
+	fi
+	local dconf_dep=false
+	local dconf_dep_needed=false
+	local dconf_exec_cnt=0
+	local dconf_unexec_cnt=0
+
 	# Lists of icon themes discovered through reading
 	# @file, @exec and @unexec lines, accordingly.
 	local icon_themes= exec_icon_themes= unexec_icon_themes=
@@ -755,6 +807,8 @@ check_plist() {
 	# Lists of .py, .pyc and .pyo items found, accordingly
 	local py_files=   pyc_files=   pyo_files=
 	unset py_files[0] pyc_files[0] pyo_files[0]
+
+	local wrong_man=false wrong_info=false
 
 	# Temporary ones
 	local app l theme varname py
@@ -865,6 +919,23 @@ check_plist() {
 			    "invocation: ${l#@* }"
 			;;
 
+		share/glib-2.0/schemas/*.xml)
+			dconf_dep_needed=true
+			;;
+		"@depend devel/dconf"*)
+			dconf_dep=true
+			;;
+		"@exec %D/bin/glib-compile-schemas %D/share/glib-2.0/schemas >/dev/null")
+			((++dconf_exec_cnt))
+			;;
+		"@unexec-delete %D/bin/glib-compile-schemas %D/share/glib-2.0/schemas >/dev/null")
+			((++dconf_unexec_cnt))
+			;;
+		@?(un)exec?(-delete|-update)" %D/bin/glib-compile-schemas"*)
+			err "${portref}incorrect glib-compile-schemas" \
+			    "invocation: ${l#@* }"
+			;;
+
 		"@depend devel/gettext"*)
 			gettext_dep=true
 			;;
@@ -884,6 +955,13 @@ check_plist() {
 			;;
 		*.pyo)
 			pyo_files[${#pyo_files[@]}]=$(normalize_pyco "$l")
+			;;
+
+		share/man/*)
+			wrong_man=true
+			;;
+		share/info/*)
+			wrong_info=true
 			;;
 		esac
 	done
@@ -986,11 +1064,41 @@ check_plist() {
 		err "${portref}missing @unexec-delete of update-mime-database"
 	fi
 
+	# glib-compile-schemas (almost same as previous)
+	#
+	# TODO: detect situation of extra devel/dconf in MODULES
+	# (requires investigation of all subpackages).
+	if $dconf_dep_needed; then
+		if ! $dconf_module; then
+			err "${portref}GLib2 XML schemas found without" \
+			    "devel/dconf in MODULES"
+		elif ! $dconf_dep; then
+			err "${portref}missing" \
+			    "RUN_DEPENDS${subpkg}+=\${MODDCONF_RUN_DEPENDS}"
+		fi
+	fi
+
+	if $dconf_dep_needed; then
+		((dconf_exec_cnt--)) || true
+		((dconf_unexec_cnt--)) || true
+	fi
+	if ((dconf_exec_cnt > 0)) &&
+	    [[ $fullpkgname != glib2-* ]]; then
+		err "${portref}extra @exec of glib-compile-schemas"
+	elif ((dconf_exec_cnt < 0)); then
+		err "${portref}missing @exec of glib-compile-schemas"
+	fi
+	if ((dconf_unexec_cnt > 0)); then
+		err "${portref}extra @unexec-delete of glib-compile-schemas"
+	elif ((dconf_unexec_cnt < 0)); then
+		err "${portref}missing @unexec-delete of glib-compile-schemas"
+	fi
+
 	# gettext
 	$translation_found && ! $gettext_dep && ! $is_static &&
 		[[ $fullpkgname != gettext-* ]] &&
 		err "${portref}translation file(s) found without" \
-		    "devel/gettext dependency"
+		    "devel/gettext dependency in MODULES or RUN_DEPENDS"
 
 	# Python modules
 	((${#py_files[@]} > 0))  && set -sA py_files  -- "${py_files[@]}"
@@ -1011,7 +1119,7 @@ check_plist() {
 		else
 			err "${portref}Python module without" \
 			    "compiled version, consider using" \
-			    "\${MODPY_LIBDIR}/compileall.py: $py"
+			    "\${MODPY_BIN} \${MODPY_LIBDIR}/compileall.py: $py"
 		fi
 
 		while [[ $io -lt ${#pyo_files[@]} ]]; do
@@ -1044,6 +1152,11 @@ check_plist() {
 	#	    "expected: ${pyo_files[$io]%o}"
 	#	((++io))
 	#done
+
+	$wrong_man && err "${portref}manual pages should go under" \
+	    "\${PREFIX}/man/ rather than under \${PREFIX}/share/man/"
+	$wrong_info && err "${portref}info pages should go under" \
+	    "\${PREFIX}/info/ rather than under \${PREFIX}/share/info/"
 }
 
 # Checks made:
@@ -1136,6 +1249,65 @@ check_wantlib() {
 	fi
 
 	! $error
+}
+
+# Checks made:
+#   * No extra PERMIT_DISTFILES_FTP variables in Makefile.
+#   * PERMIT_DISTFILES_FTP should not contain just "No" but a reason.
+#
+# Runs in the port directory.
+# XXX does not handle Makefile.inc and other .include cases correctly.
+check_permit_dist() {
+	$debugging && echo "CALLED: check_permit_dist($*)" >&2
+
+	local portref=$(portref $1); shift
+	local perm_pkg_cdrom=$(echo "$1" | tr '[:upper:]' '[:lower:]')
+	local perm_pkg_ftp=$(echo "$2" | tr '[:upper:]' '[:lower:]')
+	local perm_dist_ftp=$(echo "$3" | tr '[:upper:]' '[:lower:]')
+
+	if [[ ($perm_pkg_cdrom == yes || $perm_pkg_ftp == yes) && \
+	    $perm_dist_ftp == yes ]]; then
+		egrep -q "^ *PERMIT_DISTFILES_FTP[[:space:]]*=" Makefile &&
+			err "${portref}extra PERMIT_DISTFILES_FTP line(-s)"
+	fi
+
+	if [[ $perm_dist_ftp == no ]]; then
+		err "${portref}PERMIT_DISTFILES_FTP should be either" \
+		    "\"Yes\" or a reason for being non-redistributable"
+	fi
+
+	true
+}
+
+# Checks made:
+#   * No extra PERMIT_PACKAGE_FTP variables in Makefile.
+#   * PERMIT_PACKAGE_* should not contain just "No" but a reason.
+#
+# Runs in the port directory.
+# XXX does not handle Makefile.inc and other .include cases correctly.
+check_permit_subpkg() {
+	$debugging && echo "CALLED: check_permit_subpkg($*)" >&2
+
+	local portref=$1; shift
+	local subpkg=${1%-}; shift
+	local perm_pkg_cdrom=$(echo "$1" | tr '[:upper:]' '[:lower:]')
+	local perm_pkg_ftp=$(echo "$2" | tr '[:upper:]' '[:lower:]')
+
+	if [[ $perm_pkg_cdrom == yes && $perm_pkg_ftp == yes ]]; then
+		egrep -q "^ *PERMIT_PACKAGE_FTP${subpkg}[[:space:]]*=" Makefile &&
+			err "${portref}extra PERMIT_PACKAGE_FTP lines"
+	fi
+
+	if [[ $perm_pkg_cdrom == no ]]; then
+		err "${portref} PERMIT_PACKAGE_CDROM should be either" \
+		    "\"Yes\" or a reason for being non-redistributable"
+	fi
+	if [[ $perm_pkg_ftp == no ]]; then
+		err "${portref} PERMIT_PACKAGE_FTP should be either" \
+		    "\"Yes\" or a reason for being non-redistributable"
+	fi
+
+	true
 }
 
 # Checks made:
@@ -1306,13 +1478,20 @@ check_pkg_dir() {
 
 # Checks made:
 #   * There are no hardcoded /usr/local or /var paths in file.
-#     XXX /var/log should not trigger the warning.
+#     /var/log, /var/run and /var/tmp are perfectly fine, though.
 check_hardcoded() {
 	$debugging && echo "CALLED: check_hardcoded($*)" >&2
 
-	egrep -q '(/usr/local|/var)[[:>:]]' "$1" &&
-		err "hardcoded paths detected in $1, consider using" \
-		    "SUBST_VARS and PREFIX/LOCALBASE/LOCALSTATEDIR"
+	perl -n -e 'BEGIN { $ec=1; }
+		    if (m,/usr/local\b,o) { $ec=0; close ARGV; }
+		    if (m,/var((?:/+[^/\s]+)*)(?:\s.*)?$,o) {
+			unless ($1 =~ m,^/+(?:log|run|tmp),o) {
+			    $ec=0; close ARGV;
+			}
+		    }
+		    END { $? = $ec; }' \
+		"$1" && err "hardcoded paths detected in $1, consider using" \
+		    "SUBST_VARS and TRUEPREFIX/LOCALBASE/LOCALSTATEDIR/VARBASE"
 }
 
 # Checks made:
@@ -1370,7 +1549,8 @@ check_subst_vars() {
 #   * Contains OpenBSD RCS tag at the top line.
 #   * No REVISION marks present in given file (unless in update mode).
 #   * Each REVISION mark presents only once.
-#   * BUILD_DEPENDS and MODULES are not defined in VAR-subpkg manner.
+#   * BUILD_DEPENDS, MODULES and PERMIT_DISTFILES_FTP are not defined in
+#     VAR-subpkg manner.
 #   * No trailing whitespace.
 #   * SHARED_LIBS are not defined inside ".if" statements.
 #   * Variables are not assigned via "=" twice outside of .if statemets.
@@ -1380,6 +1560,7 @@ check_makefile() {
 	local F="$1"
 	check_trailing_whitespace "$F"
 	check_long_lines "$F"
+	check_hardcoded "$F"
 	head -n 1 -- "$F" |
 		egrep -q '^#[[:space:]]*\$OpenBSD.*\$' ||
 		err "$F does not have \$OpenBSD\$ RCS tag at the top"
@@ -1388,9 +1569,7 @@ check_makefile() {
 	# do not unset mkvars, having empty element(-s) is fine
 	unset revs[0]
 	local tab="$(print '\t')"
-	IFS=
-	while read -r l; do ((++lnum))
-		unset IFS
+	while IFS= read -r l; do ((++lnum))
 		set -A t -- $l
 		duprevfound=false
 
@@ -1411,7 +1590,7 @@ check_makefile() {
 			fi
 			revs[${#revs[@]}]=${t[0]}
 			;;
-		*(" ")@(BUILD_DEPENDS|MODULES)-*)
+		*(" ")@(BUILD_DEPENDS|MODULES|PERMIT_DISTFILES_FTP)-*)
 			err "${l%%-*} is not a subpackageble variable, see $F:$lnum"
 			;;
 		*(" ").*(" "|"$tab")if*)
@@ -1439,9 +1618,7 @@ check_makefile() {
 			done
 			mkvars[${#mkvars[@]}]=$var
 		fi
-		IFS=
 	done <"$F"
-	unset IFS
 }
 
 # Checks made:

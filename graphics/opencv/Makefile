@@ -1,8 +1,7 @@
-# $OpenBSD: Makefile,v 1.23 2013/11/25 14:16:23 sthen Exp $
+# $OpenBSD: Makefile,v 1.26 2014/06/03 20:41:36 zhuk Exp $
 
 ONLY_FOR_ARCHS =	${GCC4_ARCHS}
-# do not include i386 here until JDK 1.6 issues there are solved
-ONLY_FOR_ARCHS-java =	amd64
+ONLY_FOR_ARCHS-java =	amd64 i386
 SHARED_ONLY =		Yes
 
 CATEGORIES =		graphics devel
@@ -10,7 +9,7 @@ COMMENT-docs =		OpenCV documentation and examples
 COMMENT-main =		library of programming functions for real time cv
 COMMENT-java =		Java bindings for OpenCV
 
-V =			2.4.6.1
+V =			2.4.9
 DISTNAME =		opencv-$V
 PKGNAME-main =		${PKGNAME}
 PKGNAME-docs =		opencv-docs-$V
@@ -19,25 +18,27 @@ PKGNAME-java =		opencv-java-$V
 HOMEPAGE =		http://www.opencv.org/
 MAINTAINER =		Rafael Sadowski <rafael@sizeofvoid.org>
 
-SHARED_LIBS =		opencv_calib3d			1.0 #1.0
-SHARED_LIBS +=		opencv_contrib			1.0 #1.0
-SHARED_LIBS +=		opencv_core			1.0 #1.0
-SHARED_LIBS +=		opencv_features2d		1.0 #1.0
-SHARED_LIBS +=		opencv_flann			1.0 #1.0
-SHARED_LIBS +=		opencv_gpu			1.0 #1.0
-SHARED_LIBS +=		opencv_highgui			1.0 #1.0
-SHARED_LIBS +=		opencv_imgproc			1.0 #1.0
-SHARED_LIBS +=		opencv_legacy			1.0 #1.0
-SHARED_LIBS +=		opencv_ml			1.0 #1.0
-SHARED_LIBS +=		opencv_nonfree			0.0 #0.0
-SHARED_LIBS +=		opencv_objdetect		1.0 #1.0
-SHARED_LIBS +=		opencv_photo			0.0 #0.0
-SHARED_LIBS +=		opencv_stitching		0.0 #0.0
-SHARED_LIBS +=		opencv_superres			0.0 #0.0
-SHARED_LIBS +=		opencv_ts			0.0 #0.0
-SHARED_LIBS +=		opencv_video			1.0 #1.0
-SHARED_LIBS +=		opencv_videostab		0.0 #0.0
+SHARED_LIBS =		opencv_calib3d			1.0 #1.1
+SHARED_LIBS +=		opencv_contrib			1.0 #1.1
+SHARED_LIBS +=		opencv_core			1.0 #1.1
+SHARED_LIBS +=		opencv_features2d		1.0 #1.1
+SHARED_LIBS +=		opencv_flann			1.0 #1.1
+SHARED_LIBS +=		opencv_gpu			1.0 #1.1
+SHARED_LIBS +=		opencv_highgui			1.0 #1.1
+SHARED_LIBS +=		opencv_imgproc			1.0 #1.1
+SHARED_LIBS +=		opencv_legacy			1.0 #1.1
+SHARED_LIBS +=		opencv_ml			1.0 #1.1
+SHARED_LIBS +=		opencv_nonfree			0.0 #0.1
+SHARED_LIBS +=		opencv_objdetect		1.0 #1.1
+SHARED_LIBS +=		opencv_photo			0.0 #0.1
+SHARED_LIBS +=		opencv_stitching		0.0 #0.1
+SHARED_LIBS +=		opencv_superres			0.0 #0.1
+SHARED_LIBS +=		opencv_ts			0.0 #0.1
+SHARED_LIBS +=		opencv_video			1.0 #1.1
+SHARED_LIBS +=		opencv_videostab		0.0 #0.1
+SHARED_LIBS +=		opencv_ocl			0.0 #2.4
 
+EXTRACT_SUFX =		.zip
 MASTER_SITES =		${MASTER_SITE_SOURCEFORGE:=opencvlibrary/}
 
 WANTLIB-main =  Half Iex IlmImf IlmThread Imath X11 Xcomposite Xcursor
@@ -80,8 +81,7 @@ MODULES =		devel/cmake \
 BUILD_DEPENDS =		devel/doxygen \
 			math/py-numpy
 
-RUN_DEPENDS-main =	${RUN_DEPENDS} \
-			math/py-numpy
+RUN_DEPENDS-main =	math/py-numpy
 RUN_DEPENDS-docs =	${BUILD_PKGPATH},-main
 RUN_DEPENDS-java =	${MODJAVA_RUN_DEPENDS}
 
@@ -113,7 +113,7 @@ CONFIGURE_ARGS =	-DBUILD_opencv_nonfree:Bool=On \
 
 .if ${BUILD_PACKAGES:M-java}
 MODULES +=		java
-MODJAVA_VER =		1.6+
+MODJAVA_VER =		1.7+
 BUILD_DEPENDS +=	devel/apache-ant
 .else
 # Safe: Java will be detected, if present, but won't be used

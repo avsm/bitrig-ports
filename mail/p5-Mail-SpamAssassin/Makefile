@@ -1,9 +1,9 @@
-# $OpenBSD: Makefile,v 1.83 2014/03/25 21:05:26 sthen Exp $
+# $OpenBSD: Makefile,v 1.87 2014/04/30 14:01:29 naddy Exp $
 
 COMMENT=		mailfilter to identify and mark spam
 
 VER=			3.4.0
-REVISION=		0
+REVISION=		2
 DISTNAME=		Mail-SpamAssassin-${VER}
 PKGNAME=		p5-${DISTNAME}
 RULESNAME=		Mail-SpamAssassin-rules-${VER}.r1565117.tgz
@@ -42,6 +42,7 @@ RUN_DEPENDS=		${COMMON_DEPENDS} \
 			www/p5-libwww
 # SpamAssassin can use curl instead of LWP (lighter dep chain), but it needs
 # a separate HTTP::Date, our LWP pre-dates this being split off.
+TEST_DEPENDS=		${RUN_DEPENDS}
 
 MAKE_ENV+=		CC="${CC}"
 
@@ -56,7 +57,7 @@ CONFDIR=		${SYSCONFDIR}/mail/spamassassin
 LOCALSTATEDIR=		/var/db/spamassassin
 SAMPLE_CONFDIR=		${PREFIX}/share/examples/SpamAssassin
 
-SUBST_VARS=		CONFDIR LOCALSTATEDIR
+SUBST_VARS=		CONFDIR
 
 # test insists on creating files in $HOME
 PORTHOME=		${WRKDIR}/temp-home

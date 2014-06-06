@@ -1,10 +1,9 @@
-# $OpenBSD: Makefile,v 1.54 2014/04/08 17:25:06 ajacoutot Exp $
+# $OpenBSD: Makefile,v 1.57 2014/05/13 17:16:50 jasper Exp $
 
 COMMENT=	interfaces for interacting with online accounts
 
 GNOME_PROJECT=	gnome-online-accounts
-GNOME_VERSION=	3.12.0
-REVISION=	0
+GNOME_VERSION=	3.12.2
 
 SHARED_LIBS +=  goa-1.0              3.0      # .0.0
 SHARED_LIBS +=  goa-backend-1.0      3.0      # .0.0
@@ -42,11 +41,5 @@ MODGNU_CONFIG_GUESS_DIRS= \
 			${WRKSRC}/telepathy-account-widgets
 
 CONFIGURE_ARGS=		--disable-gudev
-
-pre-configure:
-# https://bugzilla.gnome.org/show_bug.cgi?id=726570
-# XXX check if still needed at next release
-	perl -pi -e 's,--libtool=\$$\(top_builddir\)/libtool,--libtool=\$${LIBTOOL},g' \
-		${WRKSRC}/src/goa/Makefile.in
 
 .include <bsd.port.mk>

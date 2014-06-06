@@ -1,10 +1,10 @@
-# $OpenBSD: Makefile,v 1.12 2013/12/24 22:31:26 jasper Exp $
+# $OpenBSD: Makefile,v 1.14 2014/05/20 19:34:48 jasper Exp $
 
 PKG_ARCH=	*
 
 COMMENT=	open source message broker implementing JMS 1.1
 
-V=		5.9.0
+V=		5.9.1
 DISTNAME=	apache-activemq-$V
 
 CATEGORIES=	net
@@ -16,7 +16,7 @@ MAINTAINER=	Jasper Lievisse Adriaanse <jasper@openbsd.org>
 # Apache2
 PERMIT_PACKAGE_CDROM=	Yes
 
-MASTER_SITES=	${MASTER_SITE_APACHE:=activemq/apache-activemq/${V}/}
+MASTER_SITES=	${MASTER_SITE_APACHE:=activemq/${V}/}
 EXTRACT_SUFX=	-bin.tar.gz
 
 MODULES=	java

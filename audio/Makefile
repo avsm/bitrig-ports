@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.323 2014/03/28 20:59:48 naddy Exp $
+# $OpenBSD: Makefile,v 1.333 2014/05/28 22:17:46 jeremy Exp $
 
      SUBDIR =
      SUBDIR += abcde
@@ -16,6 +16,7 @@
      SUBDIR += audacious-plugins
      SUBDIR += audacity
      SUBDIR += aumix
+     SUBDIR += beets
      SUBDIR += bladeenc
      SUBDIR += bonk
      SUBDIR += calf
@@ -152,6 +153,7 @@
      SUBDIR += opennap
      SUBDIR += opus
      SUBDIR += opus-tools
+     SUBDIR += opusfile
      SUBDIR += p5-Audio-CD
      SUBDIR += p5-Audio-FLAC-Header
      SUBDIR += p5-Audio-M4P
@@ -177,6 +179,7 @@
      SUBDIR += p5-gnupod
      SUBDIR += p5-libvorbis
      SUBDIR += pacpl
+     SUBDIR += paulstretch
      SUBDIR += pianobar
      SUBDIR += picard
      SUBDIR += pithos
@@ -184,15 +187,19 @@
      SUBDIR += portaudio-svn
      SUBDIR += potamus
      SUBDIR += pulseaudio
+     SUBDIR += puddletag
+     SUBDIR += py-acoustid
      SUBDIR += py-ao
      SUBDIR += py-audio
      SUBDIR += py-cddb
+     SUBDIR += py-discogs-client
      SUBDIR += py-eyed3
      SUBDIR += py-id3
      SUBDIR += py-last
      SUBDIR += py-mpd
      SUBDIR += py-mpd2
      SUBDIR += py-mpd2,python3
+     SUBDIR += py-musicbrainzngs
      SUBDIR += py-mutagen
      SUBDIR += py-ogg
      SUBDIR += py-tagger
@@ -202,6 +209,7 @@
      SUBDIR += py-xmms
      SUBDIR += pykaraoke
      SUBDIR += pympd
+     SUBDIR += quodlibet
      SUBDIR += rhythmbox
      SUBDIR += rioutil
      SUBDIR += rplay
@@ -214,6 +222,10 @@
      SUBDIR += ruby-sonos,ruby19
      SUBDIR += ruby-sonos,ruby20
      SUBDIR += ruby-sonos,ruby21
+     SUBDIR += ruby-taglib,ruby18
+     SUBDIR += ruby-taglib,ruby19
+     SUBDIR += ruby-taglib,ruby20
+     SUBDIR += ruby-taglib,ruby21
      SUBDIR += ruby-vorbis_comment,ruby18
      SUBDIR += ruby-vorbis_comment,ruby19
      SUBDIR += ruby-vorbis_comment,ruby20
@@ -224,6 +236,7 @@
      SUBDIR += shntool
      SUBDIR += shorten
      SUBDIR += sidplay
+     SUBDIR += siren
      SUBDIR += snack
      SUBDIR += solfege
      SUBDIR += sonata

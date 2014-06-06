@@ -1,11 +1,11 @@
-# $OpenBSD: Makefile,v 1.27 2014/01/20 16:08:47 ajacoutot Exp $
+# $OpenBSD: Makefile,v 1.29 2014/04/30 14:20:08 pea Exp $
 
 COMMENT=	administration and development platform for PostgreSQL
 
-V=		1.16.1
+V=		1.18.1
+REVISION=	0
 DISTNAME=	pgadmin3-$V
 CATEGORIES=	databases devel
-REVISION=	0
 
 HOMEPAGE=	http://www.pgadmin.org/
 
@@ -14,7 +14,7 @@ MAINTAINER=	Pierre-Emmanuel Andre <pea@openbsd.org>
 # Artistic license
 PERMIT_PACKAGE_CDROM=	Yes
 
-WANTLIB=	c m pthread stdc++
+WANTLIB=	c m pthread stdc++ crypto z
 
 MASTER_SITES=	ftp://ftp2.uk.postgresql.org/sites/ftp.postgresql.org/pgadmin3/release/v$V/src/ \
     ftp://ftp5.us.postgresql.org/pub/PostgreSQL/pgadmin3/release/v$V/src/ \

@@ -1,7 +1,7 @@
 #! /usr/bin/perl
 
 # ex:ts=8 sw=4:
-# $OpenBSD: Quirks.pm,v 1.150 2014/04/07 12:41:27 jasper Exp $
+# $OpenBSD: Quirks.pm,v 1.156 2014/05/06 17:55:59 jasper Exp $
 #
 # Copyright (c) 2009 Marc Espie <espie@openbsd.org>
 #
@@ -406,6 +406,15 @@ my $obsolete_reason = {
 	'gedit-cossa' => 3,
 	'anjuta-extras' => 3,
 	'moserial' => 3,
+	'ethos' => 3,
+	'ekiga' => 0,
+	'kpoppassd' => 2,
+	'p5-Authen-Krb5-Simple' => 2,
+	'py-pykpass' => 2,
+	'mod_auth_kerb' => 2,
+	'p5-GSSAPI' => 2,
+	'opal' => 0,
+	'p5-GetLive' => 3,
 };
 
 # ->is_base_system($handle, $state):

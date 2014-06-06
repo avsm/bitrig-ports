@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.284 2014/03/24 09:10:54 juanfra Exp $
+# $OpenBSD: Makefile,v 1.289 2014/05/30 15:26:43 edd Exp $
 
      SUBDIR =
      SUBDIR += abuse
@@ -58,6 +58,7 @@
      SUBDIR += dopewars
      SUBDIR += dopewars,no_x11
      SUBDIR += duke3ddata
+     SUBDIR += dunelegacy
      SUBDIR += dungeon
      SUBDIR += dungeon-crawl
      SUBDIR += easyrpg
@@ -78,12 +79,14 @@
      SUBDIR += forcedattack
      SUBDIR += fotaq
      SUBDIR += freeciv
+     SUBDIR += freecol
      SUBDIR += freedroid
      SUBDIR += freedroidrpg
      SUBDIR += fretsonfire
      SUBDIR += frogatto
      SUBDIR += frotz
      SUBDIR += frozen-bubble
+     SUBDIR += galois
      SUBDIR += gamine
      SUBDIR += garden
      SUBDIR += gargoyle
@@ -215,9 +218,11 @@
      SUBDIR += tuxpaint-config
      SUBDIR += tuxpaint-stamps
      SUBDIR += ufoai
+     SUBDIR += uhexen2
      SUBDIR += uqm
      SUBDIR += valyriatear
      SUBDIR += vectoroids
+     SUBDIR += vegastrike
      SUBDIR += vitetris
      SUBDIR += vms-empire
      SUBDIR += vodovod

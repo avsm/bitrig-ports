@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.303 2014/03/26 20:55:04 jca Exp $
+# $OpenBSD: Makefile,v 1.308 2014/06/01 00:41:53 jturner Exp $
 
      SUBDIR =
      SUBDIR += abook
@@ -67,7 +67,6 @@
      SUBDIR += imapsync
      SUBDIR += isync
      SUBDIR += kbiff
-     SUBDIR += kpoppassd
      SUBDIR += ldapvacation
      SUBDIR += libetpan
      SUBDIR += libspf2
@@ -96,6 +95,11 @@
      SUBDIR += mozilla-thunderbird
      SUBDIR += msmtp
      SUBDIR += mutt
+     SUBDIR += mutt,sasl
+     SUBDIR += mutt,slang
+     SUBDIR += mutt,compressed,sidebar
+     SUBDIR += mutt,compressed,sidebar,sasl
+     SUBDIR += mutt,compressed,sidebar,sasl,slang
      SUBDIR += s-nail
      SUBDIR += nmh
      SUBDIR += nmh,sasl
@@ -126,7 +130,6 @@
      SUBDIR += p5-Email-Valid-Loose
      SUBDIR += p5-FuzzyOcr
      SUBDIR += p5-GMail-IMAPD
-     SUBDIR += p5-GetLive
      SUBDIR += p5-Log-Procmail
      SUBDIR += p5-MIME-Base32
      SUBDIR += p5-MIME-Charset
@@ -162,6 +165,7 @@
      SUBDIR += pflogsumm
      SUBDIR += pgpsendmail
      SUBDIR += pine-pgp-filters
+     SUBDIR += pop3d
      SUBDIR += popclient
      SUBDIR += poppassd
      SUBDIR += poppy

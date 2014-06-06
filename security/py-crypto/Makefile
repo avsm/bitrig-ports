@@ -1,18 +1,17 @@
-# $OpenBSD: Makefile,v 1.31 2013/05/30 13:09:21 ajacoutot Exp $
+# $OpenBSD: Makefile,v 1.33 2014/06/03 11:35:12 rpointel Exp $
 
 SHARED_ONLY =		Yes
 
 COMMENT =		cryptographic tools for Python
 
-MODPY_EGG_VERSION =	2.6
+MODPY_EGG_VERSION =	2.6.1
 DISTNAME =		pycrypto-${MODPY_EGG_VERSION}
 PKGNAME =		py-crypto-${MODPY_EGG_VERSION}
-CATEGORIES =    	security devel
-REVISION =		1
+CATEGORIES =		security devel
+
+REVISION = 0
 
 HOMEPAGE =		https://www.dlitz.net/software/pycrypto/
-
-MAINTAINER =		Martin Pieuchot <mpi@openbsd.org>
 
 # Public domain (patented algorithms removed by patch)
 PERMIT_PACKAGE_CDROM =	Yes
@@ -26,13 +25,13 @@ FLAVOR ?=
 
 LIB_DEPENDS =	${MODPY_LIB_DEPENDS} \
 		devel/gmp
-WANTLIB =	${MODPY_WANTLIB} gmp
+WANTLIB =	${MODPY_WANTLIB} gmp pthread
 
 # XXX Don't set CONFIGURE_STYLE=simple otherwise python.port.mk will
 # not define do-build and do-install
 CONFIGURE_ARGS =	CFLAGS="-I${LOCALBASE}/include" \
 			LDFLAGS="-L${LOCALBASE}/lib"
-CFLAGS += 		-I${LOCALBASE}/include
+CFLAGS +=		-I${LOCALBASE}/include
 
 DOCSDIR =	${PREFIX}/share/doc/py-crypto
 

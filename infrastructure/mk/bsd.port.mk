@@ -1,6 +1,6 @@
 #-*- mode: Makefile; tab-width: 4; -*-
 # ex:ts=4 sw=4 filetype=make:
-#	$OpenBSD: bsd.port.mk,v 1.1261 2014/04/08 13:29:34 espie Exp $
+#	$OpenBSD: bsd.port.mk,v 1.1265 2014/04/25 15:28:52 espie Exp $
 #
 #	bsd.port.mk - 940820 Jordan K. Hubbard.
 #	This file is in the public domain.
@@ -166,8 +166,12 @@ PACKAGE_REPOSITORY ?= ${PORTSDIR}/packages
 PORTS_BUILD_XENOCARA_TOO ?= No
 
 .if ${PORTS_BUILD_XENOCARA_TOO:L} == "no"
-.  if !exists(${X11BASE}/man/whatis.db)
+.  if !exists(${X11BASE}/man/mandoc.db)
+.    if exists(${X11BASE}/man/whatis.db)
+ERRORS += "Your X11/system is not current"
+.    else
 ERRORS += "Fatal: building ports requires correctly installed X11"
+.    endif
 .  endif
 .endif
 
@@ -946,7 +950,7 @@ _lt_libs += lib${_n:S/+/_/g:S/-/_/g:S/./_/g}_ltversion=${_v}
 # Create the generic variable substitution list, from subst vars
 SUBST_VARS += MACHINE_ARCH ARCH HOMEPAGE ^PREFIX ^SYSCONFDIR FLAVOR_EXT \
 	FULLPKGNAME MAINTAINER ^BASE_PKGPATH ^LOCALBASE ^X11BASE ^TRUEPREFIX \
-	^RCDIR
+	^RCDIR ^LOCALSTATEDIR
 _tmpvars =
 
 _PKG_ADD_AUTO ?=
@@ -2233,7 +2237,7 @@ port-lib-depends-check: ${WRKINST}/.saved_libs
 _internal-manpages-check: ${_FAKE_COOKIE}
 	@cd ${WRKINST}${TRUEPREFIX}/man && \
 		${SUDO} /usr/libexec/makewhatis -p . && \
-		cat whatis.db
+		cat mandoc.db
 
 # Most standard port targets create a cookie to avoid being re-run.
 #

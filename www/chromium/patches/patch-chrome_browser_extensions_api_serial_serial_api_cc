@@ -1,0 +1,20 @@
+$OpenBSD: patch-chrome_browser_extensions_api_serial_serial_api_cc,v 1.2 2014/05/24 15:27:34 robert Exp $
+--- chrome/browser/extensions/api/serial/serial_api.cc.orig.port	Wed May 14 21:23:11 2014
++++ chrome/browser/extensions/api/serial/serial_api.cc	Thu May 22 21:42:27 2014
+@@ -84,7 +84,7 @@ bool SerialGetDevicesFunction::Prepare() {
+ 
+ void SerialGetDevicesFunction::Work() {
+   DCHECK(BrowserThread::CurrentlyOn(BrowserThread::FILE));
+-
++#if !defined(OS_BSD) //XXX(rene) quick hack
+   device::SerialDeviceInfoList devices;
+   scoped_ptr<device::SerialDeviceEnumerator> enumerator =
+       device::SerialDeviceEnumerator::Create();
+@@ -106,6 +106,7 @@ void SerialGetDevicesFunction::Work() {
+   }
+ 
+   results_ = serial::GetDevices::Results::Create(out_devices);
++#endif
+ }
+ 
+ SerialConnectFunction::SerialConnectFunction() {}

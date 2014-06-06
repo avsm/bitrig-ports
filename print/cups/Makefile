@@ -1,9 +1,9 @@
-# $OpenBSD: Makefile,v 1.175 2014/04/10 17:15:34 ajacoutot Exp $
+# $OpenBSD: Makefile,v 1.178 2014/05/28 08:04:47 ajacoutot Exp $
 
 COMMENT-main=		Common Unix Printing System
 COMMENT-libs=		CUPS libraries and headers
 
-VERSION=		1.7.2
+VERSION=		1.7.3
 DISTNAME=		cups-${VERSION}-source
 EXTRACT_SUFX=		.tar.bz2
 
@@ -26,8 +26,8 @@ MAINTAINER=		Antoine Jacoutot <ajacoutot@openbsd.org>
 # GPLv2 - LGPLv2
 PERMIT_PACKAGE_CDROM=	Yes
 
-WANTLIB += asn1 avahi-client avahi-common crypto gssapi krb5 m pthread
-WANTLIB += com_err heimbase roken wind ssl stdc++ z
+WANTLIB += avahi-client avahi-common crypto m pthread ssl stdc++
+WANTLIB += z
 
 WANTLIB-main += ${WANTLIB}
 WANTLIB-main += c cups cupscgi cupsimage cupsmime cupsppdc dbus-1 usb-1.0
@@ -97,6 +97,7 @@ CONFIGURE_ARGS=		${CONFIGURE_SHARED} \
 			--disable-cdsassl \
 			--disable-gnutls \
 			--disable-pam \
+			--disable-gssapi \
 			--without-java \
 			--without-php \
 			--without-python

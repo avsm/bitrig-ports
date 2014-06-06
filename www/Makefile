@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.659 2014/03/29 16:43:14 ajacoutot Exp $
+# $OpenBSD: Makefile,v 1.662 2014/05/28 22:17:46 jeremy Exp $
 
      SUBDIR =
      SUBDIR += ajaxterm
@@ -112,7 +112,6 @@
      SUBDIR += mimetex
      SUBDIR += minitube
      SUBDIR += mod_auth_bsd
-     SUBDIR += mod_auth_kerb
      SUBDIR += mod_auth_ldap
      SUBDIR += mod_auth_mysql
      SUBDIR += mod_auth_pgsql
@@ -218,6 +217,7 @@
      SUBDIR += p5-CatalystX-Component-Traits
      SUBDIR += p5-Config-ApacheFormat
      SUBDIR += p5-Dancer
+     SUBDIR += p5-Dancer-Plugin-Thumbnail
      SUBDIR += p5-Data-URIEncode
      SUBDIR += p5-Drupal-Admin
      SUBDIR += p5-FCGI-ProcManager
@@ -454,6 +454,7 @@
      SUBDIR += ruby-passenger,ruby18
      SUBDIR += ruby-passenger,ruby19
      SUBDIR += ruby-rack
+     SUBDIR += ruby-rack-protection
      SUBDIR += ruby-rack-test
      SUBDIR += ruby-rainbows,ruby18
      SUBDIR += ruby-rainbows,ruby19

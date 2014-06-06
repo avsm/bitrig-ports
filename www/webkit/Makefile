@@ -1,15 +1,14 @@
-# $OpenBSD: Makefile,v 1.116 2014/04/11 18:27:45 ajacoutot Exp $
+# $OpenBSD: Makefile,v 1.119 2014/05/26 16:52:35 ajacoutot Exp $
 
 COMMENT =	open source web browser engine for Gtk+
 
-V =		2.4.0
+V =		2.4.3
 DISTNAME =	webkitgtk-${V}
 PKGNAME =	webkit-${V}
 EPOCH =		1
 CATEGORIES =	www
 DPB_PROPERTIES =parallel
 EXTRACT_SUFX =	.tar.xz
-REVISION =	0
 
 HOMEPAGE =	http://webkitgtk.org/
 MASTER_SITES =	${HOMEPAGE}/releases/
@@ -140,10 +139,11 @@ pre-configure:
 	echo ${WEBKIT_API_VERSION} > ${WRKSRC}/Documentation/webkitdomgtk/version.xml
 	echo ${WEBKIT_API_VERSION} > ${WRKSRC}/Documentation/webkitgtk/version.xml
 
-.if ${FLAVOR:Mgtk3}
 post-install:
+	${INSTALL_PROGRAM} ${WRKSRC}/Programs/.libs/GtkLauncher ${PREFIX}/bin/GtkLauncher
+.if ${FLAVOR:Mgtk3}
 	mv ${PREFIX}/bin/GtkLauncher ${PREFIX}/bin/GtkLauncher-3
-	cp ${WRKSRC}/Programs/.libs/MiniBrowser ${PREFIX}/bin/MiniBrowser
+	${INSTALL_PROGRAM} ${WRKSRC}/Programs/.libs/MiniBrowser ${PREFIX}/bin/MiniBrowser
 .endif
 
 .include <bsd.port.mk>

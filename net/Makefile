@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.836 2014/04/01 18:26:42 jasper Exp $
+# $OpenBSD: Makefile,v 1.846 2014/05/27 09:59:16 ajacoutot Exp $
 
      SUBDIR =
      SUBDIR += GeoIP
@@ -80,11 +80,6 @@
      SUBDIR += ekg
      SUBDIR += enet
      SUBDIR += epic4
-     SUBDIR += erl-amqp_client
-     SUBDIR += erl-gen_bunny
-     SUBDIR += erl-ibrowse
-     SUBDIR += erl-mini_s3
-     SUBDIR += erl-rabbit_common
      SUBDIR += etherape
      SUBDIR += ettercap
      SUBDIR += ettercap,no_x11
@@ -163,9 +158,11 @@
      SUBDIR += irssi
      SUBDIR += irssi,socks
      SUBDIR += irssi-icb
+     SUBDIR += irssi-otr
      SUBDIR += irssi-silc
      SUBDIR += irssi-xmpp
      SUBDIR += isc-bind
+     SUBDIR += isc-bind,geoip
      SUBDIR += isc-dhcp
      SUBDIR += jabberd,mysql
      SUBDIR += jabberd,mysql,ldap
@@ -202,6 +199,7 @@
      SUBDIR += libupnp
      SUBDIR += livemedia
      SUBDIR += lldpd
+     SUBDIR += lldpd,snmp
      SUBDIR += loudmouth
      SUBDIR += luasocket
      SUBDIR += luasocket,lua52
@@ -268,7 +266,6 @@
      SUBDIR += oinkmaster
      SUBDIR += olsrd
      SUBDIR += onioncat
-     SUBDIR += opal
      SUBDIR += openafs
      SUBDIR += openconnect
      SUBDIR += openfire
@@ -482,6 +479,7 @@
      SUBDIR += py-impacket
      SUBDIR += py-ipaddr
      SUBDIR += py-irclib
+     SUBDIR += py-libcloud
      SUBDIR += py-libpcap
      SUBDIR += py-medusa
      SUBDIR += py-msgpack
@@ -520,6 +518,9 @@
      SUBDIR += ruby-macaddr
      SUBDIR += ruby-macaddr,ruby18
      SUBDIR += ruby-minion
+     SUBDIR += ruby-msgpack,ruby19
+     SUBDIR += ruby-msgpack,ruby20
+     SUBDIR += ruby-msgpack,ruby21
      SUBDIR += ruby-net-dns
      SUBDIR += ruby-net-http-digest_auth
      SUBDIR += ruby-net-http-digest_auth,ruby18
@@ -532,7 +533,6 @@
      SUBDIR += ruby-stomp
      SUBDIR += ruby-xmpp4r
      SUBDIR += samba
-     SUBDIR += samba,ads
      SUBDIR += samba,ldap
      SUBDIR += scamper
      SUBDIR += scapy
@@ -600,6 +600,7 @@
      SUBDIR += ucspi-unix
      SUBDIR += udns
      SUBDIR += udptunnel
+     SUBDIR += unifi
      SUBDIR += unison
      SUBDIR += unworkable
      SUBDIR += ushare

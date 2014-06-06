@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.152 2014/03/09 19:54:45 jasper Exp $
+# $OpenBSD: Makefile,v 1.154 2014/05/29 13:40:51 sthen Exp $
 
 COMMENT-main=		XML parsing library
 COMMENT-python=		Python bindings for libxml
@@ -12,6 +12,7 @@ CATEGORIES=		textproc
 MASTER_SITES=		http://gd.tuwien.ac.at/pub/libxml/ \
 			ftp://xmlsoft.org/libxml/
 
+REVISION=		1
 
 HOMEPAGE=		http://xmlsoft.org/
 
@@ -22,7 +23,8 @@ WANTLIB=		m z
 
 MODULES=		converters/libiconv
 
-CONFIGURE_STYLE=	gnu
+CONFIGURE_STYLE=	autoconf
+AUTOCONF_VERSION=	2.69
 CONFIGURE_ARGS+=	${CONFIGURE_SHARED} \
 			--enable-static \
 			--with-html-dir="${PREFIX}/share/doc" \

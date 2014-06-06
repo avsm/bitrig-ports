@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.1213 2014/04/05 15:34:27 afresh1 Exp $
+# $OpenBSD: Makefile,v 1.1230 2014/05/30 09:22:21 sthen Exp $
 
      SUBDIR =
      SUBDIR += ElectricFence
@@ -32,6 +32,7 @@
      SUBDIR += blame
      SUBDIR += boehm-gc
      SUBDIR += boost
+     SUBDIR += boris
      SUBDIR += bouml
      SUBDIR += bpython
      SUBDIR += bullet
@@ -101,20 +102,6 @@
      SUBDIR += eclipse
      SUBDIR += ectags
      SUBDIR += emacs-haskell
-     SUBDIR += erl-automeck
-     SUBDIR += erl-bear
-     SUBDIR += erl-depsolver
-     SUBDIR += erl-ej
-     SUBDIR += erl-ejson
-     SUBDIR += erl-eper
-     SUBDIR += erl-fast_log
-     SUBDIR += erl-folsom
-     SUBDIR += erl-gen_server2
-     SUBDIR += erl-jiffy
-     SUBDIR += erl-meck
-     SUBDIR += erl-mixer
-     SUBDIR += erl-pooler
-     SUBDIR += ethos
      SUBDIR += fasm
      SUBDIR += ffcall
      SUBDIR += flatzebra
@@ -123,6 +110,7 @@
      SUBDIR += fossil
      SUBDIR += fossil,static
      SUBDIR += fox
+     SUBDIR += frama-c
      SUBDIR += fribidi
      SUBDIR += gconf-editor
      SUBDIR += gconf2
@@ -135,6 +123,7 @@
      SUBDIR += giggle
      SUBDIR += gindent
      SUBDIR += git
+     SUBDIR += git-bz
      SUBDIR += git-cola
      SUBDIR += git-cvs
      SUBDIR += glade
@@ -167,6 +156,7 @@
      SUBDIR += harfbuzz
      SUBDIR += hasktags
      SUBDIR += help2man
+     SUBDIR += hgview
      SUBDIR += hmake
      SUBDIR += hs-BoundedChan
      SUBDIR += hs-ConfigFile
@@ -708,7 +698,6 @@
      SUBDIR += p5-Expect-Simple
      SUBDIR += p5-Exporter-Lite
      SUBDIR += p5-Exporter-Tidy
-     SUBDIR += p5-ExtUtils-BuildRC
      SUBDIR += p5-ExtUtils-CChecker
      SUBDIR += p5-ExtUtils-Config
      SUBDIR += p5-ExtUtils-Depends
@@ -824,6 +813,7 @@
      SUBDIR += p5-MLDBM-Sync
      SUBDIR += p5-MRO-Compat
      SUBDIR += p5-Memoize-ExpireLRU
+     SUBDIR += p5-Module-Build-Tiny
      SUBDIR += p5-Module-Find
      SUBDIR += p5-Module-Implementation
      SUBDIR += p5-Module-Install
@@ -899,6 +889,7 @@
      SUBDIR += p5-Package-Generator
      SUBDIR += p5-Package-Stash
      SUBDIR += p5-Package-Stash-XS
+     SUBDIR += p5-Package-Variant
      SUBDIR += p5-PadWalker
      SUBDIR += p5-Pango
      SUBDIR += p5-Parallel-ForkManager
@@ -1010,6 +1001,7 @@
      SUBDIR += p5-Test-File
      SUBDIR += p5-Test-File-Contents
      SUBDIR += p5-Test-Group
+     SUBDIR += p5-Test-Harness
      SUBDIR += p5-Test-HTML-Tidy
      SUBDIR += p5-Test-Inline
      SUBDIR += p5-Test-Inter
@@ -1047,6 +1039,7 @@
      SUBDIR += p5-Test-WWW-Mechanize
      SUBDIR += p5-Test-WWW-Mechanize-Catalyst
      SUBDIR += p5-Test-Warn
+     SUBDIR += p5-Test-Warnings
      SUBDIR += p5-Test-Weaken
      SUBDIR += p5-Test-YAML-Valid
      SUBDIR += p5-Test-use-ok
@@ -1105,6 +1098,7 @@
      SUBDIR += p5-enum
      SUBDIR += p5-indirect
      SUBDIR += p5-libintl
+     SUBDIR += p5-lib-abs
      SUBDIR += p5-namespace-autoclean
      SUBDIR += p5-namespace-clean
      SUBDIR += p5-prefork
@@ -1140,6 +1134,7 @@
      SUBDIR += py-Checker
      SUBDIR += py-SOAPpy
      SUBDIR += py-addons
+     SUBDIR += py-algorithm-munkres
      SUBDIR += py-altgraph
      SUBDIR += py-argh
      SUBDIR += py-argcomplete
@@ -1147,6 +1142,7 @@
      SUBDIR += py-async
      SUBDIR += py-babel
      SUBDIR += py-babel,python3
+     SUBDIR += py-backports-ssl-match-hostname
      SUBDIR += py-blinker
      SUBDIR += py-buildbot
      SUBDIR += py-buildslave
@@ -1166,6 +1162,7 @@
      SUBDIR += py-dulwich
      SUBDIR += py-editdist
      SUBDIR += py-elftools
+     SUBDIR += py-enum34
      SUBDIR += py-epsilon
      SUBDIR += py-extremes
      SUBDIR += py-fpconst
@@ -1189,6 +1186,7 @@
      SUBDIR += py-kid
      SUBDIR += py-liblarch
      SUBDIR += py-libmagic
+     SUBDIR += py-libmagic,python3
      SUBDIR += py-logilab-astng
      SUBDIR += py-logilab-common
      SUBDIR += py-minimock
@@ -1206,10 +1204,12 @@
      SUBDIR += py-peak-rules
      SUBDIR += py-pexpect
      SUBDIR += py-pip
+     SUBDIR += py-pip,python3
      SUBDIR += py-prioritized_methods
      SUBDIR += py-progressbar
      SUBDIR += py-protocols
      SUBDIR += py-py
+     SUBDIR += py-py,python3
      SUBDIR += py-pyprof2calltree
      SUBDIR += py-pyro
      SUBDIR += py-radix
@@ -1219,7 +1219,9 @@
      SUBDIR += py-send2trash
      SUBDIR += py-serial
      SUBDIR += py-setproctitle
+     SUBDIR += py-setproctitle,python3
      SUBDIR += py-setuptools
+     SUBDIR += py-setuptools,python3
      SUBDIR += py-silc
      SUBDIR += py-simplejson
      SUBDIR += py-sip
@@ -1229,6 +1231,7 @@
      SUBDIR += py-suds
      SUBDIR += py-symboltype
      SUBDIR += py-test
+     SUBDIR += py-test,python3
      SUBDIR += py-testtools
      SUBDIR += py-tpg
      SUBDIR += py-turbocheetah
@@ -1271,6 +1274,10 @@
      SUBDIR += rebar
      SUBDIR += remake
      SUBDIR += rlog
+     SUBDIR += ruby-atomic,ruby18
+     SUBDIR += ruby-atomic,ruby19
+     SUBDIR += ruby-atomic,ruby20
+     SUBDIR += ruby-atomic,ruby21
      SUBDIR += ruby-abstract
      SUBDIR += ruby-arrayfields
      SUBDIR += ruby-bacon
@@ -1345,8 +1352,9 @@
      SUBDIR += ruby-rcov,ruby19
      SUBDIR += ruby-rdoc
      SUBDIR += ruby-ref
-     SUBDIR += ruby-rgen
-     SUBDIR += ruby-rgen,ruby18
+     SUBDIR += ruby-rgen,ruby19
+     SUBDIR += ruby-rgen,ruby20
+     SUBDIR += ruby-rgen,ruby21
      SUBDIR += ruby-rr
      SUBDIR += ruby-rspec
      SUBDIR += ruby-ruby2ruby

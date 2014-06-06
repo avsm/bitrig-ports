@@ -1,9 +1,9 @@
-# $OpenBSD: Makefile,v 1.81 2014/04/10 12:25:22 naddy Exp $
+# $OpenBSD: Makefile,v 1.83 2014/05/27 20:06:26 naddy Exp $
 
 COMMENT=	GNU Bourne Again Shell
 
 DISTNAME=	bash-4.3
-PKGNAME=	${DISTNAME}.8
+PKGNAME=	${DISTNAME}.18
 CATEGORIES=	shells
 HOMEPAGE=	http://cnswww.cns.cwru.edu/~chet/bash/bashtop.html
 
@@ -15,16 +15,12 @@ PERMIT_PACKAGE_CDROM=	Yes
 MASTER_SITES=	${MASTER_SITE_GNU:=bash/}
 MASTER_SITES0=	${MASTER_SITE_GNU:=bash/${DISTNAME}-patches/}
 DIST_SUBDIR=	bash
-.for i in 01 02 03 04 05 06 07 08
+.for i in 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18
 PATCHFILES+=	bash43-0$i:0
 .endfor
 
 MODULES=	devel/gettext
 WANTLIB=	c termcap 
-
-# enable if parse.y is patched without y.tab.c
-#BUILD_DEPENDS=	devel/bison
-#YACC=		${LOCALBASE}/bin/bison -y
 
 CONFIGURE_STYLE=gnu
 CONFIGURE_ARGS=	${NO_SHARED_LIBS:S/Yes/--enable-static-link/:S/No//}
