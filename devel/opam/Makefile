@@ -3,7 +3,7 @@
 COMMENT =	Source-based OCaml package manager
 CATEGORIES =	devel 
 
-V =		1.1.1
+V =		1.1.2-rc2
 MAINTAINER = 	Anil Madhavapeddy <avsm@openbsd.org>
 
 NAME =		opam
@@ -22,10 +22,7 @@ MODULES =	lang/ocaml
 WANTLIB =	c m
 
 CONFIGURE_STYLE = gnu
-MAKE_FLAGS =	OCPBUILD="./ocp-build/ocp-build -no-use-ocamlfind -no-user-prefs"
-FAKE_FLAGS =	OPAMROOT=${WRKDIR}/opam-home
-
-post-patch:
-	cd ${WRKDIST}/src_ext && $(GMAKE) clone
+ALL_TARGET =    lib-ext all man
+FAKE_FLAGS =    DESTDIR=${DESTDIR}${PREFIX}
 
 .include <bsd.port.mk>

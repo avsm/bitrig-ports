@@ -5,7 +5,6 @@
 @man man/man1/opam-admin-check.1
 @man man/man1/opam-admin-make.1
 @man man/man1/opam-admin.1
-@man man/man1/opam-check.1
 @man man/man1/opam-config.1
 @man man/man1/opam-help.1
 @man man/man1/opam-info.1
