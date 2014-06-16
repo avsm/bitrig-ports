@@ -3,7 +3,7 @@
 COMMENT =	Source-based OCaml package manager
 CATEGORIES =	devel 
 
-V =		1.1.2-rc2
+V =		1.1.2-rc3
 MAINTAINER = 	Anil Madhavapeddy <avsm@openbsd.org>
 
 NAME =		opam
@@ -22,7 +22,7 @@ MODULES =	lang/ocaml
 WANTLIB =	c m
 
 CONFIGURE_STYLE = gnu
-ALL_TARGET =    lib-ext all man
-FAKE_FLAGS =    DESTDIR=${DESTDIR}${PREFIX}
+ALL_TARGET =    lib-ext all
+FAKE_FLAGS =    prefix=${PREFIX}
 
 .include <bsd.port.mk>
