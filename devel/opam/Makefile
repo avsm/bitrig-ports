@@ -3,7 +3,7 @@
 COMMENT =	Source-based OCaml package manager
 CATEGORIES =	devel 
 
-V =		1.1.2-rc3
+V =		1.1.2
 MAINTAINER = 	Anil Madhavapeddy <avsm@openbsd.org>
 
 NAME =		opam
