@@ -210,12 +210,6 @@ lib/ocaml/unix.cmxa
 lib/ocaml/unixLabels.cmx
 lib/ocaml/weak.cmx
 lib/ocaml/weak.p.cmx
-lib/ocaml/compiler-libs/ccomp.cmti
-lib/ocaml/compiler-libs/printtyp.cmti
-lib/ocaml/compiler-libs/toploop.cmti
-lib/ocaml/compiler-libs/typedtreeMap.cmti
-lib/ocaml/compiler-libs/typetexp.cmti
-lib/ocaml/map.cmti
 lib/ocaml/arg.p.cmt
 lib/ocaml/array.p.cmt
 lib/ocaml/arrayLabels.p.cmt
