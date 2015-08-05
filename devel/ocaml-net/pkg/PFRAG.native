@@ -78,6 +78,7 @@ lib/ocaml/netunidata/netmappings_kr.o
 lib/ocaml/netunidata/netmappings_other.cmx
 lib/ocaml/netunidata/netmappings_other.o
 lib/ocaml/netunidata/netunidata.a
+lib/ocaml/netunidata/netunidata.p.a
 lib/ocaml/netunidata/netunidata.cmxa
 lib/ocaml/netunidata/netunidata.cmxa
 lib/ocaml/netunidata/netunidata.p.cmxa
