@@ -1,7 +1,7 @@
 @comment $OpenBSD: PFRAG.native,v 1.2 2013/11/25 14:35:26 dcoppa Exp $
 %%dynlink%%
-lib/ocaml/lwt/lwt-extra.a
-lib/ocaml/lwt/lwt-extra.cmxa
+lib/ocaml/lwt/liblwt-glib_stubs.a
+lib/ocaml/lwt/liblwt-unix_stubs.a
 lib/ocaml/lwt/lwt-glib.a
 lib/ocaml/lwt/lwt-glib.cmxa
 lib/ocaml/lwt/lwt-log.a
@@ -15,10 +15,16 @@ lib/ocaml/lwt/lwt-simple-top.cmxa
 lib/ocaml/lwt/lwt-ssl.a
 lib/ocaml/lwt/lwt-ssl.cmxa
 lib/ocaml/lwt/lwt-syntax-log.a
+lib/ocaml/lwt/lwt-syntax-log.a
+lib/ocaml/lwt/lwt-syntax-log.cmxa
 lib/ocaml/lwt/lwt-syntax-log.cmxa
 lib/ocaml/lwt/lwt-syntax-options.a
+lib/ocaml/lwt/lwt-syntax-options.a
+lib/ocaml/lwt/lwt-syntax-options.cmxa
 lib/ocaml/lwt/lwt-syntax-options.cmxa
 lib/ocaml/lwt/lwt-syntax.a
+lib/ocaml/lwt/lwt-syntax.a
+lib/ocaml/lwt/lwt-syntax.cmxa
 lib/ocaml/lwt/lwt-syntax.cmxa
 lib/ocaml/lwt/lwt-unix.a
 lib/ocaml/lwt/lwt-unix.cmxa
@@ -28,13 +34,12 @@ lib/ocaml/lwt/lwt.cmxa
 lib/ocaml/lwt/lwt_bytes.cmx
 lib/ocaml/lwt/lwt_chan.cmx
 lib/ocaml/lwt/lwt_condition.cmx
+lib/ocaml/lwt/lwt_config.cmx
 lib/ocaml/lwt/lwt_daemon.cmx
 lib/ocaml/lwt/lwt_engine.cmx
-lib/ocaml/lwt/lwt_event.cmx
 lib/ocaml/lwt/lwt_gc.cmx
 lib/ocaml/lwt/lwt_glib.cmx
 lib/ocaml/lwt/lwt_io.cmx
-lib/ocaml/lwt/lwt_lib.cmx
 lib/ocaml/lwt/lwt_list.cmx
 lib/ocaml/lwt/lwt_log.cmx
 lib/ocaml/lwt/lwt_log_core.cmx
@@ -48,7 +53,6 @@ lib/ocaml/lwt/lwt_preemptive.cmx
 lib/ocaml/lwt/lwt_process.cmx
 lib/ocaml/lwt/lwt_react.cmx
 lib/ocaml/lwt/lwt_sequence.cmx
-lib/ocaml/lwt/lwt_signal.cmx
 lib/ocaml/lwt/lwt_simple_top.cmx
 lib/ocaml/lwt/lwt_ssl.cmx
 lib/ocaml/lwt/lwt_stream.cmx
@@ -58,7 +62,12 @@ lib/ocaml/lwt/lwt_throttle.cmx
 lib/ocaml/lwt/lwt_timeout.cmx
 lib/ocaml/lwt/lwt_unix.cmx
 lib/ocaml/lwt/lwt_unix_jobs_generated.cmx
-lib/ocaml/lwt/lwt_util.cmx
+lib/ocaml/lwt/pa_lwt.cmx
 lib/ocaml/lwt/pa_lwt.cmx
 lib/ocaml/lwt/pa_lwt_log.cmx
+lib/ocaml/lwt/pa_lwt_log.cmx
 lib/ocaml/lwt/pa_lwt_options.cmx
+lib/ocaml/lwt/pa_lwt_options.cmx
+lib/ocaml/lwt/ppx.a
+lib/ocaml/lwt/ppx.cmxa
+lib/ocaml/lwt/ppx_lwt.cmx
