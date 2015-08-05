@@ -3,8 +3,8 @@
 COMMENT =	library for manipulating the terminal
 CATEGORIES =	devel
 
-V =		1.6
-DISTNAME =	lambda-term-1.6
+V =		1.9
+DISTNAME =	lambda-term-${V}
 GH_ACCOUNT =	diml
 GH_PROJECT =	lambda-term
 GH_TAGNAME =	$V
