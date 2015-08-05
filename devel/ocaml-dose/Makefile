@@ -3,7 +3,7 @@
 COMMENT =		software repository analysis in OCaml
 CATEGORIES =		devel
 
-VERSION =		3.2.2
+VERSION =		3.3
 DISTNAME =		dose3-${VERSION}
 PKGNAME =		ocaml-dose-${VERSION}
 REVISION =		0
@@ -15,7 +15,7 @@ MAINTAINER =		Christopher Zimmermann <chrisz@openbsd.org>
 # LGPLv3+
 PERMIT_PACKAGE_CDROM =	Yes
 
-MASTER_SITES =		https://gforge.inria.fr/frs/download.php/file/33677/
+MASTER_SITES =		https://gforge.inria.fr/frs/download.php/file/34277/
 
 MODULES =		lang/ocaml
 
