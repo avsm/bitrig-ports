@@ -1,4 +1,5 @@
 @comment $OpenBSD: PLIST-main,v 1.1.1.1 2014/10/25 17:10:14 chrisz Exp $
+@bin bin/aspcud
 @bin bin/opam
 @bin bin/opam-admin
 @bin bin/opam-admin.top

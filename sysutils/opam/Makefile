@@ -38,7 +38,9 @@ BUILD_DEPENDS =		devel/git \
 RUN_DEPENDS =		lang/ocaml-camlp4 \
 			net/rsync \
 			archivers/unzip \
-			devel/gmake
+			devel/gmake \
+			archivers/bzip2 \
+			net/curl
 
 USE_GMAKE =		Yes
 
@@ -60,5 +62,6 @@ post-install:
 	${INSTALL_DATA} ${WRKSRC}/doc/pages/*.md ${docdir}/pages
 	${INSTALL_DATA} ${WRKSRC}/doc/html/* ${docdir}/api
 	${INSTALL_DATA} ${WRKSRC}/doc/dev-manual/dev-manual.pdf ${docdir}/
+	${INSTALL_SCRIPT} ${FILESDIR}/aspcud ${PREFIX}/bin/aspcud
 
 .include <bsd.port.mk>
