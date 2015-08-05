@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.5 2015/07/20 07:18:29 zhuk Exp $
+# $OpenBSD: Makefile,v 1.7 2015/08/12 12:33:02 zhuk Exp $
 
 COMMENT =		non-linear video editor for KDE
 VERSION =		0.9.10

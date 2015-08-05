@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.6 2015/07/10 18:28:14 zhuk Exp $
+# $OpenBSD: Makefile,v 1.8 2015/08/12 12:33:02 zhuk Exp $
 
 CATEGORIES =	devel x11
 COMMENT =	integrated development environment for KDE 4

@@ -1,11 +1,11 @@
-# $OpenBSD: Makefile,v 1.5 2015/06/26 09:18:39 ajacoutot Exp $
+# $OpenBSD: Makefile,v 1.8 2015/08/12 12:27:03 zhuk Exp $
 
 CATEGORIES =	net
 COMMENT =	torrent client for KDE 4
 V =		4.3.1
 DISTNAME =	ktorrent-$V
 HOMEPAGE =	http://ktorrent.pwsp.net/
-REVISION =	3
+REVISION =	4
 
 EXTRACT_SUFX =	.tar.bz2
 
@@ -28,8 +28,8 @@ MASTER_SITES =	${HOMEPAGE}downloads/$V/
 # GPLv2+
 PERMIT_PACKAGE_CDROM =          Yes
 
-MODULES =	x11/kde4 multimedia/phonon
-MODKDE4_USE =	pim workspace
+MODULES =		devel/gettext x11/kde4 multimedia/phonon
+MODKDE4_USE =		pim workspace
 
 RUN_DEPENDS =	devel/desktop-file-utils \
 		x11/gtk+3,-guic

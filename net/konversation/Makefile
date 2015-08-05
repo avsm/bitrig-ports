@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.4 2015/06/26 09:18:39 ajacoutot Exp $
+# $OpenBSD: Makefile,v 1.6 2015/08/12 12:33:02 zhuk Exp $
 
 CATEGORIES =	net
 COMMENT =	IRC client for KDE 4

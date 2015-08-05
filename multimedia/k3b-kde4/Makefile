@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.6 2015/07/15 09:56:28 zhuk Exp $
+# $OpenBSD: Makefile,v 1.8 2015/08/12 12:33:02 zhuk Exp $
 
 COMMENT =		CD/DVD creator
 DISTNAME =		k3b-2.0.3a

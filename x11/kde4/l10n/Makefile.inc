@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile.inc,v 1.8 2015/04/12 18:06:32 zhuk Exp $
+# $OpenBSD: Makefile.inc,v 1.10 2015/08/12 12:33:02 zhuk Exp $
 
 IGNORE_SILENT =		Yes
 COMMENT =		K Desktop Environment, language localization pack
@@ -28,7 +28,8 @@ PLIST =		${PKGDIR}/PLIST-${KDE_L10N_LANG}
 CHECKSUM_FILE =	${.CURDIR}/../distinfo
 PKG_ARGS =	-f ${PKGDIR}/PFRAG.conflict
 
-MODULES +=	devel/gettext
+MODULES +=		devel/gettext
+
 NO_TEST =	Yes
 CONFIGURE_ENV =	CFLAGS=-I${PREFIX}/include \
 		LDFLAGS="-L${PREFIX}/lib -liconv -lintl"

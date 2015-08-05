@@ -1,11 +1,11 @@
-# $OpenBSD: Makefile,v 1.8 2015/05/28 10:17:24 pascal Exp $
+# $OpenBSD: Makefile,v 1.11 2015/08/12 12:33:02 zhuk Exp $
 
 CATEGORIES =	net
 COMMENT =	KTorrent engine
 V =		1.3.1
 DISTNAME =	libktorrent-$V
 HOMEPAGE =	http://ktorrent.pwsp.net/
-REVISION =	7
+REVISION =	8
 
 EXTRACT_SUFX =	.tar.bz2
 
@@ -22,12 +22,13 @@ WANTLIB += gcrypt gmp qca2
 
 MASTER_SITES =	${HOMEPAGE}downloads/${V:C/^./4/}/
 
-MODULES =		x11/kde4
+MODULES =		devel/gettext x11/kde4
 MODKDE4_USE =		libs
 MODKDE4_LIB_LINKS =	Yes
 
 BUILD_DEPENDS =	devel/boost \
-		devel/doxygen
+		devel/doxygen \
+		devel/gettext-tools
 
 LIB_DEPENDS =	devel/gmp \
 		security/libgcrypt \

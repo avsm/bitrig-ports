@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.15 2015/07/13 16:33:03 zhuk Exp $
+# $OpenBSD: Makefile,v 1.17 2015/08/12 12:33:02 zhuk Exp $
 
 COMMENT-kipi =		KDE image plugins collection
 COMMENT-main =		KDE photo management utility

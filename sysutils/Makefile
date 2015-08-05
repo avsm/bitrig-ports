@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.348 2015/07/14 23:54:06 jasper Exp $
+# $OpenBSD: Makefile,v 1.350 2015/08/12 06:50:31 jasper Exp $
 
      SUBDIR =
      SUBDIR += accountsservice
@@ -17,6 +17,7 @@
      SUBDIR += cdrtools
      SUBDIR += cfengine
      SUBDIR += checkbashisms
+     SUBDIR += cl-launch
      SUBDIR += clusterit
      SUBDIR += clusterit,no_x11
      SUBDIR += collectd
@@ -29,7 +30,6 @@
      SUBDIR += coreutils
      SUBDIR += crashme
      SUBDIR += curlftpfs
-     SUBDIR += cyphertite
      SUBDIR += d-feet
      SUBDIR += dateutils
      SUBDIR += dcfldd
