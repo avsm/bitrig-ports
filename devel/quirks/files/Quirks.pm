@@ -1,7 +1,7 @@
 #! /usr/bin/perl
 
 # ex:ts=8 sw=4:
-# $OpenBSD: Quirks.pm,v 1.280 2015/08/11 21:47:55 jasper Exp $
+# $OpenBSD: Quirks.pm,v 1.285 2015/08/25 11:29:52 jca Exp $
 #
 # Copyright (c) 2009 Marc Espie <espie@openbsd.org>
 #
@@ -375,6 +375,8 @@ my $stem_extensions = {
 	'ruby21-passenger-standalone' => 'ruby21-passenger',
 	'ruby22-passenger-standalone' => 'ruby22-passenger',
 	'mirall' => 'owncloudclient',
+# 5.9
+	'consolekit' => 'consolekit2',
 };
 
 # reasons for obsolete packages
@@ -598,6 +600,11 @@ my $obsolete_reason = {
 	'cyphertite' => 3,
 	'cxxtools' => 5,
 	'tntnet' => 6,
+	'dwb' => 6,
+	'ns4' => 3,
+	'tcplist' => 0,
+	'wide-dhcp' => 0,
+	'cfs' => 0,
 };
 
 # ->is_base_system($handle, $state):

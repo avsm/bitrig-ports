@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.350 2015/08/12 06:50:31 jasper Exp $
+# $OpenBSD: Makefile,v 1.356 2015/08/25 11:55:05 ajacoutot Exp $
 
      SUBDIR =
      SUBDIR += accountsservice
@@ -23,6 +23,7 @@
      SUBDIR += collectd
      SUBDIR += colorls
      SUBDIR += colortail
+     SUBDIR += colortree
      SUBDIR += conky
      SUBDIR += conky,no_x11
      SUBDIR += conky,xmms2
@@ -38,6 +39,7 @@
      SUBDIR += deja-dup
      SUBDIR += detox
      SUBDIR += dfc
+     SUBDIR += direvent
      SUBDIR += diskrescue
      SUBDIR += dmassage
      SUBDIR += dmidecode
@@ -76,6 +78,7 @@
      SUBDIR += hotplug-diskmount
      SUBDIR += idled
      SUBDIR += iogen
+     SUBDIR += ioping
      SUBDIR += ipmitool
      SUBDIR += iwatch
      SUBDIR += knutclient
@@ -121,7 +124,6 @@
      SUBDIR += node-daemon
      SUBDIR += node-rmdir
      SUBDIR += node-syslog
-     SUBDIR += ns4
      SUBDIR += ntfs-3g
      SUBDIR += nut
      SUBDIR += opam
@@ -225,7 +227,7 @@
      SUBDIR += syslog-ng
      SUBDIR += tabled
      SUBDIR += tarsnap
-     SUBDIR += tcplist
+     SUBDIR += tarsnap-gui
      SUBDIR += tentakel
      SUBDIR += testdisk
      SUBDIR += tkdvd

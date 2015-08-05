@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.1373 2015/08/11 21:44:35 jasper Exp $
+# $OpenBSD: Makefile,v 1.1378 2015/08/25 06:41:10 ajacoutot Exp $
 
      SUBDIR =
      SUBDIR += ElectricFence
@@ -366,6 +366,7 @@
      SUBDIR += libidn
      SUBDIR += libinotify
      SUBDIR += libio
+     SUBDIR += libiscsi
      SUBDIR += libivykis
      SUBDIR += libixp
      SUBDIR += liblouis
@@ -373,6 +374,7 @@
      SUBDIR += libmemcached
      SUBDIR += libmpc
      SUBDIR += libmtp
+     SUBDIR += libnfs
      SUBDIR += libnotify
      SUBDIR += libofx
      SUBDIR += liboil
@@ -1217,7 +1219,9 @@
      SUBDIR += py-cffi,python3
      SUBDIR += py-cheetah
      SUBDIR += py-clint
+     SUBDIR += py-cloudpickle
      SUBDIR += py-configobj
+     SUBDIR += py-configparser
      SUBDIR += py-country
      SUBDIR += py-coverage
      SUBDIR += py-coverage,python3
@@ -1241,6 +1245,7 @@
      SUBDIR += py-epsilon
      SUBDIR += py-extremes
      SUBDIR += py-fpconst
+     SUBDIR += py-functools32
      SUBDIR += py-futures
      SUBDIR += py-gdata
      SUBDIR += py-gevent
@@ -1260,6 +1265,7 @@
      SUBDIR += py-isodate
      SUBDIR += py-isodate,python3
      SUBDIR += py-jsonrpclib
+     SUBDIR += py-jsonschema
      SUBDIR += py-kid
      SUBDIR += py-liblarch
      SUBDIR += py-libmagic
@@ -1278,6 +1284,7 @@
      SUBDIR += py-notify
      SUBDIR += py-openbsd
      SUBDIR += py-optik
+     SUBDIR += py-path.py
      SUBDIR += py-parsing
      SUBDIR += py-parsing,python3
      SUBDIR += py-peak-rules
@@ -1306,6 +1313,7 @@
      SUBDIR += py-setuptools,python3
      SUBDIR += py-sh
      SUBDIR += py-silc
+     SUBDIR += py-simplegeneric
      SUBDIR += py-simplejson
      SUBDIR += py-singledispatch
      SUBDIR += py-sip
@@ -1330,6 +1338,7 @@
      SUBDIR += py-unittest2
      SUBDIR += py-urwid
      SUBDIR += py-urwid,python3
+     SUBDIR += py-vcversioner
      SUBDIR += py-virtualenv
      SUBDIR += py-wbem
      SUBDIR += py-wsgiutils

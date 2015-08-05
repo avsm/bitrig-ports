@@ -1,15 +1,15 @@
-# $OpenBSD: Makefile,v 1.41 2015/08/11 20:57:48 bcallah Exp $
+# $OpenBSD: Makefile,v 1.43 2015/08/25 13:18:27 sthen Exp $
 
-V =		20150802
+V =		20150823
 COMMENT =	high-level, extensible programming language
 DISTNAME =	seed7_05_${V}
 PKGNAME =	seed7-${V}
 EXTRACT_SUFX =	.tgz
 CATEGORIES =	lang
 BROKEN-hppa =	SIGILL during build
+REVISION =	0
 
 HOMEPAGE =	http://seed7.sourceforge.net/
-MAINTAINER =	Brian Callahan <bcallah@openbsd.org>
 
 # Interpreter and example programs: GPLv2+
 # Runtime libraries: LGPLv2.1

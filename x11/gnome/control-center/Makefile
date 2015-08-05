@@ -1,7 +1,4 @@
-# $OpenBSD: Makefile,v 1.8 2015/07/22 18:27:48 ajacoutot Exp $
-
-# XXX remove hostnames-test.txt hack in pre-configure when updating to 3.12.0
-# https://git.gnome.org/browse/gnome-control-center/commit/?id=4736b03ed9e2ae9214117454f70811dbacd78739
+# $OpenBSD: Makefile,v 1.11 2015/08/18 09:55:47 ajacoutot Exp $
 
 # XXX change proxy settings without network-manager?
 
@@ -11,6 +8,7 @@ COMMENT=		GNOME control center
 
 GNOME_PROJECT=		gnome-control-center
 GNOME_VERSION=		3.16.3
+REVISION=		2
 
 CATEGORIES=		x11
 
@@ -92,5 +90,10 @@ MODGNOME_CPPFLAGS=	-I${X11BASE}/include
 MODGNOME_LDFLAGS=	-L${X11BASE}/lib
 
 FAKE_FLAGS=		sysconfdir=${PREFIX}/share/examples/gnome-control-center
+
+# XXX remove at the next major release
+# https://git.gnome.org/browse/gnome-control-center/commit/?id=cc600a918b2a6c34ae81cf85ef7b49a8e3f02ee6
+post-extract:
+	cp ${FILESDIR}/*.png ${WRKSRC}/panels/datetime/data/
 
 .include <bsd.port.mk>

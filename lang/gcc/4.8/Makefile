@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.48 2015/07/02 00:22:18 zhuk Exp $
+# $OpenBSD: Makefile,v 1.50 2015/08/18 10:14:06 sthen Exp $
 
 BROKEN-mips64 = ld: not enough GOT space for local GOT entries
 BROKEN-mips64el = ld: not enough GOT space for local GOT entries
@@ -38,10 +38,10 @@ PKGSPEC-main = gcc->=4.8,<4.9
 REVISION-main =	4
 REVISION-c++ =	2
 REVISION-estdc =2
-REVISION-f95 =	2
+REVISION-f95 =	4
 REVISION-java =	3
 REVISION-objc =	2
-REVISION-ada =	2
+REVISION-ada =	3
 
 SHARED_LIBS =	estdc++		16.0 \
 		gfortran	5.0 \
@@ -208,6 +208,10 @@ PKG_ARGS += -DITM=0
 # depends on __float128
 .if ${MACHINE_ARCH} == "amd64" || ${MACHINE_ARCH} == "i386"
 PKG_ARGS += -DQUADMATH=1
+# XXX quadmath is actually a WANTLIB of -f95, but it's just listed as
+#     a RUN_DEPENDS rather than LIB_DEPENDS+WANTLIB due to the mess of
+#     multiple GCC versions.
+RUN_DEPENDS-f95 =	${BUILD_PKGPATH},-main>=4.8,<4.9
 .else
 PKG_ARGS +=-DQUADMATH=0
 .endif
@@ -223,6 +227,7 @@ RUN_DEPENDS-c++ =	${RUN_DEPENDS} \
 WANTLIB-estdc =		m
 WANTLIB-java =		${WANTLIB} pthread
 WANTLIB-main =		${WANTLIB} pthread
+WANTLIB-ada =		${WANTLIB} pthread util
 
 LIB_DEPENDS +=		devel/gmp>=4.2 \
 			devel/mpfr \

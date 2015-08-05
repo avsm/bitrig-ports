@@ -1,13 +1,12 @@
-# $OpenBSD: Makefile,v 1.36 2015/07/18 01:11:18 ajacoutot Exp $
+# $OpenBSD: Makefile,v 1.38 2015/08/25 13:18:28 sthen Exp $
 
 COMMENT=	MS-Explorer like file manager for X
 
-DISTNAME=	xfe-1.40
+DISTNAME=	xfe-1.40.1
 CATEGORIES=	x11
 REVISION=	0
 
 HOMEPAGE=	http://roland65.free.fr/xfe/
-MAINTAINER=	Brian Callahan <bcallah@openbsd.org>
 
 # GPLv2+
 PERMIT_PACKAGE_CDROM=	Yes
@@ -33,5 +32,8 @@ CONFIGURE_ENV=	CPPFLAGS="-I${LOCALBASE}/include \
 			-L${X11BASE}/lib -lXft -pthread"
 
 MAKE_FLAGS=	CXXFLAGS="${CXXFLAGS} -DHAVE_XFT_H"
+
+pre-configure:
+	sed -i "s,-O2,,g" ${WRKSRC}/configure
 
 .include <bsd.port.mk>

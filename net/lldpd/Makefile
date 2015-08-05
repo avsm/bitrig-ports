@@ -1,13 +1,14 @@
-# $OpenBSD: Makefile,v 1.15 2015/07/18 22:31:04 sthen Exp $
+# $OpenBSD: Makefile,v 1.17 2015/08/14 12:09:56 sthen Exp $
 
 COMMENT=	LLDP (802.1ab)/CDP/EDP/SONMP/FDP daemon and SNMP subagent
 
-DISTNAME=	lldpd-0.7.15
+DISTNAME=	lldpd-0.7.16
+REVISION=	0
 DISTFILES=	${DISTNAME}${EXTRACT_SUFX} \
 		LLDP-MIB-200505060000Z.txt:0
 EXTRACT_ONLY=	${DISTNAME}${EXTRACT_SUFX}
 
-SHARED_LIBS +=	lldpctl                   2.1 # 10.0
+SHARED_LIBS +=	lldpctl                   2.2 # 11.0
 
 CATEGORIES=	net
 
@@ -33,7 +34,9 @@ LIB_DEPENDS=	devel/libevent2
 SEPARATE_BUILD=	Yes
 
 CONFIGURE_STYLE=	gnu
-CONFIGURE_ARGS+=	--with-privsep-chroot=/var/run/lldpd
+CONFIGURE_ARGS+=	--with-privsep-chroot=/var/run/lldpd \
+			--without-json \
+			--without-xml
 CONFIGURE_ENV=		CPPFLAGS="${CPPFLAGS}" \
 			LDFLAGS="${LDFLAGS}"
 FAKE_FLAGS=		sysconfdir="${PREFIX}/share/examples/lldpd"

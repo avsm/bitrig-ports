@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.920 2015/07/30 07:11:25 kirby Exp $
+# $OpenBSD: Makefile,v 1.923 2015/08/25 11:28:41 jca Exp $
 
      SUBDIR =
      SUBDIR += GeoIP
@@ -172,6 +172,7 @@
      SUBDIR += irssi-xmpp
      SUBDIR += isc-bind
      SUBDIR += isc-bind,geoip
+     SUBDIR += isc-bind,no_ssl
      SUBDIR += isc-dhcp
      SUBDIR += jabberd,mysql
      SUBDIR += jabberd,mysql,ldap
@@ -568,7 +569,6 @@
      SUBDIR += ruby-stomp
      SUBDIR += ruby-xmpp4r
      SUBDIR += samba
-     SUBDIR += samba,ldap
      SUBDIR += scamper
      SUBDIR += scapy
      SUBDIR += seafile
@@ -658,7 +658,6 @@
      SUBDIR += weex
      SUBDIR += wget
      SUBDIR += whatweb
-     SUBDIR += wide-dhcp
      SUBDIR += wide-dhcpv6
      SUBDIR += winexe
      SUBDIR += wireshark

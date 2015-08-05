@@ -1,5 +1,5 @@
 # ex:ts=8 sw=4:
-# $OpenBSD: Config.pm,v 1.56 2015/07/27 17:19:46 espie Exp $
+# $OpenBSD: Config.pm,v 1.61 2015/08/25 22:40:56 espie Exp $
 #
 # Copyright (c) 2010-2013 Marc Espie <espie@openbsd.org>
 #
@@ -27,7 +27,7 @@ use DPB::User;
 sub setup_users
 {
 	my ($class, $state) = @_;
-	for my $u (qw(unpriv_user build_user log_user fetch_user port_user)) {
+	for my $u (qw(build_user log_user fetch_user port_user)) {
 		my $U = uc($u);
 		if ($state->defines($U)) {
 			$state->{$u} = DPB::User->new($state->defines($U));
@@ -46,12 +46,12 @@ sub setup_users
 	my $u = DPB::User->new('_dpb');
 	if (defined $u->{uid}) {
 		$state->{unpriv_user} = $u;
+	} else {
+		$state->fatal("No _dpb user");
 	}
-	if (defined $state->{unpriv_user}) {
-		$state->{unpriv_user}->enforce_local;
-		$> = $state->{unpriv_user}{uid};
-		$) = $state->{unpriv_user}{grouplist};
-	}
+	$state->{unpriv_user}->enforce_local;
+	$> = $state->{unpriv_user}{uid};
+	$) = $state->{unpriv_user}{grouplist};
 }
 
 sub parse_command_line
@@ -103,7 +103,11 @@ sub parse_command_line
 			$state->usage("-$l takes an integer argument, not $o");
 		}
 	}
-	$state->{interactive} = $state->opt('i');
+	if ($state->opt('i')) {
+		require DPB::Interactive;
+		$state->{interactive} = DPB::Interactive->new;
+	}
+
     	$state->{chroot} = $state->opt('B');
 	$state->{base_user} = DPB::User->from_uid($<);
 	if (!defined $state->{base_user}) {
@@ -154,13 +158,17 @@ sub parse_command_line
 	# keep cmdline subst values
 	my %cmdline = %{$state->{subst}};
 
+	if (!defined $state->{port_user}) {
+		my ($uid, $gid) = (stat $state->{realports})[4,5];
+		$state->{port_user} = DPB::User->from_uid($uid, $gid);
+	}
 	$class->parse_config_files($state);
 	# ... as those must override the config files contents
 	while (my ($k, $v) = each %cmdline) {
 		$state->{subst}->{$k} = $v;
 	}
-	$state->{build_user} //= $state->{default_prop}{build_user};
 	$class->setup_users($state);
+	$state->{build_user} //= $state->{default_prop}{build_user};
 	if (!defined $state->{port_user}) {
 		my ($uid, $gid) = (stat $state->{realports})[4,5];
 		$state->{port_user} = DPB::User->from_uid($uid, $gid);
@@ -181,9 +189,7 @@ sub parse_command_line
 	$state->say("Build user: #1", $state->{build_user}->user);
 	$state->say("Fetch user: #1", $state->{fetch_user}->user);
 	$state->say("Log user: #1", $state->{log_user}->user);
-	if (defined $state->{unpriv_user}) {
-		$state->say("Unpriv user: #1", $state->{unpriv_user}->user);
-	}
+	$state->say("Unpriv user: #1", $state->{unpriv_user}->user);
 
 	$state->{chroot} = $state->{default_prop}{chroot};
 	# reparse things properly now that we can chroot
@@ -213,10 +219,9 @@ sub parse_command_line
 
 	$state->{size_log} = "%f/build-stats/%a-size";
 
-	if ($state->define_present("STARTUP")) {
-		$state->{startup_script} = $state->{subst}->value("STARTUP");
-	} elsif ($state->define_present("CLEANUP")) {
-		$state->{startup_script} = $state->{subst}->value("CLEANUP");
+	my $k = $state->is_interactive ? "STARTUPI" : "STARTUP";
+	if ($state->define_present($k)) {
+		$state->{startup_script} = $state->{subst}->value($k);
 	}
 	if ($state->define_present('LOGDIR')) {
 		$state->{logdir} = $state->subst->value('LOGDIR');
@@ -306,6 +311,9 @@ sub command_line_overrides
 
 	if (defined $state->{base_user}) {
 		$override_prop->{base_user} = $state->{base_user};
+	}
+	if (defined $state->{port_user}) {
+		$override_prop->{port_user} = $state->{port_user};
 	}
 	if (!$state->{subst}->empty('HISTORY_ONLY')) {
 		$state->{want_fetchinfo} = 1;

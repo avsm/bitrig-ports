@@ -1,12 +1,11 @@
-# $OpenBSD: Makefile,v 1.4 2015/06/22 01:22:52 bcallah Exp $
+# $OpenBSD: Makefile,v 1.6 2015/08/25 13:18:28 sthen Exp $
 
 COMMENT =	lightweight graphical download manager
-DISTNAME =	uget-2.0
-REVISION =	0
+DISTNAME =	uget-2.0.1
 CATEGORIES =	www net x11
+REVISION =	0
 
 HOMEPAGE =	http://ugetdm.com/
-MAINTAINER =	Brian Callahan <bcallah@openbsd.org>
 
 # LGPLv2.1+
 PERMIT_PACKAGE_CDROM =	Yes

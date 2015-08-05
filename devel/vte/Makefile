@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.116 2014/09/05 14:45:02 jasper Exp $
+# $OpenBSD: Makefile,v 1.118 2015/08/25 06:36:46 ajacoutot Exp $
 
 PORTROACH +=		limit:^0\.2
 
@@ -13,8 +13,8 @@ SHARED_LIBS+=	vte	14.1    # 2609.0
 FULLPKGNAME-main=	vte-${GNOME_VERSION}
 FULLPKGNAME-python= 	py-${DISTNAME}
 
-REVISION-main =		14
-REVISION-python = 	10
+REVISION-main =		16
+REVISION-python = 	12
 
 CATEGORIES=		devel
 

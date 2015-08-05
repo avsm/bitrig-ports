@@ -1,12 +1,11 @@
-# $OpenBSD: Makefile,v 1.68 2015/03/20 14:59:36 dcoppa Exp $
+# $OpenBSD: Makefile,v 1.71 2015/08/26 09:07:49 dcoppa Exp $
 
 SHARED_ONLY =	Yes
 
-COMMENT =	console client for pandora
-BROKEN-hppa =	libjson-c.so.0.0: undefined reference to __sync_val_compare_and_swap_4
+COMMENT =	command-line client for Pandora Internet Radio
 
-DISTNAME =	pianobar-2014.09.28
-REVISION =	1
+DISTNAME =	pianobar-2015.08.04
+REVISION =	0
 EXTRACT_SUFX =	.tar.bz2
 CATEGORIES =	audio
 
@@ -14,20 +13,20 @@ MAINTAINER =	David Coppa <dcoppa@openbsd.org>
 
 HOMEPAGE =	http://6xq.net/projects/pianobar/
 
-MASTER_SITES =	${HOMEPAGE}
+MASTER_SITES =	https://distfiles.bsdfrog.org/
 
-SHARED_LIBS =	piano	7.0	# 0.0.0
+SHARED_LIBS =	piano	8.0	# 0.0.0
 
 # MIT
 PERMIT_PACKAGE_CDROM =	Yes
 
-WANTLIB =	ao avcodec avfilter avformat avutil c gcrypt \
-		gnutls json-c m pthread
+WANTLIB =	ao avcodec avfilter avformat avutil c curl \
+		gcrypt json-c m pthread
 
 LIB_DEPENDS =	audio/libao \
 		devel/json-c \
 		graphics/ffmpeg>=20140412 \
-		security/gnutls>=2.10.0 \
+		net/curl \
 		security/libgcrypt
 
 .if !defined(DEBUG)
@@ -49,14 +48,11 @@ FAKE_FLAGS =	PREFIX="${PREFIX}" \
 
 USE_GMAKE =	Yes
 
-TEST_TARGET = 	test
+NO_TEST =	Yes
 
 post-install:
 	${INSTALL_DATA_DIR} ${PREFIX}/share/examples/pianobar
 	${INSTALL_DATA} ${WRKSRC}/contrib/config-example \
 		${PREFIX}/share/examples/pianobar/config
-
-pre-test:
-	@touch ${WRKSRC}/src/libwaitress/waitress.c
 
 .include <bsd.port.mk>

@@ -1,16 +1,10 @@
-# $OpenBSD: Makefile,v 1.68 2015/07/18 14:33:50 jasper Exp $
+# $OpenBSD: Makefile,v 1.70 2015/08/24 12:37:52 jasper Exp $
 
 # XXX
 # util.c: implement pa_get_binary_name()
 # sndio: what to do with (channel) map
 # sndio: check sample format
 # sndio: support for recording
-
-# hppa/mips64 don't have native atomic operations.
-# PA can use/detect libatomic_ops as a fallback
-# but in that case linking fails.
-BROKEN-hppa =	lack of atomic ops
-BROKEN-mips64 =	lack of atomic ops
 
 SHARED_ONLY=		Yes
 
@@ -19,7 +13,7 @@ COMMENT=		cross-platform networked sound server
 VERSION=		6.0
 DISTNAME=		pulseaudio-${VERSION}
 EXTRACT_SUFX=		.tar.xz
-REVISION=		4
+REVISION=		5
 
 SHARED_LIBS +=  pulse                4.0      # .18.0
 SHARED_LIBS +=  pulse-simple         0.0      # .1.0

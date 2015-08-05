@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.115 2015/05/20 12:05:50 pirofti Exp $
+# $OpenBSD: Makefile,v 1.117 2015/08/20 18:39:41 feinerer Exp $
 
     SUBDIR =
     SUBDIR += a2ps
@@ -9,6 +9,7 @@
     SUBDIR += cups
     SUBDIR += cups-bjnp
     SUBDIR += cups-filters
+    SUBDIR += cups-filters,ldap
     SUBDIR += cups-pdf
     SUBDIR += cups-pk-helper
     SUBDIR += detex
@@ -58,6 +59,7 @@
     SUBDIR += scribus
     SUBDIR += splix
     SUBDIR += t1utils
+    SUBDIR += texinfo
     SUBDIR += texlive
     SUBDIR += transfig
     SUBDIR += unpaper

@@ -1,11 +1,10 @@
-# $OpenBSD: Makefile,v 1.25 2015/05/20 03:23:57 bcallah Exp $
+# $OpenBSD: Makefile,v 1.29 2015/08/25 13:18:26 sthen Exp $
 
 COMMENT=	translate common internet acronyms
 
-DISTNAME=	wtf-20150518
+DISTNAME=	wtf-20150822
+REVISION=	1
 CATEGORIES=	games
-
-MAINTAINER=	Brian Callahan <bcallah@openbsd.org>
 
 # Public Domain
 PERMIT_PACKAGE_CDROM=	Yes
@@ -24,5 +23,6 @@ do-install:
 	${INSTALL_SCRIPT} ${WRKSRC}/wtf ${PREFIX}/bin
 	${INSTALL_MAN} ${WRKSRC}/wtf.6 ${PREFIX}/man/man6
 	${INSTALL_DATA} ${WRKSRC}/acronyms{,.comp} ${PREFIX}/share/misc
+	${INSTALL_DATA} ${WRKSRC}/acronyms-o.real ${PREFIX}/share/misc/acronyms-o
 
 .include <bsd.port.mk>

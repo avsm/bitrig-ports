@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.49 2015/04/04 09:21:01 ajacoutot Exp $
+# $OpenBSD: Makefile,v 1.51 2015/08/25 14:03:21 sthen Exp $
 
 SHARED_ONLY=		Yes
 DPB_PROPERTIES=		tag:kde3
@@ -20,15 +20,15 @@ PKGNAME-gtk3=		uim-gtk3-$V
 PKGNAME-kde=		uim-kde-$V
 PKGNAME-qt=		uim-qt-$V
 PKGNAME-qt4=		uim-qt4-$V
-REVISION-gtk=		0
-REVISION-gtk3=		0
-REVISION-kde=		0
-REVISION-main=		0
-REVISION-qt=		0
-REVISION-qt4=		0
+REVISION-gtk=		1
+REVISION-gtk3=		2
+REVISION-kde=		1
+REVISION-main=		1
+REVISION-qt=		1
+REVISION-qt4=		1
 
-MASTER_SITES=		https://uim.googlecode.com/files/
-HOMEPAGE=		https://code.google.com/p/uim/
+MASTER_SITES=		https://github.com/uim/uim/releases/download/uim-$V/
+HOMEPAGE=		https://github.com/uim/uim
 
 SHARED_LIBS +=	gcroots              0.0      # .1.0
 SHARED_LIBS +=	uim-scm              0.0      # .0.0
@@ -79,7 +79,7 @@ WANTLIB-gtk3 += dbus-1 expat ffi gcroots gdk-3 gdk_pixbuf-2.0 gio-2.0
 WANTLIB-gtk3 += glib-2.0 gmodule-2.0 gobject-2.0 graphite2 gthread-2.0
 WANTLIB-gtk3 += gtk-3 harfbuzz pango-1.0 pangocairo-1.0 pangoft2-1.0
 WANTLIB-gtk3 += pcre pixman-1 png pthread pthread-stubs uim uim-custom
-WANTLIB-gtk3 += uim-scm xcb xcb-render xcb-shm z
+WANTLIB-gtk3 += uim-scm xcb xcb-render xcb-shm z epoxy
 
 LIB_DEPENDS-gtk3=	inputmethods/uim \
 			x11/gtk+3

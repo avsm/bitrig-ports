@@ -1,16 +1,17 @@
-# $OpenBSD: Makefile,v 1.1.1.1 2014/12/20 19:31:44 bcallah Exp $
+# $OpenBSD: Makefile,v 1.3 2015/08/25 13:18:25 sthen Exp $
 
 COMMENT =	general-purpose software audio FSK modem
-DISTNAME =	minimodem-0.21
+DISTNAME =	minimodem-0.22.1
 CATEGORIES =	comms
+REVISION =	0
 
 HOMEPAGE =	http://www.whence.com/minimodem/
-MAINTAINER =	Brian Callahan <bcallah@openbsd.org>
 
 # GPLv3+
 PERMIT_PACKAGE_CDROM =	Yes
 
-WANTLIB += c fftw3f m pthread pulse pulse-simple sndfile
+WANTLIB += c fftw3f fftw3f_threads m pthread pulse pulse-simple
+WANTLIB += sndfile
 
 MASTER_SITES =	http://www.whence.com/minimodem/
 
@@ -26,6 +27,6 @@ CONFIGURE_ARGS =	--without-alsa \
 			--with-pulseaudio \
 			--with-sndfile
 
-MAKE_FLAGS =	LIBS="-lfftw3f -lpulse-simple -lsndfile"
+MAKE_FLAGS =	LIBS="-lfftw3f_threads -lpulse-simple -lsndfile"
 
 .include <bsd.port.mk>
