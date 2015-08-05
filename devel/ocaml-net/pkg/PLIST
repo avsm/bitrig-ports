@@ -342,7 +342,6 @@ lib/ocaml/netsys/netsys.cma
 lib/ocaml/netsys/netsys.cmi
 lib/ocaml/netsys/netsys.mli
 lib/ocaml/netsys/netsys_c_event.h
-lib/ocaml/netsys/netsys_c_outofheap.o
 lib/ocaml/netsys/netsys_ciphers.cmi
 lib/ocaml/netsys/netsys_ciphers.mli
 lib/ocaml/netsys/netsys_conf.cmi
@@ -522,16 +521,12 @@ lib/ocaml/netunidata/cmapr.windows1257.netdb
 lib/ocaml/netunidata/cmapr.windows1258.netdb
 lib/ocaml/netunidata/netmappings_iso.cmi
 lib/ocaml/netunidata/netmappings_iso.cmo
-lib/ocaml/netunidata/netmappings_iso.o
 lib/ocaml/netunidata/netmappings_jp.cmi
 lib/ocaml/netunidata/netmappings_jp.cmo
-lib/ocaml/netunidata/netmappings_jp.o
 lib/ocaml/netunidata/netmappings_kr.cmi
 lib/ocaml/netunidata/netmappings_kr.cmo
-lib/ocaml/netunidata/netmappings_kr.o
 lib/ocaml/netunidata/netmappings_other.cmi
 lib/ocaml/netunidata/netmappings_other.cmo
-lib/ocaml/netunidata/netmappings_other.o
 lib/ocaml/netunidata/netunichecksums.cmi
 lib/ocaml/netunidata/netuniconfig.cmi
 lib/ocaml/netunidata/netunidata.cma
@@ -540,7 +535,6 @@ lib/ocaml/netunidata/netunidata.mli
 lib/ocaml/netunidata/netunidata.p.a
 lib/ocaml/netunidata/netuniinit.cmi
 lib/ocaml/netunidata/netuniinit.cmo
-lib/ocaml/netunidata/netuniinit.o
 lib/ocaml/rpc/
 lib/ocaml/rpc-auth-local/
 lib/ocaml/rpc-auth-local/META
