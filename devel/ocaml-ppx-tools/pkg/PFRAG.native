@@ -1,0 +1,6 @@
+@comment $OpenBSD$
+%%dynlink%%
+lib/ocaml/ppx_tools/ast_convenience.cmx
+lib/ocaml/ppx_tools/ast_mapper_class.cmx
+lib/ocaml/ppx_tools/ppx_tools.a
+lib/ocaml/ppx_tools/ppx_tools.cmxa
