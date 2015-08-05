@@ -18,16 +18,24 @@ PERMIT_PACKAGE_CDROM=	Yes
 
 MODULES=	lang/ocaml
 
-WANTLIB+=	c X11 Xpm freetype gif jpeg m png tiff z
-
 LIB_DEPENDS=	graphics/jpeg \
 		graphics/giflib \
 		graphics/png \
-		graphics/tiff
+		graphics/tiff \
+		graphics/libexif \
+		x11/gtk+2
+
 BUILD_DEPENDS=	devel/omake \
 		sysutils/findlib \
 		lang/ocaml,-graphics \
-		print/ghostscript/gnu
+		print/ghostscript/gnu \
+		x11/lablgtk2
+
+WANTLIB = 	X11 Xcomposite Xcursor Xdamage Xext Xfixes Xi Xinerama
+WANTLIB +=	Xpm Xrandr Xrender atk-1.0 c cairo exif fontconfig
+WANTLIB +=	freetype gdk-x11-2.0 gdk_pixbuf-2.0 gif gio-2.0 glib-2.0
+WANTLIB +=	gobject-2.0 gtk-x11-2.0 intl jpeg m pango-1.0 pangocairo-1.0
+WANTLIB +=	pangoft2-1.0 png pthread tiff z
 
 .include <bsd.port.arch.mk>
 .if ${PROPERTIES:Mocaml_native}
