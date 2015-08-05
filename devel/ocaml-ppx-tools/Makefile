@@ -27,5 +27,6 @@ PERMIT_PACKAGE_CDROM =		Yes
 MODULES =	lang/ocaml
 BUILD_DEPENDS =	sysutils/findlib
 USE_GMAKE =	Yes
+NO_TEST = 	Yes
 
 .include <bsd.port.mk>
