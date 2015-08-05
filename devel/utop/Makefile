@@ -18,7 +18,7 @@ CONFIGURE_STYLE =	oasis
 CONFIGURE_ARGS +=	--enable-tests
 
 MODULES =		lang/ocaml
-RUN_DEPENDS =		devel/ocaml-lambda-term
+RUN_DEPENDS =		devel/ocaml-lambda-term devel/ocaml-lwt
 BUILD_DEPENDS =		${RUN_DEPENDS} sysutils/findlib lang/ocaml-camlp4
 
 # silence a warning
