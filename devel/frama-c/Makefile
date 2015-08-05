@@ -6,9 +6,8 @@ COMMENT =		an extensible platform for analysis of C software
 BROKEN-powerpc =	Error while linking /usr/local/lib/ocaml/vmthreads/stdlib.cma
 BROKEN-alpha =		Error while linking /usr/local/lib/ocaml/vmthreads/stdlib.cma
 
-DISTNAME =		frama-c-Neon-20140301
-PKGNAME =		frama-c-1.10
-REVISION =		1
+DISTNAME =		frama-c-Sodium-20150201
+PKGNAME =		frama-c-1.11
 CATEGORIES =		devel
 HOMEPAGE =		http://www.frama-c.com/
 
