@@ -10,8 +10,7 @@ COMMENT-graphics = OCaml Graphics library providing basic drawing primitives
 # XXX Don't even think of updating ocaml alone.
 # Do check that the ports that depend on it still work, or repair them. 
 # Don't forget to bump version in ocaml.port.mk, too!
-VERSION=4.02.1
-REVISION-main =	0
+VERSION=4.02.3
 
 PKGNAME-main =		ocaml-${VERSION}
 PKGNAME-graphics =	ocaml-graphics-${VERSION}
@@ -27,7 +26,7 @@ DOCFILES=	${BASENAME}-refman-html.tar.gz
 DISTFILES=	${DISTNAME}.tar.gz ${DOCFILES}
 DISTNAME =	ocaml-${VERSION}
 
-HOMEPAGE=	http://www.ocaml.org/
+HOMEPAGE=	https://www.ocaml.org/
 MAINTAINER=	Anil Madhavapeddy <avsm@openbsd.org>
 
 # QPL/LGPL
