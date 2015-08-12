@@ -2,8 +2,7 @@
 
 COMMENT=		pure OCaml library to read/write CSV files
 
-DISTNAME=		csv-1.2.3
-REVISION=		1
+DISTNAME=		csv-1.4.1
 PKGNAME=		ocaml-${DISTNAME}
 
 CATEGORIES=		textproc
@@ -13,7 +12,7 @@ HOMEPAGE=		https://forge.ocamlcore.org/projects/csv/
 # LGPLv2.1
 PERMIT_PACKAGE_CDROM=	Yes
 
-MASTER_SITES=		https://forge.ocamlcore.org/frs/download.php/978/
+MASTER_SITES=		https://github.com/Chris00/ocaml-csv/releases/download/1.4.1/
 
 MODULES=		lang/ocaml
 
