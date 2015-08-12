@@ -6,7 +6,7 @@ CATEGORIES=	textproc
 V=		2.2
 DISTNAME=	xml-light-${V}
 PKGNAME=	ocaml-${DISTNAME}
-REVISION =	7
+REVISION =	8
 EXTRACT_SUFX=	.zip
 MASTER_SITES=	http://tech.motion-twin.com/zip/
 
