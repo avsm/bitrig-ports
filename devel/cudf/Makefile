@@ -11,6 +11,7 @@ VERSION =		0.7
 DISTNAME =		cudf-${VERSION}
 PKGNAME-ocaml =		ocaml-cudf-${VERSION}
 PKGNAME-main =		libcudf-${VERSION}
+REVISION =		1
 
 MASTER_SITES =		https://gforge.inria.fr/frs/download.php/latestfile/4606/
 
