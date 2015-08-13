@@ -5,6 +5,7 @@ COMMENT=		extended standard library for OCaml
 DISTNAME=		extlib-1.6.1
 PKGNAME=		ocaml-${DISTNAME}
 CATEGORIES=		devel
+REVISION=               1
 
 HOMEPAGE=		https://ocaml-extlib.googlecode.com/
 

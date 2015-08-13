@@ -6,7 +6,7 @@ CATEGORIES=	devel
 V=		2.03.2
 DISTNAME=	calendar-${V}
 PKGNAME=	ocaml-calendar-${V}
-REVISION=	5
+REVISION=	6
 # You need to update MASTER_SITES too, when changing the version number.
 MASTER_SITES=	https://forge.ocamlcore.org/frs/download.php/915/
 

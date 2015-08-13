@@ -11,6 +11,7 @@ GH_TAGNAME =	rel-${V}
 DISTNAME =	camomile-${V}
 WRKSRC =	${WRKDIST}/Camomile
 PKGNAME =	ocaml-${DISTNAME}
+REVISION =      1
 
 MAINTAINER =	Christopher Zimmermann <chrisz@openbsd.org>
 

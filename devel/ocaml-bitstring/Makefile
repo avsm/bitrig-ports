@@ -4,7 +4,7 @@ COMMENT=		Erlang-style bitstrings for OCaml
 
 DISTNAME=		ocaml-bitstring-2.0.4
 
-REVISION=		0
+REVISION=		1
 
 CATEGORIES=		devel
 

@@ -9,6 +9,7 @@ DISTNAME =	${NAME}-${V}
 EXTRACT_SUFX =	.tbz
 PKGNAME =	ocaml-${DISTNAME}
 MASTER_SITES =	http://erratique.ch/software/${NAME}/releases/
+REVISION =      1
 
 HOMEPAGE =	http://erratique.ch/software/${NAME}
 
@@ -21,7 +22,7 @@ MODULES =		lang/ocaml
 WANTLIB +=		c m
 
 RUN_DEPENDS =		devel/ocaml-uutf
-BUILD_DEPENDS =		${RUN_DEPENDS}
+BUILD_DEPENDS =		devel/ocaml-uutf
 
 CONFIGURE_STYLE =	oasis
 
