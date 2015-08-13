@@ -12,6 +12,15 @@ PKGNAME =	ocaml-ppx-tools-${V}
 
 HOMEPAGE =	https://github.com/${GH_ACCOUNT}/${GH_PROJECT}
 
+ALL_TARGET =    byte
+.include <bsd.port.arch.mk>
+.if ${PROPERTIES:Mocaml_native}
+ALL_TARGET +=   opt
+.if ${PROPERTIES:Mocaml_native_dynlink}
+ALL_TARGET +=   dyn
+.endif
+.endif
+
 # MIT
 PERMIT_PACKAGE_CDROM =		Yes
 
