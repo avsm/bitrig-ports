@@ -3,7 +3,7 @@
 COMMENT =	OCaml Preprocessor and Pretty-Printer
 CATEGORIES =	lang
 
-V =		4.02.1+1
+V =		4.02+6
 GH_ACCOUNT =	ocaml
 GH_PROJECT =	camlp4
 GH_TAGNAME =	${V}
@@ -41,9 +41,9 @@ INSTALL_TARGET =	install install-META
 
 
 pre-install:
-	echo PKGDIR=${PREFIX}/lib/ocaml >>${WRKSRC}/config.sh
-	echo LIBDIR=${PREFIX}/lib/ocaml >>${WRKSRC}/config.sh
-	echo BINDIR=${PREFIX}/bin >>${WRKSRC}/config.sh
+	echo PKGDIR=${LOCALBASE}/lib/ocaml >>${WRKSRC}/config.sh
+	echo LIBDIR=${LOCALBASE}/lib/ocaml >>${WRKSRC}/config.sh
+	echo BINDIR=${LOCALBASE}/bin >>${WRKSRC}/config.sh
 
 
 .include <bsd.port.mk>
