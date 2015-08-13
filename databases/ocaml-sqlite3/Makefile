@@ -3,13 +3,12 @@
 COMMENT=	Objective Caml bindings for SQLite3
 CATEGORIES=	databases
 
-V=		2.0.4
+V=		2.0.9
 NAME =		ocaml-sqlite3
 DISTNAME=	sqlite3-ocaml-${V}
 PKGNAME=	${NAME}-${V}
-REVISION=	0
 EXTRACT_SUFX=	.tar.gz
-MASTER_SITES=	https://bitbucket.org/mmottl/sqlite3-ocaml/downloads/
+MASTER_SITES=	https://github.com/mmottl/sqlite3-ocaml/releases/download/v${V}/
 
 MAINTAINER=	Anil Madhavapeddy <avsm@openbsd.org>
 HOMEPAGE=	https://bitbucket.org/mmottl/sqlite3-ocaml/
