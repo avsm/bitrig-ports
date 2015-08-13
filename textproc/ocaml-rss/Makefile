@@ -4,7 +4,7 @@ COMMENT=	Objective Caml library to parse RSS 2.0
 CATEGORIES=	textproc
 
 V=		2.0
-REVISION=	1
+REVISION=	2
 DISTNAME=	ocamlrss-${V}
 PKGNAME=	ocaml-rss-${V}
 MASTER_SITES=	http://zoggy.github.com/ocamlrss/
