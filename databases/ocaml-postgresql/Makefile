@@ -3,12 +3,12 @@
 COMMENT=	Objective Caml bindings for PostgreSQL
 CATEGORIES=	databases
 
-V=		2.0.2
+V=		3.2.1
 REVISION=	1
 NAME =		ocaml-postgresql
 DISTNAME=	postgresql-ocaml-${V}
 PKGNAME=	${NAME}-${V}
-MASTER_SITES=	https://bitbucket.org/mmottl/postgresql-ocaml/downloads/
+MASTER_SITES=	https://github.com/mmottl/postgresql-ocaml/releases/download/v${V}/
 
 MAINTAINER=	Anil Madhavapeddy <avsm@openbsd.org>
 HOMEPAGE=	https://bitbucket.org/mmottl/postgresql-ocaml/
