@@ -3,10 +3,9 @@
 COMMENT =	the Ocamlnet internet protocol foundation library
 CATEGORIES =	devel www mail
 
-V =		3.7.5
+V =		4.0.2
 DISTNAME =	ocamlnet-${V}
 PKGNAME =	ocaml-net-${V}
-REVISION =	0
 
 MASTER_SITES =	http://download.camlcity.org/download/
 HOMEPAGE =	http://projects.camlcity.org/projects/ocamlnet.html
