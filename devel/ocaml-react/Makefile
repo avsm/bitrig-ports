@@ -4,6 +4,7 @@ COMMENT =	functional reactive programming (FRP) for OCaml
 CATEGORIES =	devel
 
 V =		1.2.0
+REVISION =      1
 NAME =		react
 DISTNAME =	${NAME}-${V}
 EXTRACT_SUFX =	.tbz

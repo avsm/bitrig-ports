@@ -4,7 +4,7 @@ COMMENT =	unit test framework for OCaml
 CATEGORIES =	devel
 
 DISTNAME =	ounit-2.0.0
-REVISION =	0
+REVISION =	1
 
 # The last url component (the number) changes every release, too.
 MASTER_SITES =	http://forge.ocamlcore.org/frs/download.php/1258/
