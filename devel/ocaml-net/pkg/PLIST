@@ -532,7 +532,6 @@ lib/ocaml/netunidata/netuniconfig.cmi
 lib/ocaml/netunidata/netunidata.cma
 lib/ocaml/netunidata/netunidata.cmi
 lib/ocaml/netunidata/netunidata.mli
-lib/ocaml/netunidata/netunidata.p.a
 lib/ocaml/netunidata/netuniinit.cmi
 lib/ocaml/netunidata/netuniinit.cmo
 lib/ocaml/rpc/
