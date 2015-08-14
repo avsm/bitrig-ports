@@ -15,16 +15,10 @@ lib/ocaml/lwt/lwt-simple-top.cmxa
 lib/ocaml/lwt/lwt-ssl.a
 lib/ocaml/lwt/lwt-ssl.cmxa
 lib/ocaml/lwt/lwt-syntax-log.a
-lib/ocaml/lwt/lwt-syntax-log.a
-lib/ocaml/lwt/lwt-syntax-log.cmxa
 lib/ocaml/lwt/lwt-syntax-log.cmxa
 lib/ocaml/lwt/lwt-syntax-options.a
-lib/ocaml/lwt/lwt-syntax-options.a
-lib/ocaml/lwt/lwt-syntax-options.cmxa
 lib/ocaml/lwt/lwt-syntax-options.cmxa
 lib/ocaml/lwt/lwt-syntax.a
-lib/ocaml/lwt/lwt-syntax.a
-lib/ocaml/lwt/lwt-syntax.cmxa
 lib/ocaml/lwt/lwt-syntax.cmxa
 lib/ocaml/lwt/lwt-unix.a
 lib/ocaml/lwt/lwt-unix.cmxa
@@ -63,10 +57,7 @@ lib/ocaml/lwt/lwt_timeout.cmx
 lib/ocaml/lwt/lwt_unix.cmx
 lib/ocaml/lwt/lwt_unix_jobs_generated.cmx
 lib/ocaml/lwt/pa_lwt.cmx
-lib/ocaml/lwt/pa_lwt.cmx
 lib/ocaml/lwt/pa_lwt_log.cmx
-lib/ocaml/lwt/pa_lwt_log.cmx
-lib/ocaml/lwt/pa_lwt_options.cmx
 lib/ocaml/lwt/pa_lwt_options.cmx
 lib/ocaml/lwt/ppx.a
 lib/ocaml/lwt/ppx.cmxa
