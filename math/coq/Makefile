@@ -4,6 +4,7 @@ COMMENT=		proof assistant based on a typed lambda calculus
 
 V=			8.4pl6
 DISTNAME=		coq-$V
+REVISION=		0
 
 CATEGORIES=		math
 HOMEPAGE=		http://coq.inria.fr/
