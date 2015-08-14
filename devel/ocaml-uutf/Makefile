@@ -3,7 +3,7 @@
 COMMENT =	non-blocking streaming unicode codec
 CATEGORIES =	devel
 
-V =		0.9.3
+V =		0.9.4
 NAME =		uutf
 DISTNAME =	${NAME}-${V}
 EXTRACT_SUFX =	.tbz
