@@ -6,6 +6,7 @@ V =		2.18.3
 DISTNAME =	lablgtk-$V
 PKGNAME =	lablgtk2-$V
 CATEGORIES =	x11 devel
+REVISION =	1
 
 HOMEPAGE =	http://lablgtk.forge.ocamlcore.org/
 MASTER_SITES =	https://forge.ocamlcore.org/frs/download.php/1479/
