@@ -3,7 +3,7 @@
 COMMENT=		curses / ncurses bindings for OCaml
 
 DISTNAME=		ocaml-curses-1.0.3
-REVISION=		1
+REVISION=		2
 CATEGORIES=		devel
 
 HOMEPAGE=		http://www.nongnu.org/ocaml-tmk/
