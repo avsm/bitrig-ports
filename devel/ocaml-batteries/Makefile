@@ -3,13 +3,12 @@
 COMMENT =	OCaml Batteries Included - OCaml foundation library
 CATEGORIES =	devel
 
-V =		2.2.0
+V =		2.3.1
 GH_ACCOUNT =	ocaml-batteries-team
 GH_PROJECT =	batteries-included
 GH_TAGNAME =	v$V
 DISTNAME =	${GH_PROJECT}-$V
 PKGNAME =	ocaml-batteries-$V
-REVISION =	1
 
 HOMEPAGE =	http://batteries.forge.ocamlcore.org/
 
