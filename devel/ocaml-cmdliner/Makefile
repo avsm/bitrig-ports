@@ -3,7 +3,7 @@
 COMMENT =	declarative definition of command line interfaces
 CATEGORIES =	devel
 
-V =		0.9.5
+V =		0.9.7
 NAME =		cmdliner
 DISTNAME =	${NAME}-${V}
 EXTRACT_SUFX =	.tbz
