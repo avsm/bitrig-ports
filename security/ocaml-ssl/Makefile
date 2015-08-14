@@ -6,7 +6,7 @@ CATEGORIES =	devel security
 NAME =		ocaml-ssl
 DISTNAME =	${NAME}-0.4.6
 MASTER_SITES =	${MASTER_SITE_SOURCEFORGE:=savonet/ocaml-ssl/}
-REVISION =	3
+REVISION =	4
 
 HOMEPAGE =	http://sourceforge.net/projects/savonet/files/ocaml-ssl/
 
